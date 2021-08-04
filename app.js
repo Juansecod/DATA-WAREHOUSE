@@ -13,11 +13,11 @@ const inicializacion = async(sequelize) => {
             {type:sequelize.QueryTypes.SELECT});
         if(!result[0]) {
              sequelize.query(`INSERT INTO usuarios(email, nombre, apellido, contrasena, idRol)  
-                VALUES('admin', '', '', '${bcrypt.hashSync('admin', 10)}', 1);`,
+                VALUES('admin@mail.com', '', '', '${bcrypt.hashSync('admin', 10)}', 1);`,
                 { type: sequelize.QueryTypes.INSERT }); 
             console.log('-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------');
             console.log('  Bienvenido a Data WareHouse! En caso de requerir acceso a las propiedades administrativas ingrese los siguientes campos en el login:                                                    \n');
-            console.log(`                                  email: 'admin'                                                                                                                                          \n`);            
+            console.log(`                                  email: 'admin@mail.com'                                                                                                                                          \n`);            
             console.log(`                                  contrasena: 'admin'                                                                                                                                     \n`);               
             console.log('  Para loggearse correctamente se recomienda la lectura de la documentacion. Para mayor seguridad asegurarse de cambiar la contraseña de este usuario, o en su defecto, eliminarlo.       \n');
             console.log(`  En caso de un incidente al borrar por completo los usuarios de la base de dato se crea como defecto el usuario administrativo 'admin'.                                                  \n`);
