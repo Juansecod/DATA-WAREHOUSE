@@ -31,7 +31,7 @@ const tokenValidator = async(req, res, next) => {
     try {
         if (!token) throw new Error("400 - Sesion no encontrada");
         jwt.verify(token, process.env.KEY_TOKEN, (err, decoded) => {
-            if (err) throw new Error();            
+            if (err) throw new Error('Token invalido');            
             req.decoded = decoded;
             next();
         }); 
@@ -56,4 +56,9 @@ const adminIdentificator = async(req, res, next)=>{
     }
 };
 
-module.exports = { emailValidator, passwordEncrypt, tokenValidator, adminIdentificator };
+module.exports = { 
+    emailValidator, 
+    passwordEncrypt, 
+    tokenValidator, 
+    adminIdentificator
+};

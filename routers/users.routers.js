@@ -7,9 +7,12 @@ router.post('/signUp', middlewares.emailValidator, usersControllers.singupUser);
 
 router.use(middlewares.tokenValidator);
 
-
 router.use(middlewares.adminIdentificator);
-router.post('/signinBasic', middlewares.emailValidator, middlewares.passwordEncrypt, usersControllers.singinUserBasic);
-router.post('/signinAdmin', middlewares.emailValidator, middlewares.passwordEncrypt, usersControllers.singinUserAdmin);
+router.get('/', usersControllers.getUSers);
+router.get('/:id', usersControllers.getUSer);
+router.put('/update/:id', usersControllers.updateUser);
+router.put('/updateRol/:idUsuario', usersControllers.updateRolUser);
+router.post('/signinUser', middlewares.emailValidator, middlewares.passwordEncrypt, usersControllers.singinUser);
+router.delete('/delete', usersControllers.deleteUser);
 
 module.exports = router;
