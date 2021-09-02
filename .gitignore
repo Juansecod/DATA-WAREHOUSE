@@ -102,15 +102,3 @@ dist
 
 # TernJS port file
 .tern-port
-
-
-# ignore in branch frontend
-/config
-/controllers
-/errors
-/middleware
-/routers
-app.js
-package.json
-/assets
-package-lock.json

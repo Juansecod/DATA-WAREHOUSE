@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./src/style/style.css">
+    <title>LOGIN - DATA WAREHOUSE</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="replace-navbars">
+                <script src="./src/scripts/navbar.js"></script>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="login">
+            <div class="container">
+                <h2>Bienvenido</h2>
+                <form action="" method="POST" autocomplete="off">
+                    <div class="container-input">
+                        <label for="email">Correo<text>*</text></label>
+                        <input type="email" id="email" name="email" required placeholder="example@mail.com" >
+                        <p class="info required"></p>
+                    </div>
+                    <div class="container-input">
+                        <label for="password">Contraseña<text>*</text></label>
+                        <input type="password" id="password" name="password" required placeholder="********" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                        title="Debe contener al menos un número y una letra mayúscula y minúscula, y al menos 8 caracteres o más">
+                        <p class="info required"></p>
+                    </div>
+                    <input type="submit" value="Ingresar" class="signin">
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <script src="./src/scripts/redirect-login.js"></script>
+      </footer>
+</body>
+</html>

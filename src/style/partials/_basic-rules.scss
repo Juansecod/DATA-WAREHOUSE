@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+*, *:hover, *:active{
+    text-decoration: none;
+    font-family: $font-family;
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+    color: $white-color;
+}
+
+text{
+    color: $red-color;
+}
+
+main{
+    min-height: calc(100vh - 62px);
+}
+
+ul{
+    list-style: none;
+}
+
+input{
+    border-radius: 5px;
+    min-width: 190px;
+    min-height: 35.5px;
+    border: 1px solid $grey-color;
+}

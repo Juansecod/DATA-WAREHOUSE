@@ -1,0 +1,1 @@
+if(token != undefined) window.location.replace("./");
