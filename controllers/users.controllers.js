@@ -156,6 +156,7 @@ const singupUser = async(req, res) => {
 		return res.status(200).json( {
 	        'msg': true,
 	        'data': `Bienvenido ${user[0].nombre} ${user[0].apellido}`,
+            'admin': (user[0].idRol == 1) ? true : false,
 	        'token': token
 	    });
     }catch(error){
