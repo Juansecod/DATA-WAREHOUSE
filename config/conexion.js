@@ -11,7 +11,7 @@ const path = `mysql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB}`;
 
 const sequelize = new Sequelize(path, {
     dialect: 'mysql',
-    operatorsAliases: 0 ,
+    operatorsAliases: 0,
     logging: false,
 });
 

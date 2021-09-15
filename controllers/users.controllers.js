@@ -21,6 +21,7 @@ const getUSers = async (req, res) =>{
         const result = await sequelize.query(`SELECT u.idUsuario, u.nombre, u.apellido, u.email, r.nombre AS 'rol' 
             FROM usuarios u LEFT JOIN rolesUsuario r ON u.idRol = r.idRol;`, 
 	    	{type:sequelize.QueryTypes.SELECT});
+        console.log(result);
 	    return res.status(200).json({
 	        'msg': true,
 	        'data': result
