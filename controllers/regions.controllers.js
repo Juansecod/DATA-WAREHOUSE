@@ -1,9 +1,21 @@
 /* Conexion BD */
 const sequelize = require('../config/conexion.js');
 
+const getListRegions = async(req, res) => {
+    const list = await sequelize.query(
+        'SELECT r.nombre AS region, p.nombre AS pais, c.nombre AS ciudad FROM regiones r JOIN paises p ON r.idRegion = p.idRegion JOIN ciudades c ON c.idPais = p.idPais',
+        {type: sequelize.QueryTypes.SELECT}
+    );
+    return res.status(200).json({
+        'msg': true,
+        'data': list
+    });
+};
+
 const getRegions = async(req, res) => {
     try {
-        const regions = await sequelize.query(`SELECT * FROM regiones`,
+        const regions = await sequelize.query(
+            'SELECT * FROM regiones',
             {type: sequelize.QueryTypes.SELECT}
         );
         return res.status(200).json({
@@ -101,4 +113,5 @@ module.exports = {
     postRegion,
     updateRegion,
     deleteRegion,
+    getListRegions
 };

@@ -1,12 +1,15 @@
+/* Dependencias */
 const express = require('express');
 const app = express();
-const port = 3001;
 const sequelize = require('./config/conexion');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
-const path = `/api/v1`;
 
-// Configuracion inicial para tener un usuario administrativo por defecto, se recomienda el cambio de contraseña al ingresarlo, o eliminarlo pero 
+/* Constantes */
+const path = '/api/v1';
+const port = 3000; //En caso de tener este puerto ocupado cambiarlo
+
+// Configuracion inicial para tener un usuario administrativo por defecto
 const inicializacion = async(sequelize) => {
     try {
         const result = await sequelize.query('SELECT idUsuario FROM usuarios WHERE idRol = 1 LIMIT 1', 
@@ -37,8 +40,8 @@ const contactsRoutes = require('./routers/contacts.routers');
 const regionsRoutes = require('./routers/regions.routers');
 
 // Middleware Globales
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 // Routes use
 app.use(`${path}/users`, usersRoutes);
