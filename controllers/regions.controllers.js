@@ -80,7 +80,7 @@ const deleteRegion = async(req, res) => {
         );
         if(!region) throw new Error();
         const paises = await sequelize.query(
-            `SELECT idPais FROM Paises WHERE idRegion = ${idRegion}`, 
+            `SELECT idPais FROM paises WHERE idRegion = ${idRegion}`, 
             { type: sequelize.QueryTypes.SELECT }
         );
         if(paises.lenght != 0) paises.forEach( async({idPais}) => {

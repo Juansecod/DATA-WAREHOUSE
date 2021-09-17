@@ -6,6 +6,8 @@ const router = express.Router();
 const regionsControllers = require('../controllers/regions.controllers');
 const countriesControllers = require('../controllers/countries.controllers');
 const citiesControllers = require('../controllers/cities.controllers');
+
+/* Middlewares */
 const middlewares = require('../middleware/middlewares');
 
 /* Rutas */

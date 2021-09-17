@@ -9,7 +9,7 @@ const emailValidator = (req, res, next) => {
         if(!emailSplit1 || !emailSplit2) throw new Error ('400 mal mail');
         next();
     }catch(error){
-        res.status(400).json({msg: "bad request"});
+        res.status(400).json({msg: "Email Invalido"});
     }
 };
 

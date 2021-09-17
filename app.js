@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 
 /* Constantes */
 const path = '/api/v1';
-const port = 3000; //En caso de tener este puerto ocupado cambiarlo
+const port = 3001; //En caso de tener este puerto ocupado cambiarlo
 
 // Configuracion inicial para tener un usuario administrativo por defecto
 const inicializacion = async(sequelize) => {

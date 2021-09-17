@@ -1,20 +1,11 @@
 /* Conexion BD */
 const sequelize = require('../config/conexion.js');
 
-/* Librerias del package.json para usar */
+/* Dependencias */
 var jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-const emailValidator = (mail) => {
-    try{
-        const emailSplit1 = mail.split('@')[1];
-        if(!(!emailSplit1)) { emailSplit2 = emailSplit1.split('.')[1]; }
-        if(!emailSplit1 || !emailSplit2) throw new Error ('400 mal mail');
-        return true;
-    }catch(error){
-        return false;
-    }
-};
+const { emailValidator } = require('../validators/mail.validator');
 
 const getUSers = async (req, res) =>{
     try {
@@ -171,20 +162,22 @@ const singupUser = async(req, res) => {
 const deleteUser = async(req, res) => {
     const {idUsuario} = req.query;
     try {
-        const result = await sequelize.query(`SELECT * FROM usuarios 
-                            WHERE id=${idUsuario}}`, 
-                            { type: sequelize.QueryTypes.SELECT });
+        const result = await sequelize.query(
+            `SELECT * FROM usuarios WHERE id=${idUsuario}`, 
+            { type: sequelize.QueryTypes.SELECT }
+        );
         if(!result) throw new Error();
-        const resultDelete = await sequelize.query(`DELETE FROM usuarios ${condicionalSQL(req)}`,
-					{ type: sequelize.QueryTypes.DELETE });
-        console.log(resultDelete);
+        await sequelize.query(
+            `DELETE FROM usuarios ${condicionalSQL(req)}`,
+		    { type: sequelize.QueryTypes.DELETE }
+        );
 		return res.status(200).json( {
 	        'msg': true,
-	        'data': `Usuario eliminado con exito`
+	        'data': 'Usuario eliminado con exito'
 	    });
     } catch (error) {
         res.status(400).json({
-            msg: "bad request"
+            msg: 'Bad request'
         });
     }
 };
