@@ -5,14 +5,14 @@
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-
 <!-- PROJECT LOGO -->
 <br />
+
 <p align="center">
   <a href="https://github.com/Juansecod/DATA-WAREHOUSE">
-    <img src="https://blog.acamica.com/content/images/2020/12/Logo_Redes--Custom-.png" alt="Logo" width="150" height="150">
+    <img src="https://user-images.githubusercontent.com/62673626/133725620-eb7acaad-c712-40ba-a6de-6ce67469222b.png" alt="logo" width="150" height="150">
   </a>
-
+  
   <h2 align="center">✔ DATA-WAREHOUSE</h2>
 
   <p align="center">
@@ -55,7 +55,8 @@
 <!-- sobre este proyecto -->
 ## Sobre Este Proyecto
 
-![image]()
+![Vista Previa](https://user-images.githubusercontent.com/62673626/133725472-702c808c-9d9b-4c13-b674-437cb81d8675.png)
+
 
 Este proyecto plante la creacion de un sistema de administración de los contactos de las compañías asociadas a una empresa. Deberpas poner en funcionamiento tanto las partes necesarias para realizar una REST API como para realizar el cliente que interactue con ella. En ellos se debera realizar un CRUD tanto en las compañías como los contactos.
 
