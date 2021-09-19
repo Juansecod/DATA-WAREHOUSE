@@ -96,12 +96,19 @@ CREATE TABLE IF NOT EXISTS `dataWarehouse`.`contactos` (
   `email` VARCHAR(255) NOT NULL,
   `interes` INT NULL DEFAULT 0,
   `idCompania` INT NOT NULL,
+  `idCiudad` INT NOT NULL,
   PRIMARY KEY (`idContacto`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
   INDEX `fk_contactos_companias1_idx` (`idCompania` ASC) VISIBLE,
+  INDEX `fk_contactos_ciudades1_idx` (`idCiudad` ASC) VISIBLE,
   CONSTRAINT `fk_contactos_companias1`
     FOREIGN KEY (`idCompania`)
     REFERENCES `dataWarehouse`.`companias` (`idCompania`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+  CONSTRAINT `fk_contactos_ciudades1`
+    FOREIGN KEY (`idCiudad`)
+    REFERENCES `dataWarehouse`.`ciudades` (`idCiudad`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -144,8 +151,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dataWarehouse`.`redesContacto` (
   `idRedContacto` INT NOT NULL AUTO_INCREMENT,
+  `canal` VARCHAR(45) NOT NULL,
   `url` VARCHAR(255) NULL,
   `telefono` VARCHAR(45) NULL,
+  `preferencia` VARCHAR(45) NOT NULL,
   `idContacto` INT NOT NULL,
   PRIMARY KEY (`idRedContacto`),
   INDEX `fk_redesContacto_contactos1_idx` (`idContacto` ASC) VISIBLE,
