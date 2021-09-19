@@ -5,7 +5,7 @@ const sequelize = require('../config/conexion.js');
 var jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-const { emailValidator } = require('../validators/mail.validator');
+const { emailValidator } = require('../middleware/validators/mail.validator');
 
 const getUSers = async (req, res) =>{
     try {
@@ -88,7 +88,7 @@ const updateUser = async (req, res) => {
         }
         if (valores[0] == ",") valores = valores.replace(",","");
 		
-		const sentenciaSQL = sql + valores + `WHERE idUsuario=${id}`;
+		const sentenciaSQL = sql + valores + `WHERE idUsuario = ${id}`;
 
 		let resultUpdate = await sequelize.query(`${sentenciaSQL};`,
 	        { type: sequelize.QueryTypes.UPDATE });
@@ -163,17 +163,17 @@ const deleteUser = async(req, res) => {
     const {idUsuario} = req.query;
     try {
         const result = await sequelize.query(
-            `SELECT * FROM usuarios WHERE id=${idUsuario}`, 
+            `SELECT * FROM usuarios WHERE idUsuario = ${idUsuario}`, 
             { type: sequelize.QueryTypes.SELECT }
         );
         if(!result) throw new Error();
         await sequelize.query(
-            `DELETE FROM usuarios ${condicionalSQL(req)}`,
+            `DELETE FROM usuarios WHERE idUsuario = ${idUsuario}`,
 		    { type: sequelize.QueryTypes.DELETE }
         );
 		return res.status(200).json( {
-	        'msg': true,
-	        'data': 'Usuario eliminado con exito'
+	        msg: true,
+	        data: 'Usuario eliminado con exito'
 	    });
     } catch (error) {
         res.status(400).json({

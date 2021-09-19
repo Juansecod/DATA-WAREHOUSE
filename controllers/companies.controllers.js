@@ -1,6 +1,6 @@
 /* Conexion BD */
 const sequelize = require('../config/conexion.js');
-const { emailValidator } = require('../validators/mail.validator');
+const { emailValidator } = require('../middleware/validators/mail.validator');
 
 const getCompanies = async (req,res) => {
     try {
