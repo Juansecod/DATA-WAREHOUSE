@@ -95,6 +95,7 @@ CREATE TABLE IF NOT EXISTS `dataWarehouse`.`contactos` (
   `cargo` VARCHAR(45) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
   `interes` INT NULL DEFAULT 0,
+  `direccion` VARCHAR(255) NOT NULL,
   `idCompania` INT NOT NULL,
   `idCiudad` INT NOT NULL,
   PRIMARY KEY (`idContacto`),
