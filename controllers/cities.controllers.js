@@ -1,5 +1,6 @@
 /* Conexion BD */
 const sequelize = require('../config/conexion.js');
+const { city:deleteScript } = require('../scripts/deleteCities.script');
 
 const getCities = async(req, res) => {
     try {
@@ -86,20 +87,13 @@ const updateCity = async(req,res) => {
 const deleteCity = async(req, res) => {
     const {idCity} = req.query;
     try {
-        const ciudad = await sequelize.query(
-            `SELECT nombre FROM ciudades WHERE idCiudad=${idCity}}`, 
-            { type: sequelize.QueryTypes.SELECT }
-        );
-        if(!ciudad) throw new Error();
-        await sequelize.query(
-            `DELETE FROM ciudades WHERE idCiudad = ${idCity}`,
-			{ type: sequelize.QueryTypes.DELETE }
-        );
+        const ciudad = await deleteScript(idCity);
 		return res.status(200).json( {
-	        'msg': true,
-	        'data': `La ciudad ${ciudad[0].nombre} ha sido eliminada con exito`
+	        msg: true,
+	        data: `La ciudad ${ciudad[0].nombre} ha sido eliminada con exito`
 	    });
     } catch (error) {
+        console.log(error);
         res.status(400).json({
             msg: "Bad request"
         });

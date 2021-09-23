@@ -1,5 +1,6 @@
 /* Conexion BD */
 const sequelize = require('../config/conexion.js');
+const { deleteRegion:deleteScript } = require('../scripts/deleteRegion.script');
 
 const getListRegions = async(req, res) => {
     const list = await sequelize.query(
@@ -74,32 +75,10 @@ const updateRegion = async(req,res) => {
 const deleteRegion = async(req, res) => {
     const {idRegion} = req.query;
     try {
-        const region = await sequelize.query(
-            `SELECT nombre FROM regiones WHERE idRegion = ${idRegion}`, 
-            { type: sequelize.QueryTypes.SELECT }
-        );
-        if(!region) throw new Error();
-        const paises = await sequelize.query(
-            `SELECT idPais FROM paises WHERE idRegion = ${idRegion}`, 
-            { type: sequelize.QueryTypes.SELECT }
-        );
-        if(paises.lenght != 0) paises.forEach( async({idPais}) => {
-            await sequelize.query(
-                `DELETE FROM ciudades WHERE idPais = ${idPais}`,
-			    { type: sequelize.QueryTypes.DELETE }
-            );
-        });
-        await sequelize.query(
-            `DELETE FROM paises WHERE idRegion = ${idRegion}`,
-			{ type: sequelize.QueryTypes.DELETE }
-        );
-        await sequelize.query(
-            `DELETE FROM regiones WHERE idRegion = ${idRegion}`,
-					{ type: sequelize.QueryTypes.DELETE }
-            );
+        deleteScript(idRegion);
 		return res.status(200).json( {
-	        'msg': true,
-	        'data': `La region ${region[0].nombre} se ha eliminado con exito`
+	        msg: true,
+	        data: `La region ${region[0].nombre} se ha eliminado con exito`
 	    });
     } catch (error) {
         res.status(400).json({
@@ -110,8 +89,8 @@ const deleteRegion = async(req, res) => {
 
 module.exports = { 
     getRegions,
+    getListRegions,
     postRegion,
     updateRegion,
-    deleteRegion,
-    getListRegions
+    deleteRegion
 };

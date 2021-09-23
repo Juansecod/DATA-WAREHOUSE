@@ -1,6 +1,7 @@
 /* Conexion BD */
 const sequelize = require('../config/conexion.js');
 const { emailValidator } = require('../middleware/validators/mail.validator');
+const { company:deleteScript } = require('../scripts/deleteCompanies.script');
 
 const getCompanies = async (req,res) => {
     try {
@@ -92,29 +93,7 @@ const updateCompany = async (req, res) => {
 const deleteCompany = async(req, res) => {
     const { id:idCompany } = req.query;
     try {
-        const company = await sequelize.query(
-            `SELECT * FROM companias WHERE idCompania = ${idCompany}`, 
-            { type: sequelize.QueryTypes.SELECT }
-        );
-        if(!company) throw new Error('Compañia no encontrada');
-        const contacts = await sequelize.query(
-            `SELECT idContacto FROM contactos WHERE idCompania = ${idCompany}`, 
-            { type: sequelize.QueryTypes.SELECT }
-        );
-        if(contacts.lenght != 0) contacts.forEach( async({idContacto}) => {
-            await sequelize.query(
-                `DELETE FROM redesContacto WHERE idContacto = ${idContacto}`,
-			    { type: sequelize.QueryTypes.DELETE }
-            );
-        });
-        await sequelize.query(
-            `DELETE FROM contactos WHERE idCompania = ${idCompany}`,
-			{ type: sequelize.QueryTypes.DELETE }
-        );
-        await sequelize.query(
-            `DELETE FROM companias WHERE idCompania = ${idCompany}`,
-			{ type: sequelize.QueryTypes.DELETE }
-        );
+        await deleteScript(idCompany);
 		return res.status(200).json( {
 	        'msg': true,
 	        'data': 'Compañia eliminada con exito'

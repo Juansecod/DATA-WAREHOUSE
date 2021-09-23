@@ -4,7 +4,7 @@ const sequelize = require('../config/conexion.js');
 /* Dependencias */
 var jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-
+const { deleteData } = require('../scripts/delete.script');
 const { emailValidator } = require('../middleware/validators/mail.validator');
 
 const getUSers = async (req, res) =>{
@@ -12,7 +12,6 @@ const getUSers = async (req, res) =>{
         const result = await sequelize.query(`SELECT u.idUsuario, u.nombre, u.apellido, u.email, r.nombre AS 'rol' 
             FROM usuarios u LEFT JOIN rolesUsuario r ON u.idRol = r.idRol;`, 
 	    	{type:sequelize.QueryTypes.SELECT});
-        console.log(result);
 	    return res.status(200).json({
 	        'msg': true,
 	        'data': result
@@ -135,14 +134,15 @@ const singupUser = async(req, res) => {
         const user = await sequelize.query(`SELECT * FROM usuarios WHERE email='${email}' LIMIT 1`,
             {type: sequelize.QueryTypes.SELECT}
         );
-        if(!user) throw new Error('Usuario no encontrado');
+        if(!user[0]) throw new Error('Usuario no encontrado');
+        const {idUsuario,idRol} = user[0];
         const token = await bcrypt.compare(contrasena, user[0].contrasena).then((authorization) => {
 			if(authorization){
-				const jwtToken = jwt.sign({'idUsuario': user[0].idUsuario, 'idRol': user[0].idRol}, 
+				const jwtToken = jwt.sign({idUsuario, idRol}, 
                                     process.env.KEY_TOKEN, { expiresIn: process.env.EXPIRES });
         		return jwtToken;
 			}else{
-				throw new Error('400');
+				throw new Error('400 - Bad Password');
 			}
 		});
 		return res.status(200).json( {
@@ -162,15 +162,12 @@ const singupUser = async(req, res) => {
 const deleteUser = async(req, res) => {
     const {idUsuario} = req.query;
     try {
-        const result = await sequelize.query(
+        const user = await sequelize.query(
             `SELECT * FROM usuarios WHERE idUsuario = ${idUsuario}`, 
             { type: sequelize.QueryTypes.SELECT }
         );
-        if(!result) throw new Error();
-        await sequelize.query(
-            `DELETE FROM usuarios WHERE idUsuario = ${idUsuario}`,
-		    { type: sequelize.QueryTypes.DELETE }
-        );
+        if(!user[0]) throw new Error();
+        await deleteData('usuarios','idUsuario',idUsuario);
 		return res.status(200).json( {
 	        msg: true,
 	        data: 'Usuario eliminado con exito'

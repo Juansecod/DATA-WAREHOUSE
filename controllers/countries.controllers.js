@@ -1,5 +1,6 @@
 /* Conexion BD */
 const sequelize = require('../config/conexion');
+const { country:deleteScript } = require('../scripts/deleteCountries.script');
 
 const getCountries = async(req, res) => {
     try {
@@ -86,24 +87,13 @@ const updateCountry = async(req,res) => {
 const deleteCountry = async(req, res) => {
     const {idCountry} = req.query;
     try {
-        const pais = await sequelize.query(
-            `SELECT nombre FROM paises WHERE idPais=${idCountry}}`, 
-            { type: sequelize.QueryTypes.SELECT }
-        );
-        if(!pais) throw new Error();
-        await sequelize.query(
-            `DELETE FROM ciudades WHERE idPais = ${idCountry}`,
-			{ type: sequelize.QueryTypes.DELETE }
-        );
-        await sequelize.query(
-            `DELETE FROM paises WHERE idPais = ${idCountry}`,
-			{ type: sequelize.QueryTypes.DELETE }
-        );
+        const pais = await deleteScript(idCountry);
 		return res.status(200).json( {
 	        'msg': true,
 	        'data': `El pais ${pais[0].nombre} se ha eliminado con exito`
 	    });
     } catch (error) {
+        console.log(error);
         res.status(400).json({
             msg: "bad request"
         });
