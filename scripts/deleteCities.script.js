@@ -29,7 +29,7 @@ const deleteCities = {
                 `SELECT nombre FROM ciudades WHERE idCiudad=${idCity}`, 
                 { type: sequelize.QueryTypes.SELECT }
             );
-            if(!ciudad[0]) throw new Error('Ciudad no encontrada');
+            if(!ciudad[0]) throw new Error('404');
             await deleteContacts.city(idCity);
             await deleteCompanies.city(idCity);
             await deleteData('ciudades','idCiudad',idCity);

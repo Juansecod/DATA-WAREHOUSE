@@ -6,6 +6,7 @@ var jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { deleteData } = require('../scripts/delete.script');
 const { emailValidator } = require('../middleware/validators/mail.validator');
+const errorResponse = require('../error/error');
 
 const getUSers = async (req, res) =>{
     try {
@@ -13,13 +14,11 @@ const getUSers = async (req, res) =>{
             FROM usuarios u LEFT JOIN rolesUsuario r ON u.idRol = r.idRol;`, 
 	    	{type:sequelize.QueryTypes.SELECT});
 	    return res.status(200).json({
-	        'msg': true,
-	        'data': result
+	        msg: true,
+	        data: result
 	    });
     } catch (error) {
-        res.status(400).json({
-            msg: "Bad request"
-        });
+        errorResponse(res, error);
     }
 };
 
@@ -29,16 +28,13 @@ const getUSer = async (req, res) =>{
         const result = await sequelize.query(`SELECT u.idUsuario, u.nombre, u.apellido, u.email, r.nombre AS 'rol' 
             FROM usuarios u LEFT JOIN rolesUsuario r ON u.idRol = r.idRol WHERE u.idUsuario=${id}`, 
 	    	{type:sequelize.QueryTypes.SELECT});
-        if(!result[0]) throw new Error("Usuario no encontrado");
+        if(!result[0]) throw new Error(404);
 	    return res.status(200).json({
-	        'msg': true,
-	        'data': result
+	        msg: true,
+	        data: result
 	    });
     } catch (error) {
-        console.log(error);
-        res.status(400).json({
-            msg: "Bad request"
-        });
+        errorResponse(res, error);
     }
 };
 
@@ -48,22 +44,19 @@ const singinUser = async (req, res) => {
         const rol = await sequelize.query(`SELECT nombre FROM rolesUsuario WHERE idRol = ${idRol}`,
             {type: sequelize.QueryTypes.SELECT}
         );
-        if(!rol[0]) throw new Error("Rol invalido");
+        if(!rol[0]) throw new Error('Rol invalido');
         const resultInsert = await sequelize.query(
             `INSERT INTO usuarios(nombre, apellido, email, contrasena, idRol)
             VALUES ('${nombre}', '${apellido}', '${email}', '${contrasena}', ${idRol})`,
             {type: sequelize.QueryTypes.INSERT}
         );
-        if(resultInsert[1] == 0) throw new Error("No se ha logrado registrar");
+        if(resultInsert[1] == 0) throw new Error(400);
         return res.status(201).json({
-            'msg': true,
-            'data': `Se ha regitrado a ${nombre} ${apellido} con exito. Este usuario cuenta con el rol de usuario ${rol[0].nombre}`
+            msg: true,
+            data: `Se ha regitrado a ${nombre} ${apellido} con exito. Este usuario cuenta con el rol de usuario ${rol[0].nombre}`
         }); 
     } catch(error) {
-        console.log(error);
-        return res.status(400).json({
-            msg:"Ups, algo salio mal"
-        });
+        errorResponse(res, error);
     }
 };
 
@@ -76,12 +69,12 @@ const updateUser = async (req, res) => {
 		if (nombre != undefined) valores = valores + ` nombre = '${nombre}'`;
 		if (apellido != undefined) valores = valores + `, apellido = '${apellido}'`;
 		if (email != undefined) {
-            const isEmail = emailValidator(email);
-            if (!isEmail) throw new Error();
+            const isEmail = await emailValidator(email);
+            if (!isEmail) throw new Error('Formato de email invalido');
             valores = valores + `, email = '${email}'`;
         }
         if(contrasena != undefined){
-            if(contrasena.length < 8) throw new Error('400');
+            if(contrasena.length < 8) throw new Error('Contraseña menor de 8 caracteres');
             contrasenaEncrypt = await bcrypt.hashSync(contrasena, 10);
             valores = valores + `, contrasena = '${contrasenaEncrypt}'`;
         }
@@ -92,17 +85,14 @@ const updateUser = async (req, res) => {
 		let resultUpdate = await sequelize.query(`${sentenciaSQL};`,
 	        { type: sequelize.QueryTypes.UPDATE });
 
-		if(resultUpdate[1] == 0) throw new Error('400');
+		if(resultUpdate[1] == 0) throw new Error(400);
 		
 		return res.status(201).json({
-	            'msg': true,
-	            'data': `Usuario actualizado con exito`
-	        });
+            msg: true,
+            data: `Usuario actualizado con exito`
+	    });
 	}catch(error){
-		console.log(error);
-        return res.status(400).json({
-            msg:"Ups, algo salio mal"
-        });
+		errorResponse(res, error);
 	}
 };
 
@@ -115,16 +105,13 @@ const updateRolUser = async(req, res) => {
         if(!rolExist[0]) throw new Error('Rol invalido');
 		const resultUpdate = await sequelize.query(`UPDATE usuarios SET idRol = ${idRol} WHERE idUsuario = ${idUsuario}`, 
 			{ type: sequelize.QueryTypes.UPDATE});
-		if(resultUpdate[1] == 0) throw new Error('400');
+		if(resultUpdate[1] == 0) throw new Error(400);
 		return res.status(201).json({
-	            'msg': true,
-	            'data': `Usuario actualizado con exito`
-	        });
-	}catch(error){
-		console.log(error);
-        return res.status(400).json({
-            msg:"Ups, algo salio mal"
+            msg: true,
+            data: `Usuario actualizado con exito`
         });
+	}catch(error){
+		errorResponse(res, error);
 	}
 };
 
@@ -134,7 +121,7 @@ const singupUser = async(req, res) => {
         const user = await sequelize.query(`SELECT * FROM usuarios WHERE email='${email}' LIMIT 1`,
             {type: sequelize.QueryTypes.SELECT}
         );
-        if(!user[0]) throw new Error('Usuario no encontrado');
+        if(!user[0]) throw new Error(404);
         const {idUsuario,idRol} = user[0];
         const token = await bcrypt.compare(contrasena, user[0].contrasena).then((authorization) => {
 			if(authorization){
@@ -142,20 +129,17 @@ const singupUser = async(req, res) => {
                                     process.env.KEY_TOKEN, { expiresIn: process.env.EXPIRES });
         		return jwtToken;
 			}else{
-				throw new Error('400 - Bad Password');
+				throw new Error(400);
 			}
 		});
 		return res.status(200).json( {
-	        'msg': true,
-	        'data': `Bienvenido ${user[0].nombre} ${user[0].apellido}`,
-            'admin': (user[0].idRol == 1) ? true : false,
-	        'token': token
+	        msg: true,
+	        data: `Bienvenido ${user[0].nombre} ${user[0].apellido}`,
+            admin: (user[0].idRol == 1) ? true : false,
+	        token
 	    });
     }catch(error){
-        console.log(error);
-        return res.status(400).json({
-            msg:"Ups, algo salio mal"
-        });
+        errorResponse(res, error);
     }
 };
 
@@ -166,16 +150,14 @@ const deleteUser = async(req, res) => {
             `SELECT * FROM usuarios WHERE idUsuario = ${idUsuario}`, 
             { type: sequelize.QueryTypes.SELECT }
         );
-        if(!user[0]) throw new Error();
+        if(!user[0]) throw new Error(404);
         await deleteData('usuarios','idUsuario',idUsuario);
 		return res.status(200).json( {
 	        msg: true,
 	        data: 'Usuario eliminado con exito'
 	    });
     } catch (error) {
-        res.status(400).json({
-            msg: 'Bad request'
-        });
+        errorResponse(res, error);
     }
 };
 

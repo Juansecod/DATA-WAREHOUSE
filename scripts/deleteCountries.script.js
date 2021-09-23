@@ -27,7 +27,7 @@ const deleteCountries = {
                 `SELECT nombre FROM paises WHERE idPais=${idCountry}`, 
                 { type: sequelize.QueryTypes.SELECT }
             );
-            if(!pais[0]) throw new Error('Pais no encontrado');
+            if(!pais[0]) throw new Error('404');
             await deleteCities.country(idCountry);
             await deleteData('paises','idPais',idCountry);
             return pais;

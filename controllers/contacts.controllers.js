@@ -2,6 +2,7 @@
 const sequelize = require('../config/conexion.js');
 const { redesValidator } = require('../middleware/validators/redes.validator');
 const { contact:deleteScript } = require('../scripts/deleteContacts.script');
+const errorResponse = require('../error/error');
 
 const getContacts = async(req,res) => {
     try {
@@ -17,9 +18,7 @@ const getContacts = async(req,res) => {
             data: contacts
         });
     }catch (error) {
-        res.status(400).json({
-            msg: "Bad request"
-        });
+        errorResponse(res, error);
     }
 };
 
@@ -42,7 +41,7 @@ const postContact = async(req,res) => {
             VALUES ('${nombre}','${apellido}','${cargo}','${email}',${interes},'${direccion}',${idCompany},${idCiudad});`,
             {type: sequelize.QueryTypes.INSERT}
         );
-        if(resultInsert[1] == 0) throw new Error("No se ha logrado registrar");
+        if(resultInsert[1] == 0) throw new Error(400);
         /* Registro Redes Contacto */
         const idContact = resultInsert[0];
         redes.forEach(async({ canal, url, telefono, preferencia = 'Sin Preferencia' })=>{
@@ -62,10 +61,7 @@ const postContact = async(req,res) => {
             data: `Se ha regitrado a ${nombre} ${apellido} con exito. Este contacto pertenece a la compañia ${company} y reside en la ciudad ${city}`
         });
     } catch (error) {
-        console.log(error);
-        res.status(400).json({
-            msg: "Bad request"
-        });
+        errorResponse(res, error);
     }
 };
 
@@ -75,9 +71,7 @@ const putContact = async(req,res) =>{
         throw new Error('No hay codigo aun');
     } catch (error) {
         console.log(error);
-        res.status(400).json({
-            msg: "Bad request"
-        });
+        errorResponse(res, error);
     }
 };
 
@@ -90,10 +84,7 @@ const deleteContact = async(req,res) => {
 	        data: 'Contacto eliminado con exito'
 	    });
     }catch(error){
-        console.log(error);
-        res.status(400).json({
-            msg: "Bad request"
-        });
+        errorResponse(res, error);
     }
 };
 

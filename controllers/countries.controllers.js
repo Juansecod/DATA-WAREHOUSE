@@ -1,6 +1,7 @@
 /* Conexion BD */
 const sequelize = require('../config/conexion');
 const { country:deleteScript } = require('../scripts/deleteCountries.script');
+const errorResponse = require('../error/error');
 
 const getCountries = async(req, res) => {
     try {
@@ -12,10 +13,7 @@ const getCountries = async(req, res) => {
             'data': countries
         });
     } catch (error) {
-        console.log(error);
-        res.status(400).json({
-            msg: "Bad request"
-        });
+        errorResponse(res, error);
     }
 };
 
@@ -31,10 +29,7 @@ const getCountriesOfRegion = async(req, res) => {
             'data': countries
         });
     } catch (error) {
-        console.log(error);
-        res.status(400).json({
-            msg: 'algo ha salido mal'
-        });
+        errorResponse(res, error);
     }
 };
 
@@ -51,15 +46,13 @@ const postCountriesOfRegion = async(req, res) => {
             `INSERT INTO paises(nombre, idRegion) VALUES ('${nombre}', ${idRegion});`,
             {type: sequelize.QueryTypes.INSERT}
         );
+        if(result[1] == 0) throw new Error(400);
         return res.status(201).json({
             'msg': true,
             'data': `El pais: ${nombre}, ha sido registrado exitosamente en la region ${region[0].nombre}.`
         });
     } catch (error) {
-        console.log(error);
-        res.status(400).json({
-            msg: 'algo ha salido mal'
-        });
+        errorResponse(res, error);
     }
 };
 
@@ -71,16 +64,13 @@ const updateCountry = async(req,res) => {
             `UPDATE paises SET nombre = '${nombre}' WHERE idPais = ${idCountry}`,
             {type: sequelize.QueryTypes.UPDATE}
         );
-        if(resultUpdate[1] == 0) throw new Error('400');
+        if(resultUpdate[1] == 0) throw new Error(400);
 		return res.status(201).json({
 	            'msg': true,
 	            'data': 'Pais actualizada con exito'
 	        });
     } catch (error) {
-        console.log(error);
-        res.status(400).json({
-            msg: 'algo ha salido mal'
-        });
+        errorResponse(res, error);
     }
 };
 
@@ -93,10 +83,7 @@ const deleteCountry = async(req, res) => {
 	        'data': `El pais ${pais[0].nombre} se ha eliminado con exito`
 	    });
     } catch (error) {
-        console.log(error);
-        res.status(400).json({
-            msg: "bad request"
-        });
+        errorResponse(res, error);
     }
 };
 

@@ -1,16 +1,21 @@
 /* Conexion BD */
 const sequelize = require('../config/conexion.js');
 const { deleteRegion:deleteScript } = require('../scripts/deleteRegion.script');
+const errorResponse = require('../error/error');
 
 const getListRegions = async(req, res) => {
-    const list = await sequelize.query(
-        'SELECT r.nombre AS region, p.nombre AS pais, c.nombre AS ciudad FROM regiones r JOIN paises p ON r.idRegion = p.idRegion JOIN ciudades c ON c.idPais = p.idPais',
-        {type: sequelize.QueryTypes.SELECT}
-    );
-    return res.status(200).json({
-        'msg': true,
-        'data': list
-    });
+    try {
+        const list = await sequelize.query(
+            'SELECT r.nombre AS region, p.nombre AS pais, c.nombre AS ciudad FROM regiones r JOIN paises p ON r.idRegion = p.idRegion JOIN ciudades c ON c.idPais = p.idPais',
+            {type: sequelize.QueryTypes.SELECT}
+        );
+        return res.status(200).json({
+            msg: true,
+            data: list
+        });
+    } catch (error) {
+        errorResponse(res, error);
+    }
 };
 
 const getRegions = async(req, res) => {
@@ -20,34 +25,29 @@ const getRegions = async(req, res) => {
             {type: sequelize.QueryTypes.SELECT}
         );
         return res.status(200).json({
-            'msg': true,
-            'data': regions
+            msg: true,
+            data: regions
         });
     } catch (error) {
-        console.log(error);
-        res.status(400).json({
-            msg: "Bad request"
-        });
+        errorResponse(res, error);
     }
 };
 
 const postRegion = async(req, res) => {
     const { nombre } = req.body;
     try {
-        if(!nombre) throw new Error('campos requeridos vacios');
+        if(!nombre) throw new Error(400);
         const result = await sequelize.query(
             `INSERT INTO regiones(nombre) VALUES ('${nombre}');`,
             {type: sequelize.QueryTypes.INSERT}
         );
+        if(result[1] == 0) throw new Error(400);
         return res.status(201).json({
-            'msg': true,
-            'data': `La region: ${nombre}, ha sido registrada exitosamente`
+            msg: true,
+            data: `La region: ${nombre}, ha sido registrada exitosamente`
         });
     } catch (error) {
-        console.log(error);
-        res.status(400).json({
-            msg: 'algo ha salido mal'
-        });
+        errorResponse(res, error);
     }
 };
 
@@ -59,16 +59,13 @@ const updateRegion = async(req,res) => {
             `UPDATE regiones SET nombre = '${nombre}' WHERE idRegion = ${idRegion}`,
             {type: sequelize.QueryTypes.UPDATE}
         );
-        if(resultUpdate[1] == 0) throw new Error('400');
+        if(resultUpdate[1] == 0) throw new Error(400);
 		return res.status(201).json({
-	            'msg': true,
-	            'data': `Region actualizada con exito`
+	            msg: true,
+	            data: `Region actualizada con exito`
 	        });
     } catch (error) {
-        console.log(error);
-        res.status(400).json({
-            msg: 'algo ha salido mal'
-        });
+        errorResponse(res, error);
     }
 };
 
@@ -81,9 +78,7 @@ const deleteRegion = async(req, res) => {
 	        data: `La region ${region[0].nombre} se ha eliminado con exito`
 	    });
     } catch (error) {
-        res.status(400).json({
-            msg: "bad request"
-        });
+        errorResponse(res, error);
     }
 };
 

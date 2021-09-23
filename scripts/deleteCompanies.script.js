@@ -27,7 +27,7 @@ const deleteCompanies = {
                 `SELECT nombre FROM companias WHERE idCompania=${idCompany}`, 
                 { type: sequelize.QueryTypes.SELECT }
             );
-            if(!company[0]) throw new Error('Compañia no encontrada');
+            if(!company[0]) throw new Error('404');
             await deleteContacts.company(idCompany);
             await deleteData('companias','idCompania',idCompany);
         } catch (error) {

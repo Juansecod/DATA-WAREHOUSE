@@ -1,65 +1,56 @@
 var jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const errorResponse = require('../error/error');
 const {emailValidator: mailValid} = require('./validators/mail.validator');
 
 const emailValidator = (req, res, next) => {
+    const { email } = req.body;
     try{
-        const { email } = req.body;
-        if(!mailValid(email)) throw new Error('400 mal mail');
+        if(!mailValid(email)) throw new Error(400);
         next();
     }catch(error){
-        res.status(400).json({
-            msg: 'Email Invalido'
-        });
+        errorResponse(res, error);
     }
 };
 
 const passwordEncrypt = async(req, res, next) => {
     try{
         var { contrasena } = req.body;
-        if(contrasena.length < 8) throw new Error('400');
-        contrasena = await bcrypt.hashSync(contrasena, 10);
+        if(contrasena.length < 8) throw new Error(400);
+        contrasena = bcrypt.hashSync(contrasena, 10);
         req.body.contrasena = contrasena;
         next();
     }catch(error){
-        res.status(400).json({
-            msg: 'Por favor ingrese una contraseña de minimo 8 caracteres'
-        });
+        errorResponse(res, error);
     }
 };
 
 const tokenValidator = async(req, res, next) => {
     const token = req.headers.authorization;
     try {
-        if (!token) throw new Error('400 - Sesion no encontrada');
+        if (!token) throw new Error('Sesion no encontrada');
         jwt.verify(token, process.env.KEY_TOKEN, (err, decoded) => {
-            if (err) throw new Error('Token invalido');            
+            if (err) throw new Error(401);            
             req.decoded = decoded;
             next();
         }); 
     } catch (error) {
-        console.log(error);
-        res.status(400).json({
-            msg: 'algo ha salido mal'
-        });
+        errorResponse(res, error);
     }
 };
 
 const adminIdentificator = async(req, res, next)=>{
     const { idRol } = req.decoded;
     try {
-        if(idRol != 1) throw new Error('401 - No Autorizado');
+        if(idRol != 1) throw new Error(401);
         next();
     } catch (error) {
-        console.log(error);
-        res.status(401).json({
-            msg: 'No tienes autorizacion'
-        });
+        errorResponse(res, error);
     }
 };
 
 module.exports = { 
-    emailValidator, 
+    emailValidator,
     passwordEncrypt, 
     tokenValidator, 
     adminIdentificator

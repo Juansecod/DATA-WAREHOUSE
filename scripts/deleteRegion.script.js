@@ -7,7 +7,7 @@ const deleteRegion = async(idRegion) => {
             `SELECT nombre FROM regiones WHERE idRegion = ${idRegion}`, 
             { type: sequelize.QueryTypes.SELECT }
         );
-        if(!region[0]) throw new Error('Region no encontrada');
+        if(!region[0]) throw new Error('404');
         await deleteCountries.region(idRegion);
         await deleteData('regiones','idRegion',idRegion);
     } catch (error) {

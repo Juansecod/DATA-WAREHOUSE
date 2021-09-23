@@ -2,6 +2,7 @@
 const sequelize = require('../config/conexion.js');
 const { emailValidator } = require('../middleware/validators/mail.validator');
 const { company:deleteScript } = require('../scripts/deleteCompanies.script');
+const errorResponse = require('../error/error');
 
 const getCompanies = async (req,res) => {
     try {
@@ -11,13 +12,11 @@ const getCompanies = async (req,res) => {
             {type: sequelize.QueryTypes.SELECT}
         );
         return res.status(200).json({
-            'msg': true,
-            'data': companies
+            msg: true,
+            data: companies
         });
     } catch (error) {
-        res.status(400).json({
-            msg: "Bad request"
-        });
+        errorResponse(res, error);
     }
         
 };
@@ -28,23 +27,20 @@ const postCompany = async (req, res) => {
         const ciudad = await sequelize.query(`SELECT nombre FROM ciudades WHERE idCiudad = ${idCiudad}`,
             {type: sequelize.QueryTypes.SELECT}
         );
-        if(!ciudad[0]) throw new Error("Ciudad invalida");
-        if(!nombre) throw new Error("Ingresa un nombre valido");
+        if(!ciudad[0]) throw new Error('Ciudad invalida');
+        if(!nombre) throw new Error('Ingresa un nombre valido');
         const resultInsert = await sequelize.query(
             `INSERT INTO companias(nombre, email, direccion, telefono, idCiudad)
             VALUES ('${nombre}', '${email}', '${direccion}', ${telefono}, ${idCiudad})`,
             {type: sequelize.QueryTypes.INSERT}
         );
-        if(resultInsert[1] == 0) throw new Error("No se ha logrado registrar");
+        if(resultInsert[1] == 0) throw new Error(400);
         return res.status(201).json({
-            'msg': true,
-            'data': `Se ha regitrado ${nombre} con exito. Se registro en la ciudad ${ciudad[0].nombre}`
+            msg: true,
+            data: `Se ha regitrado ${nombre} con exito. Se registro en la ciudad ${ciudad[0].nombre}`
         }); 
     } catch(error) {
-        console.log(error);
-        return res.status(400).json({
-            msg:"Ups, algo salio mal"
-        });
+        errorResponse(res, error);
     }
 };
 
@@ -57,7 +53,7 @@ const updateCompany = async (req, res) => {
 		if (nombre != undefined) valores = valores + ` nombre = '${nombre}'`;
 		if (email != undefined) {
             const isEmail = emailValidator(email);
-            if (!isEmail) throw new Error();
+            if (!isEmail) throw new Error('Ingrese un formato de mail valido');
             valores = valores + `, email = '${email}'`;
         }
         if (direccion != undefined) valores = valores + `, direccion = '${direccion}'`;
@@ -66,7 +62,7 @@ const updateCompany = async (req, res) => {
             const ciudad = await sequelize.query(`SELECT nombre FROM ciudades WHERE idCiudad = ${idCiudad}`,
                 {type: sequelize.QueryTypes.SELECT}
             );
-            if(!ciudad[0]) throw new Error("Ciudad invalida");
+            if(!ciudad[0]) throw new Error('Ciudad invalida');
             valores = valores + `, idCiudad = ${idCiudad}`;
         }
         if (valores[0] == ",") valores = valores.replace(",","");
@@ -76,17 +72,14 @@ const updateCompany = async (req, res) => {
 		let resultUpdate = await sequelize.query(`${sentenciaSQL};`,
 	        { type: sequelize.QueryTypes.UPDATE });
 
-		if(resultUpdate[1] == 0) throw new Error('400');
+		if(resultUpdate[1] == 0) throw new Error(400);
 		
 		return res.status(201).json({
-	            'msg': true,
-	            'data': 'Compañia actualizada con exito'
+	            msg: true,
+	            data: 'Compañia actualizada con exito'
 	        });
 	}catch(error){
-		console.log(error);
-        return res.status(400).json({
-            msg: 'Ups, algo salio mal'
-        });
+		errorResponse(res, error);
 	}
 };
 
@@ -95,13 +88,11 @@ const deleteCompany = async(req, res) => {
     try {
         await deleteScript(idCompany);
 		return res.status(200).json( {
-	        'msg': true,
-	        'data': 'Compañia eliminada con exito'
+	        msg: true,
+	        data: 'Compañia eliminada con exito'
 	    });
     } catch (error) {
-        res.status(400).json({
-            msg: 'Bad request'
-        });
+        errorResponse(res, error);
     }
 };
 

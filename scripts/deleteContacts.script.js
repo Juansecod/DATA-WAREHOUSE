@@ -44,7 +44,7 @@ const deleteContacts = {
                 `SELECT idContacto FROM contactos WHERE idContacto = ${idContacto}`, 
                 { type: sequelize.QueryTypes.SELECT }
             );
-            if(!contact[0]) throw new Error('Contacto no existente');
+            if(!contact[0]) throw new Error('404');
             await deleteData('redesContacto','idContacto',idContacto);
             await deleteData('contactos','idContacto',idContacto);
         } catch (error) {
