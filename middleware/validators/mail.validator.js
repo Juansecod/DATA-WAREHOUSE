@@ -3,7 +3,7 @@ module.exports = {
         try{
             const emailSplit1 = mail.split('@')[1];
             if(!(!emailSplit1)) { emailSplit2 = emailSplit1.split('.')[1]; }
-            if(!emailSplit1 || !emailSplit2) throw new Error ('400 mal mail');
+            if(!emailSplit1 || !emailSplit2) throw new Error (400);
             return true;
         }catch(error){
             return false;

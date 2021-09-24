@@ -69,8 +69,7 @@ const updateUser = async (req, res) => {
 		if (nombre != undefined) valores = valores + ` nombre = '${nombre}'`;
 		if (apellido != undefined) valores = valores + `, apellido = '${apellido}'`;
 		if (email != undefined) {
-            const isEmail = await emailValidator(email);
-            if (!isEmail) throw new Error('Formato de email invalido');
+            if (!emailValidator(email)) throw new Error('Formato de email invalido');
             valores = valores + `, email = '${email}'`;
         }
         if(contrasena != undefined){
