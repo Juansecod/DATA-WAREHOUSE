@@ -1,0 +1,31 @@
+{
+  "name": "data-warehouse-api",
+  "version": "1.0.0",
+  "description": "Administracion de los contactos de una compañia de marketing ",
+  "main": "app.js",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  },
+  "scripts": {
+    "startApp": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Juansecod/DATA-WAREHOUSE.git"
+  },
+  "author": "Juansecode",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Juansecod/DATA-WAREHOUSE/issues"
+  },
+  "homepage": "https://github.com/Juansecod/DATA-WAREHOUSE#readme"
+}
