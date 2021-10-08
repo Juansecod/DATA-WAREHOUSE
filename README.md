@@ -41,7 +41,7 @@
       </ul>
     </li>
     <li>
-      <a href="https://github.com/Juansecod/DATA-WAREHOUSE/tree/main/Backend">Backend</a>
+      <a href="https://github.com/Juansecod/DATA-WAREHOUSE/tree/main/backend">Backend</a>
     </li>
     <li><a href="https://github.com/Juansecod/DATA-WAREHOUSE/tree/main/Client">Frontend</a>
     </li>
