@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="stylesheet" href="./src/style/style.css">
     <title>DATA-WAREHOUSE</title>
 </head>
@@ -16,7 +17,179 @@
         </nav>
     </header>
     <main>
-
+        <section class="contacts">
+            <h2>Contactos</h2>
+            <div class="container-buttons">
+                <div class="container-search">
+                    <div class="container-input">    
+                        <input type="text" name="search" id="search">
+                        <button><i class="fas fa-caret-down"></i></button>
+                    </div>
+                    <button class="search-button"><i class="fa fa-search"></i></button>
+                </div>
+                <div class="container-submit">
+                    <button><i class="fas fa-upload"></i></button>
+                    <button>Exportar contactos <i class="fas fa-caret-down"></i></button>
+                    <a href="./addContact.html"><button>Agregar contacto</button></a>
+                </div>
+            </div>
+            <table class="table-contacts">
+                <tr class="table-header">
+                    <th class="table-select"><input type="checkbox" name="select-all-contacts" id="select-all-contacts" class="select-contact"></th>
+                    <th>Contacto <i class="fas fa-sort"></i></th>
+                    <th>País/Región <i class="fas fa-sort"></i></th>
+                    <th>Compañía <i class="fas fa-sort"></i></th>
+                    <th>Cargo <i class="fas fa-sort"></i></th>
+                    <th>Interés <i class="fas fa-sort"></i></th>
+                    <th class="actions">Acciones</th>
+                </tr>
+                <tr>
+                    <td class="table-select"><input type="checkbox" name="select-contact" id="select-contact-1" class="select-contact"></td>
+                    <td class="info-contact">
+                        <img src="https://dummyimage.com/40x40/3347e6/ffffff" alt="picture-contact">
+                        <div class="text">
+                            <h4>Camila Soledad Pantó</h4>
+                            <a href="mailto:example@example.com">example@example.com</a>
+                        </div>
+                    </td>
+                    <td class="region">
+                        <h4>Pais</h4>
+                        <p>Region</p>
+                    </td>
+                    <td class="company">
+                        <h4>Ecom Experts</h4>
+                    </td>
+                    <td class="job">
+                        <h4>UX Designer</h4>
+                    </td>
+                    <td class="interest">
+                        <h4>100%</h4>
+                        <div class="background-bar">
+                            <div class="percentage-bar percentage-bar--100"></div>
+                        </div>
+                    </td>
+                    <td class="actions">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-select"><input type="checkbox" name="select-contact" id="select-contact-1" class="select-contact"></td>
+                    <td class="info-contact">
+                        <img src="https://dummyimage.com/40x40/3347e6/ffffff" alt="picture-contact">
+                        <div class="text">
+                            <h4>Camila Soledad Pantó</h4>
+                            <a href="mailto:example@example.com">example@example.com</a>
+                        </div>
+                    </td>
+                    <td class="region">
+                        <h4>Pais</h4>
+                        <p>Region</p>
+                    </td>
+                    <td class="company">
+                        <h4>Ecom Experts</h4>
+                    </td>
+                    <td class="job">
+                        <h4>UX Designer</h4>
+                    </td>
+                    <td class="interest">
+                        <h4>75%</h4>
+                        <div class="background-bar">
+                            <div class="percentage-bar percentage-bar--75"></div>
+                        </div>
+                    </td>
+                    <td class="actions">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-select"><input type="checkbox" name="select-contact" id="select-contact-1" class="select-contact"></td>
+                    <td class="info-contact">
+                        <img src="https://dummyimage.com/40x40/3347e6/ffffff" alt="picture-contact">
+                        <div class="text">
+                            <h4>Camila Soledad Pantó</h4>
+                            <a href="mailto:example@example.com">example@example.com</a>
+                        </div>
+                    </td>
+                    <td class="region">
+                        <h4>Pais</h4>
+                        <p>Region</p>
+                    </td>
+                    <td class="company">
+                        <h4>Ecom Experts</h4>
+                    </td>
+                    <td class="job">
+                        <h4>UX Designer</h4>
+                    </td>
+                    <td class="interest">
+                        <h4>50%</h4>
+                        <div class="background-bar">
+                            <div class="percentage-bar percentage-bar--50"></div>
+                        </div>
+                    </td>
+                    <td class="actions">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-select"><input type="checkbox" name="select-contact" id="select-contact-1" class="select-contact"></td>
+                    <td class="info-contact">
+                        <img src="https://dummyimage.com/40x40/3347e6/ffffff" alt="picture-contact">
+                        <div class="text">
+                            <h4>Camila Soledad Pantó</h4>
+                            <a href="mailto:example@example.com">example@example.com</a>
+                        </div>
+                    </td>
+                    <td class="region">
+                        <h4>Pais</h4>
+                        <p>Region</p>
+                    </td>
+                    <td class="company">
+                        <h4>Ecom Experts</h4>
+                    </td>
+                    <td class="job">
+                        <h4>UX Designer</h4>
+                    </td>
+                    <td class="interest">
+                        <h4>25%</h4>
+                        <div class="background-bar">
+                            <div class="percentage-bar percentage-bar--25"></div>
+                        </div>
+                    </td>
+                    <td class="actions">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-select"><input type="checkbox" name="select-contact" id="select-contact-1" class="select-contact"></td>
+                    <td class="info-contact">
+                        <img src="https://dummyimage.com/40x40/3347e6/ffffff" alt="picture-contact">
+                        <div class="text">
+                            <h4>Camila Soledad Pantó</h4>
+                            <a href="mailto:example@example.com">example@example.com</a>
+                        </div>
+                    </td>
+                    <td class="region">
+                        <h4>Pais</h4>
+                        <p>Region</p>
+                    </td>
+                    <td class="company">
+                        <h4>Ecom Experts</h4>
+                    </td>
+                    <td class="job">
+                        <h4>UX Designer</h4>
+                    </td>
+                    <td class="interest">
+                        <h4>0%</h4>
+                        <div class="background-bar">
+                            <div class="percentage-bar"></div>
+                        </div>
+                    </td>
+                    <td class="actions">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </td>
+                </tr>
+            </table>
+        </section>
     </main>
     <footer>
         <script src="./src/scripts/app.js" type="module"></script>

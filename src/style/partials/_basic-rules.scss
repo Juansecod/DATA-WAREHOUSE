@@ -7,6 +7,13 @@
     padding: 0;
 }
 
+i, .fas, .fa, .fab, .fad, .fal, .far, .fas{
+    font-family: "Font Awesome 5 Pro";
+    &:hover, &:focus, &:active{
+        font-family: "Font Awesome 5 Pro";
+    }
+}
+
 a{
     text-decoration: none;
     color: $white-color;
@@ -29,4 +36,9 @@ input{
     min-width: 190px;
     min-height: 35.5px;
     border: 1px solid $grey-color;
+}
+
+input[type="checkbox"]{
+    min-width: 0px;
+    min-height: 0px;
 }

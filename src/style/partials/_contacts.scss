@@ -1,0 +1,187 @@
+@mixin common-properties-buttons-contacts {
+    height: 41px;
+    border-radius: 1.5px;
+}
+
+@mixin border-buttons-right {
+    border: 1px solid $dark-blue-color;
+}
+
+.contacts{
+    padding: 40px 30px 20px 30px;
+}
+
+.container-buttons{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.container-search{
+    width: 65%;
+    display: flex;
+    gap: 10px;
+    button{
+        background-color: $white-color;
+        width: 41px;
+    }
+    .container-input{
+        background-color: $white-color;
+        border: 1px solid $grey-color;
+        width: 36.7vw;
+        max-width: 471.76px;
+        height: 41px;
+        display: flex;
+        *{
+            height: 41px;
+            border: none;
+        }
+        input{
+            padding-left: 5%;
+            width: calc(95% - 41px);
+            &:focus{
+                outline: none;
+            }
+        }
+        button, i{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &:hover{
+                cursor: pointer;
+            }
+        }
+    }
+    .search-button{
+        border: 1px solid $grey-color;
+    }
+    .fa-search{
+        color: $dark-blue-color;
+    }
+}
+
+.container-submit{
+    width: 35%;
+    gap: 10px;
+    display: flex;
+    justify-content: flex-end;
+    button{
+        @include common-properties-buttons-contacts;
+        @include border-buttons-right;
+        background-color: $white-color;
+        color: $dark-blue-color;
+        padding: 0 5px 0 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 41px;
+        i{
+            min-width: 15px;
+        }
+        &:hover{
+            cursor: pointer;
+            background-color: $light-grey-color;
+        }
+        &:last-child{
+            background-color: $dark-blue-color;
+            color: $white-color;
+            &:hover{
+                background-color: $dark-blue-hover;
+            }
+        }
+    }
+}
+
+.table-contacts{
+    margin: 10px 0 0 0;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid $light-grey-color;
+}
+
+.table-header{
+    height: 56px;
+    padding: 10px 0px 5px 0px;
+    border-bottom: 1px solid $light-grey-color;
+}
+
+.table-select, .actions{
+    text-align: center;
+    padding: 0px 10px 0px 10px;
+}
+
+.select-contact{
+    width: 20px;
+    height: 20px;
+}
+
+td,th{
+    text-align:start;
+    min-height: 56px;
+}
+
+.info-contact{
+    height:71px;
+    display: flex; 
+    align-items: center;
+    justify-content: flex-start; 
+    gap: 10px;
+    img{
+        border-radius: 50%;
+        max-width: 40px;
+        min-width: 40px;
+        max-height: 40px;
+        min-height: 40px;
+        width: 40px;
+        height: 40px;
+    }
+    .text{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content:center;
+        a{
+            color: $black-color;
+        }
+        a:hover{
+            color: $black-color-hover;
+        }
+    }
+}
+
+.interest{
+    text-align:center;
+    .background-bar{
+        width: 100%;
+        background-color: $grey-color;
+        border-radius: 4px;
+        height: 8px;
+    }
+    .percentage-bar{
+        height: 8px;
+        border-radius: 4px;
+        &--100{
+            background-color: $red-color;
+            width: 100%;
+        }
+        &--75{
+            background-color: $orange-color;
+            width:75%;
+        }
+        &--50{
+            background-color: $yellow-color;
+            width: 50%;
+        }
+        &--25{
+            background-color: $sky-blue;
+            width: 25%;
+        }
+    }
+}
+
+.actions{
+    i{
+        cursor: pointer;
+    }
+}
