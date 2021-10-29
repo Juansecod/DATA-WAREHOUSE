@@ -198,6 +198,7 @@ td,th{
     width: 90vw;
     margin-left: calc(10vw / 2);
     background-color: $dark-blue-color;
+    z-index: 1000;
     display: none;
     h2{ 
         color: $white-color;

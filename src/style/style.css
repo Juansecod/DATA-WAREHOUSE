@@ -512,6 +512,7 @@ td, th {
   width: 90vw;
   margin-left: calc(10vw / 2);
   background-color: #1D72C2;
+  z-index: 1000;
   display: none;
 }
 
