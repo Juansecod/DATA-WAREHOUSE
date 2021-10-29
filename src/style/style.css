@@ -31,16 +31,143 @@ ul {
   list-style: none;
 }
 
-input {
+input, .cancel, .add-contact form select {
   border-radius: 5px;
   min-width: 190px;
   min-height: 35.5px;
   border: 1px solid #CCCCCC;
 }
 
-input[type="checkbox"] {
+input[type="checkbox"], .cancel[type="checkbox"], .add-contact form select[type="checkbox"] {
   min-width: 0px;
   min-height: 0px;
+}
+
+.disabled, .container-submit .disabled {
+  background-color: #C6CACC;
+  border: none;
+}
+
+.disabled:hover, .container-submit .disabled:hover {
+  background-color: #C6CACC;
+  border: none;
+  cursor: not-allowed;
+}
+
+.disabled::-webkit-input-placeholder, .container-submit .disabled::-webkit-input-placeholder {
+  color: #AAAAAA;
+}
+
+.disabled:-ms-input-placeholder, .container-submit .disabled:-ms-input-placeholder {
+  color: #AAAAAA;
+}
+
+.disabled::-ms-input-placeholder, .container-submit .disabled::-ms-input-placeholder {
+  color: #AAAAAA;
+}
+
+.disabled::placeholder, .container-submit .disabled::placeholder {
+  color: #AAAAAA;
+}
+
+.container {
+  width: 70%;
+  height: auto;
+  padding: 5% 5% 5% 5%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+form input, form .cancel, .add-contact form select {
+  width: 100%;
+}
+
+form .required:focus {
+  outline: none;
+  border: 1px solid #DE0028;
+}
+
+form .success:focus {
+  border: 1px solid #429C41;
+}
+
+form .submit {
+  border: 0;
+  background-color: #429c41;
+  color: #FFFFFF;
+  max-width: 30%;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
+form .submit:hover {
+  background-color: #367c10;
+  cursor: pointer;
+}
+
+form .info.required::after {
+  content: "Campo requerido";
+  color: #DE0028;
+  font-style: italic;
+}
+
+form .info.success::after {
+  content: "Cumple con los requisitos";
+  color: #429C41;
+  font-style: italic;
+}
+
+.container-input, .add-contact .network .container-button {
+  width: 100%;
+}
+
+.cancel {
+  background-color: rgba(222, 0, 40, 0.9);
+  color: #FFFFFF;
+  border: 0;
+}
+
+.cancel:hover {
+  cursor: pointer;
+  background-color: rgba(173, 1, 32, 0.9);
+}
+
+.darker-background {
+  content: '';
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+  display: none;
+}
+
+header {
+  height: 68px;
 }
 
 .navbar {
@@ -61,6 +188,9 @@ input[type="checkbox"] {
   background-color: #1D72C2;
   color: #FFFFFF;
   height: 68px;
+  position: fixed;
+  width: 100%;
+  top: 0%;
 }
 
 .navbar .logo {
@@ -122,11 +252,7 @@ input[type="checkbox"] {
           transform: scaleX(1);
 }
 
-.login .container-input {
-  width: 100%;
-}
-
-.login {
+.login, .add-user {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -137,74 +263,6 @@ input[type="checkbox"] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-}
-
-.login .container {
-  width: 70%;
-  height: auto;
-  padding: 5% 5% 5% 5%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.login form {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  gap: 10px;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-}
-
-.login form input {
-  width: 100%;
-}
-
-.login form input:focus {
-  outline: none;
-  border: 1px solid #DE0028;
-}
-
-.login form .success:focus {
-  border: 1px solid #429C41;
-}
-
-.login form .signin {
-  background-color: #429C41;
-  color: #FFFFFF;
-  max-width: 30%;
-  -ms-flex-item-align: end;
-      align-self: flex-end;
-}
-
-.login form .signin:hover {
-  background-color: #367c10;
-  cursor: pointer;
-}
-
-.login form .info.required::after {
-  content: "Campo requerido";
-  color: #DE0028;
-  font-style: italic;
-}
-
-.login form .info.success::after {
-  content: "Cumple con los requisitos";
-  color: #429C41;
-  font-style: italic;
 }
 
 .contacts {
@@ -235,7 +293,7 @@ input[type="checkbox"] {
   width: 41px;
 }
 
-.container-search .container-input {
+.container-search .container-input, .container-search .add-contact .network .container-button, .add-contact .network .container-search .container-button {
   background-color: #FFFFFF;
   border: 1px solid #CCCCCC;
   width: 36.7vw;
@@ -246,21 +304,21 @@ input[type="checkbox"] {
   display: flex;
 }
 
-.container-search .container-input * {
+.container-search .container-input *, .container-search .add-contact .network .container-button *, .add-contact .network .container-search .container-button * {
   height: 41px;
   border: none;
 }
 
-.container-search .container-input input {
+.container-search .container-input input, .container-search .add-contact .network .container-button input, .add-contact .network .container-search .container-button input, .container-search .container-input .cancel, .container-search .add-contact .network .container-button .cancel, .add-contact .network .container-search .container-button .cancel, .container-search .container-input .add-contact form select, .add-contact form .container-search .container-input select, .container-search .add-contact .network .container-button form select, .container-search .add-contact form .network .container-button select, .add-contact .network .container-search .container-button form select, .add-contact form .network .container-search .container-button select {
   padding-left: 5%;
   width: calc(95% - 41px);
 }
 
-.container-search .container-input input:focus {
+.container-search .container-input input:focus, .container-search .add-contact .network .container-button input:focus, .add-contact .network .container-search .container-button input:focus, .container-search .container-input .cancel:focus, .container-search .add-contact .network .container-button .cancel:focus, .add-contact .network .container-search .container-button .cancel:focus, .container-search .container-input .add-contact form select:focus, .add-contact form .container-search .container-input select:focus, .container-search .add-contact .network .container-button form select:focus, .container-search .add-contact form .network .container-button select:focus, .add-contact .network .container-search .container-button form select:focus, .add-contact form .network .container-search .container-button select:focus {
   outline: none;
 }
 
-.container-search .container-input button, .container-search .container-input i {
+.container-search .container-input button, .container-search .add-contact .network .container-button button, .add-contact .network .container-search .container-button button, .container-search .container-input i, .container-search .add-contact .network .container-button i, .add-contact .network .container-search .container-button i {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -272,7 +330,7 @@ input[type="checkbox"] {
           justify-content: center;
 }
 
-.container-search .container-input button:hover, .container-search .container-input i:hover {
+.container-search .container-input button:hover, .container-search .add-contact .network .container-button button:hover, .add-contact .network .container-search .container-button button:hover, .container-search .container-input i:hover, .container-search .add-contact .network .container-button i:hover, .add-contact .network .container-search .container-button i:hover {
   cursor: pointer;
 }
 
@@ -333,7 +391,7 @@ input[type="checkbox"] {
 }
 
 .table-contacts {
-  margin: 10px 0 0 0;
+  margin: 35px 0 0 0;
   width: 100%;
   border-collapse: collapse;
   border: 1px solid #E8E8E8;
@@ -446,5 +504,129 @@ td, th {
 
 .actions i {
   cursor: pointer;
+}
+
+.add-contact {
+  position: fixed;
+  top: 100px;
+  width: 90vw;
+  margin-left: calc(10vw / 2);
+  background-color: #1D72C2;
+  display: none;
+}
+
+.add-contact h2 {
+  color: #FFFFFF;
+  margin-left: calc(2.5%);
+  padding: 26.7px 0 36.6px 0;
+}
+
+.add-contact form {
+  gap: 0;
+}
+
+.add-contact form input, .add-contact form .cancel, .add-contact form select {
+  width: auto;
+}
+
+.add-contact .primary-info, .add-contact .secundary-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: #FFFFFF;
+  width: 95%;
+  margin-left: 2.5%;
+}
+
+.add-contact .primary-info {
+  padding: 3.1% 2.5%;
+  border-radius: 4px;
+  border: solid 2px #0683F9;
+}
+
+.add-contact .secundary-info {
+  margin-top: 15px;
+  width: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 15px;
+  padding: 2.6% 2.4% 4.6% 2.4%;
+  margin-left: 0px;
+}
+
+.add-contact .address, .add-contact .network {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 15px;
+}
+
+.add-contact .address .container-range {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  min-width: 315px;
+}
+
+.add-contact .address .container-range select {
+  min-width: 0px;
+}
+
+.add-contact .network .container-input, .add-contact .network .container-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: auto;
+}
+
+.add-contact .network .container-input input, .add-contact .network .container-button input, .add-contact .network .container-input .cancel, .add-contact .network .container-button .cancel, .add-contact .network .container-input form select, .add-contact form .network .container-input select, .add-contact .network .container-button form select, .add-contact form .network .container-button select {
+  max-width: 143px;
+}
+
+.add-contact .network .container-button {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.add-contact .network .container-button .add-form-network {
+  border-radius: 4px;
+  height: 35.5px;
+  min-width: 143px;
+  max-height: 35.5px;
+  border: solid 1px #AAAAAA;
+  color: #AAAAAA;
+  background-color: #FFFFFF;
+}
+
+.add-contact .network .container-button .add-form-network:hover {
+  background-color: #AAAAAA;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.add-contact .container-buttons-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 5% 0 0;
+  gap: 15px;
+  width: 95%;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding-right: 5%;
+  background-color: #FFFFFF;
+  padding-bottom: 2.5%;
 }
 /*# sourceMappingURL=style.css.map */

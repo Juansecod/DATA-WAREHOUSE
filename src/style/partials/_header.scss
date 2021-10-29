@@ -1,3 +1,7 @@
+header{
+    height: 68px;
+}
+
 .navbar{
     display: flex;
     flex-direction: row;
@@ -7,6 +11,9 @@
     background-color: $dark-blue-color;
     color: $white-color;
     height: $height-header;
+    position: fixed;
+    width: 100%;
+    top: 0%;
     .logo{
         margin-left: 5%;
     }

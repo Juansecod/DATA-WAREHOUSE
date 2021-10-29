@@ -91,10 +91,16 @@
             }
         }
     }
+    .disabled{
+        @extend .disabled;
+        &:hover{
+            @extend .disabled:hover;
+        }
+    }
 }
 
 .table-contacts{
-    margin: 10px 0 0 0;
+    margin: 35px 0 0 0;
     width: 100%;
     border-collapse: collapse;
     border: 1px solid $light-grey-color;
@@ -183,5 +189,101 @@ td,th{
 .actions{
     i{
         cursor: pointer;
+    }
+}
+
+.add-contact{
+    position: fixed;
+    top: 100px;
+    width: 90vw;
+    margin-left: calc(10vw / 2);
+    background-color: $dark-blue-color;
+    display: none;
+    h2{ 
+        color: $white-color;
+        margin-left: calc(2.5%);
+        padding: 26.7px 0 36.6px 0;
+    }
+    form{
+        gap: 0;
+        input{
+            width: auto;
+        }
+        select{
+            @extend input;
+        }
+    }
+    .primary-info, .secundary-info{
+        display: flex;
+        box-sizing:border-box;
+        background-color: $white-color;
+        width: 95%;
+        margin-left: 2.5%;
+    }
+    .primary-info{
+        padding: 3.1% 2.5%;
+        border-radius: 4px;
+        border: solid 2px $blue-color
+    }
+    .secundary-info{
+        margin-top: 15px;
+        width: 100%;
+        flex-direction: column;
+        gap: 15px;
+        padding: 2.6% 2.4% 4.6% 2.4%;
+        margin-left: 0px;
+    }
+    .address, .network{
+        width: 100%;
+        display: flex;
+        gap: 15px;
+    }
+    .address{
+        .container-range{
+            display: flex;
+            gap: 10px;
+            min-width: 315px;
+            select{
+                min-width: 0px;
+            }
+        }
+    }
+    .network{
+        .container-input{
+            display: flex;
+            flex-direction: column;
+            width: auto;
+            input{
+                max-width: 143px;
+            }
+        }
+        .container-button{
+            @extend .container-input;
+            justify-content: flex-end;
+            .add-form-network{
+                border-radius: 4px;
+                height: 35.5px;
+                min-width: 143px;
+                max-height: 35.5px;
+                border: solid 1px $dark-grey-color;
+                color: $dark-grey-color;
+                background-color: $white-color;
+            }
+            .add-form-network:hover{
+                background-color: $dark-grey-color;
+                color: $white-color;
+                cursor: pointer;
+            }
+        }
+    }
+    .container-buttons-form{
+        display: flex;
+        margin: 0 5% 0 0;
+        gap: 15px;
+        width: 95%;
+        justify-content: flex-end;
+        padding-right: 5%;
+        background-color: $white-color;
+        padding-bottom: 2.5%;
     }
 }

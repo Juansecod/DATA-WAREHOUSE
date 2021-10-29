@@ -9,6 +9,7 @@
     <title>DATA-WAREHOUSE</title>
 </head>
 <body>
+    <div class="darker-background"></div>
     <header>
         <nav class="navbar">
             <div class="replace-navbars">
@@ -28,8 +29,8 @@
                     <button class="search-button"><i class="fa fa-search"></i></button>
                 </div>
                 <div class="container-submit">
-                    <button><i class="fas fa-upload"></i></button>
-                    <button>Exportar contactos <i class="fas fa-caret-down"></i></button>
+                    <button type="button"><i class="fas fa-upload"></i></button>
+                    <button type="button">Exportar contactos <i class="fas fa-caret-down"></i></button>
                     <a href="./addContact.html"><button>Agregar contacto</button></a>
                 </div>
             </div>
@@ -189,6 +190,112 @@
                     </td>
                 </tr>
             </table>
+        </section>
+        <section class="add-contact">
+            <h2>Nuevo Contacto</h2>
+            <form>
+                <div class="primary-info">
+                    <div class="container-input">
+                        <label for="name">Nombre<text>*</text></label>
+                        <input class="required" type="text" id="name" name="name" required placeholder="Nombre Completo">
+                    </div>
+                    <div class="container-input">
+                        <label for="lastName">Apellido<text>*</text></label>
+                        <input class="required" type="text" id="lastName" name="lastName" required placeholder="Apellido Completo">
+                    </div>
+                    <div class="container-input">
+                        <label for="job">Cargo<text>*</text></label>
+                        <input class="required" type="text" id="job" name="job" required placeholder="Cargo contacto">
+                    </div>
+                    <div class="container-input">
+                        <label for="email">Email<text>*</text></label>
+                        <input class="required" type="email" id="email" name="eamil" required placeholder="email@example.com">
+                    </div>
+                    <div class="container-input">
+                        <label for="company">Compañia<text>*</text></label>
+                        <input class="required" type="text" id="company" name="company" required placeholder="Ingresar nombre de la compañia">
+                    </div>
+                </div>
+                <div class="secundary-info">
+                    <div class="address">
+                        <div class="container-input">
+                            <label for="region">Región</label>
+                            <select name="region" id="region">
+                                <option disabled selected hidden>Seleccione una region</option>
+                                <option value="centroamerica">Centroamerica</option>
+                                <option value="norteamerica">Norteamerica</option>
+                                <option value="sudamerica">Sudamerica</option>
+                            </select>
+                        </div>
+                        <div class="container-input">
+                            <label for="pais">Pais</label>
+                            <select name="pais" id="pais" disabled class="disabled">
+                                <option disabled selected hidden>Seleccione un pais</option>
+                                <option value="argentina">Argentina</option>
+                                <option value="brasil">Brasil</option>
+                                <option value="colombia">Colombia</option>
+                                <option value="uruguay">Uruguay</option>
+                            </select>
+                        </div>
+                        <div class="container-input">
+                            <label for="ciudad">Ciudad</label>
+                            <select name="ciudad" id="ciudad" disabled class="disabled">
+                                <option disabled selected hidden>Seleccione una ciudad</option>
+                                <option value="bogota">Bogota</option>
+                                <option value="cali">Cali</option>
+                                <option value="medellin">Medellin</option>
+                            </select>
+                        </div>
+                        <div class="container-input">
+                            <label for="address">Dirección</label>
+                            <input class="disabled" type="text" name="address" id="address" placeholder="Ingrese una dirección" disabled>
+                        </div>
+                        <div class="container-input">
+                            <label for="interest">Interés</label>
+                            <div class="container-range">
+                                <input type="range" name="interest" id="interest" step="25" min="0" max="100">
+                                <select name="range-select" id="range-select">
+                                    <option value="0" id="0%" selected>0%</option>
+                                    <option value="25" id="25%">25%</option>
+                                    <option value="50" id="50%">50%</option>
+                                    <option value="75" id="75%">75%</option>
+                                    <option value="100" id="100%">100%</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="network">
+                        <div class="container-input">
+                            <label for="channel">Canal Contacto</label>
+                            <select name="channel" id="channel">
+                                <option disabled selected hidden>Seleccione un canal</option>
+                                <option value="facebook">Facebook</option>
+                                <option value="linkedin">Linkedin</option>
+                                <option value="whatsapp">Whatsapp</option>
+                            </select>
+                        </div>
+                        <div class="container-input">
+                            <label for="nick-channel-contact">Cuenta de Usuario</label>
+                            <input type="text" name="nick-channel-contact" id="nick-channel-contact" placeholder="@exmaple" class="disabled" disabled>
+                        </div>
+                        <div class="container-input">
+                            <label for="preferences">Preferencias</label>
+                            <select class="disabled" name="preferences" id="preferences" disabled>
+                                <option selected value="Sin preferencia">Sin preferencia</option>
+                                <option value="canal favorito">Canal Favorito</option>
+                                <option value="no molestar">No molestar</option>
+                            </select>
+                        </div>
+                        <div class="container-button">
+                            <button type="button" class="add-form-network">+ Agregar Canal</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-buttons-form">
+                    <button class="cancel" type="button">Cancelar</button>
+                    <input class="submit" type="submit" value="Crear">                
+                </div>
+            </form> 
         </section>
     </main>
     <footer>
