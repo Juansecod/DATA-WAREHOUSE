@@ -38,7 +38,7 @@ const getUSer = async (req, res) =>{
     }
 };
 
-const singinUser = async (req, res) => {
+const singUpUser = async (req, res) => {
     const { nombre, apellido, email, contrasena, idRol } = req.body;
     try{
         const rol = await sequelize.query(`SELECT nombre FROM rolesUsuario WHERE idRol = ${idRol}`,
@@ -114,7 +114,7 @@ const updateRolUser = async(req, res) => {
 	}
 };
 
-const singupUser = async(req, res) => {
+const singInUser = async(req, res) => {
     const { email, contrasena } = req.body;
     try{
         const user = await sequelize.query(`SELECT * FROM usuarios WHERE email='${email}' LIMIT 1`,
@@ -163,9 +163,9 @@ const deleteUser = async(req, res) => {
 module.exports = { 
     getUSers,
     getUSer,
-    singinUser,
+    singInUser,
     updateUser,
     updateRolUser,
-    singupUser,
+    singUpUser,
     deleteUser 
 };
