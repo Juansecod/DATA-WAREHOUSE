@@ -7,7 +7,7 @@ const usersControllers = require('../controllers/users.controllers');
 const middlewares = require("../middleware/middlewares");
 
 /* Rutas */
-router.post('/signIp', middlewares.emailValidator, usersControllers.singupUser);
+router.post('/signIn', middlewares.emailValidator, usersControllers.singupUser);
 
 /* Acceso solo Admin */
 router.use(middlewares.tokenValidator, middlewares.adminIdentificator);
