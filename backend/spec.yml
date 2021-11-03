@@ -1,0 +1,1599 @@
+openapi: 3.0.0
+info:
+  description: "API diseñada para una compañia de marketing que permite administrar todos los contactos de sus clientes para sus campañas, acompañado de la administracion de compañias y usuarios registrados."
+  version: "1.0.0"
+  title: DATA-WAREHOUSE API
+  contact:
+    name: Juansecode
+    email: "juan.sebastianri28@gmail.com"
+  license:
+    name: "MIT License"
+    url: "https://github.com/Juansecod/DATA-WAREHOUSE/blob/main/LICENSE"
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: Servidor local generado por la misma API
+    url: http://localhost:3001/api/v1
+tags:
+  - name: usuario
+    description: Operaciones acerca del usuario
+  - name: usuario(Admin)
+    description: Operaciones solo disponibles para administradores
+  - name: contacto
+    description: Operaciones de un usuario (Tanto administrador como basico) sobre los contactos
+  - name: compañia
+    description: Operaciones de un usuario (Tanto administrador como basico) sobre las compañias
+  - name: region
+    description: Operaciones para realizar acciones con las regiones
+  - name: region(Admin)
+    description: Operaciones de los administradores sobre las regiones
+  - name: pais(Admin)
+    description: Operaciones de los administradores sobre los paises
+  - name: ciudad(Admin)
+    description: Operaciones de los administradores sobre las ciudades
+
+paths:
+  # Rutas todos los usuarios
+  /users/signIn:
+    post:
+      tags:
+        - usuario
+      summary: Ingreso en el sistema de un usuario
+      operationId: signinUsuario
+      responses:
+        "200":
+          description: Operacion realizada con exito
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: boolean
+                  data:
+                    type: string
+                  admin:
+                    type: boolean
+                  token:
+                    type: string
+        "400":
+          description: Se ha cometido un error en el procedimiento
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "404":
+          description: Usuario no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  default: example@mail.com
+                contrasena:
+                  type: string
+        description: Datos de inicio de sesion
+        required: true
+
+  # Rutas Usuarios Administrativos
+  /users:
+    get:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - usuario(Admin)
+      summary: Mostrar todos los usuarios
+      description:  Se muestra todos los usuarios registrados siempre y cuando el usuario loggeado sea administrador
+      operationId: mostrarUsuarios
+      responses:
+        "200":
+          description: Operacion realizada con exito
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        idUsuario: 
+                          type: integer
+                        nombre:
+                          type: string
+                        apellido: 
+                          type: string
+                        email:
+                          type: string
+                          default: example@mail.com
+                        rol:
+                          type: string
+        "400":
+          description: Se ha cometido un error en el procedimiento
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: Acceso denegado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+  /users/{id}:
+    get:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - usuario(Admin)
+      summary: Muestra informacion del usuario solicitado
+      operationId: mostrarUsuarioPorId
+      parameters:
+        - name: id
+          in: path
+          description: El id del usuario que solicita la informacion
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Operacion completada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: boolean
+                  data:
+                    type: array
+                    items: 
+                      type: object
+                      properties:
+                        idUsuario: 
+                          type: integer
+                        nombre:
+                          type: string
+                        apellido: 
+                          type: string
+                        email:
+                          type: string
+                          default: example@mail.com
+                        rol:
+                          type: string
+        "400":
+          description: Ha ocurrido un error al realizar la operacion
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No esta autorizado para esta operacion
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+  /users/signUpUser:
+    post:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - usuario(Admin)
+      summary: Registrar Usuario
+      description: Se agrega el usuario a la base datos, permitiendo su loggeo e interaccion con contactos y compañias. En caso de tener rol administrativo se le agregara la interaccion con las regiones y usuarios
+      operationId: crearUsuario
+      requestBody:
+        description: Datos para la creacion de un nuevo usuario
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Usuario"
+      responses:
+        "201":
+          description: Operacion realizada con exito
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "400":
+          description: Se ha cometido un error en el procedimiento
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No tienes permisos Administrativos
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+  /users/update/{id}:
+    put:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - usuario(Admin)
+      summary: Actualizar Usuario
+      description: Se actualiza los datos de un usuario en la base de datos
+      operationId: actualizarUsuario
+      parameters:
+        - name: id
+          in: path
+          description: El id del usuario a actualizar
+          required: true
+          schema:
+            type: integer             
+      requestBody:
+        description: Datos para actualizar en la base de datos (Solo es requerido un campo)
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                apellido: 
+                  type: string
+                email:
+                  type: string
+                  default: example@mail.com
+                contrasena:
+                  type: string
+      responses:
+        "201":
+          description: Operacion realizada con exito
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "400":
+          description: Se ha cometido un error en el procedimiento
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+  /users/updateRol/{idUsuario}:
+    put:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - usuario(Admin)
+      summary: Actualizar el rol de un usuario
+      description: Se actualiza el rol de un usuario ya sea a basico o a administrador
+      operationId: actualizarRol
+      parameters:
+        - name: idUsuario
+          in: path
+          description: El id del usuario a actualizar en la base de datos
+          required: true
+          schema:
+            type: integer
+        - name: idRol
+          in: query
+          description: El id del Rol para actualizar al rol deseado en la base de datos
+          required: true
+          schema:
+            type: integer
+      responses:
+        "201":
+          description: Operacion realizada con exito
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "400":
+          description: Se ha cometido un error en el procedimiento
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+  /users/delete:
+    delete:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - usuario(Admin)
+      summary: Eliminar Usuario
+      description: Se elimina los datos de un usuario en la base de datos
+      operationId: eliminarUsuario
+      responses:
+        "200":
+          description: Se ha eliminado con exito el usuario
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "400":
+          description: Se ha cometido un error en el proceso
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No tienes acceso
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "404":
+          description: No encontrado
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+
+  # Rutas Contactos
+  /contacts/:
+    get:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - contacto
+      summary: Mostrar Contactos
+      description: Muestra todos los contactos almacenados en la base de datos
+      operationId: mostrarContactos
+      responses:
+        "200":
+          description: Se ha realizado la peticion con exito
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        idContacto:
+                          type: integer
+                        nombre: 
+                          type: string
+                        apellido:
+                          type: string
+                        cargo: 
+                          type: string
+                        email: 
+                          type: string
+                          default: example@mail.com
+                        interes:
+                          type: integer
+                        idCompania: 
+                          type: integer
+                        compania:
+                          type: string
+                        idCiudad: 
+                          type: integer
+                        ciudad:
+                          type: string
+                        direccion:
+                          type: string
+                        idRedContacto: 
+                          type: integer
+                        canal:
+                          type: string
+                        link:
+                          type: string
+                          default: url.com
+                        telefono:
+                          type: string
+                        preferencias:
+                          type: string
+        "400":
+          description: Se ha cometido un error en el proceso
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No tienes acceso
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "404":
+          description: No encontrado
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+  /contacts/register/:
+    post:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - contacto
+      summary: Registrar Contacto
+      description: Se agrega el contacto a la base datos, permitiendo las acciones de los usuarios sobre ellos
+      operationId: crearContacto
+      requestBody:
+        description: Datos para la creacion de un nuevo contacto
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Contacto"
+      responses:
+        "201":
+          description: Operacion realizada con exito
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "400":
+          description: Se ha cometido un error en el procedimiento
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No tienes permisos
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+  /contacts/addNetworks/{id}:
+    post:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - contacto
+      summary: Agregar Redes a un contacto
+      description: Agrega redes no registradas a un contacto
+      operationId: agregarRedes
+      parameters:
+        - name: id
+          in: path
+          description: El id del contacto para agregar las nuevas redes en la base de datos
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Redes para agregar al contacto
+        required: true        
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                redes:
+                  type: array
+                  items:
+                    $ref: "#/components/schemas/Red"
+      responses:
+        "201":
+          description: Operacion realizada con exito
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "400":
+          description: Se ha cometido un error en el procedimiento
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No tienes permisos 
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "404":
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+  /contacts/update/{id}:
+    put:
+      security:
+       - ApiKeyAuth: []
+      tags:
+        - contacto
+      summary: Actualizar Contacto
+      description: Se actuliza el contacto en la base datos
+      operationId: actualizarContacto
+      parameters:
+        - name: id
+          in: path
+          description: El id del contacto para actualizar
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Datos para actualizar un contacto
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre: 
+                  type: string
+                apellido: 
+                  type: string
+                cargo: 
+                  type: string
+                email: 
+                  type: string
+                interes: 
+                  type: integer
+                direccion:
+                  type: string 
+                idCompany: 
+                  type: integer
+                idCiudad: 
+                  type: integer
+                redes:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      canal:
+                        type: string
+                      url: 
+                        type: string
+                      telefono:
+                        type: string
+                      preferencia: 
+                        type: string
+                      idRedContacto:
+                        type: string
+      responses:
+        "201":
+          description: Operacion realizada con exito
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "400":
+          description: Se ha cometido un error en el procedimiento
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No tienes permisos
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "404":
+          description: No encontrado
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"  
+  /contacts/delete/:
+    delete:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - contacto
+      summary: Eliminar Contacto
+      description: Se elimina los datos de un contacto en la base de datos
+      operationId: eliminarContacto
+      parameters:
+        - name: id
+          in: query
+          description: El id del contacto para eliminar
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Se ha eliminado con exito el contacto
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "400":
+          description: Se ha cometido un error en el proceso
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No tienes acceso
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "404":
+          description: No encontrado
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"    
+
+  # Rutas Compañias
+  /companies/:
+    get:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - compañia
+      summary: Mostrar Compañias
+      description: Muestra todas las compañias almacenadas en la base de datos
+      operationId: mostrarCompañias
+      responses:
+        "200":
+          description: Operacion realizada con exito
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        idCompania: 
+                          type: integer
+                        nombre:
+                          type: string
+                        email:
+                          type: string
+                          default: "example@mail.com"
+                        ciudad:
+                          type: string
+                        direccion:
+                          type: string
+                        telefono:
+                          type: string
+        "400":
+          description: Se ha cometido un error en el proceso
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No tienes acceso
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "404":
+          description: No encontrado
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+  /companies/register:
+    post:
+      security:
+        - ApiKeyAuth: []
+      tags: 
+        - compañia
+      summary: Registrar Compañia
+      description: Se agrega la compañia a la base datos, permitiendo las acciones de los usuarios sobre ellas
+      operationId: crearCompañia
+      requestBody:
+        description: Datos para la creacion de un nuevo contacto
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Compania"
+      responses:
+        "201":
+          description: Operacion realizada con exito
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "400":
+          description: Se ha cometido un error en el procedimiento
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No tienes permisos
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"  
+  /companies/update/{id}:
+    put:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - compañia
+      summary: Actualizar Compañia
+      description: Se actuliza la compañia en la base datos
+      operationId: actualizarCompañia
+      parameters:
+        - name: id
+          in: path
+          description: El id de la compañia para actualizar
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Datos para actualizar una compañia
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Compania"
+      responses:
+        "201":
+          description: Operacion realizada con exito
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "400":
+          description: Se ha cometido un error en el procedimiento
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No tienes permisos
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "404":
+          description: No encontrado
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+  /companies/delete/:
+    delete:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - compañia
+      summary: Eliminar Compañia
+      description: Se elimina los datos de una compañia en la base de datos
+      operationId: eliminarCompañia
+      parameters:
+        - name: id
+          in: query
+          description: El id de la compañia para eliminar
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Se ha eliminado con exito la compañia
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "400":
+          description: Se ha cometido un error en el proceso
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No tienes acceso
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "404":
+          description: No encontrado
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response" 
+
+  # Rutas Regiones    
+  /regions/list:
+    get:
+      tags:
+        - region
+      summary: Mostrar Lista Regiones con Paises y Ciudades
+      description: Muestra todas las regiones con sus paises y ciudades almacenadas en la base de datos
+      operationId: mostrarListaRegiones
+      responses:
+        "200":
+          description: Operacion realizada con exito
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        region:
+                          type: string
+                        pais:
+                          type: string
+                        ciudad:
+                          type: string
+        "400":
+          description: Se ha cometido un error en el proceso
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No tienes acceso
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "404":
+          description: No encontrado
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+
+  # Rutas Regiones (Usuarios Administrativos)
+  /regions/:
+    get:
+      tags:
+        - region(Admin)
+      summary: Mostrar Regiones
+      description: Muestra todas las regiones almacenadas en la base de datos
+      operationId: mostrarRegiones
+      responses:
+        "200":
+          description: Operacion realizada con exito
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        idRegion:
+                          type: integer
+                        nombre:
+                          type: string
+        "400":
+          description: Se ha cometido un error en el proceso
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No tienes acceso
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "404":
+          description: No encontrado
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+  /regions/register/:
+    post:
+      security:
+       - ApiKeyAuth: []
+      tags:
+        - region(Admin)
+      summary: Registrar Region
+      description: Crea la region en la base de datos
+      operationId: crearRegiones
+      requestBody:
+        description: Datos para la creacion de una nueva region
+        required: true  
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Region"
+      responses:
+        "201":
+          description: Operacion realizada con exito
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "400":
+          description: Se ha cometido un error en el procedimiento
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No tienes permisos
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+  /regions/update/{idRegion}:
+    put:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - region(Admin)
+      summary: Actualizar Region
+      description: actualiza la region en la base de datos
+      operationId: actualizarRegiones
+      parameters:
+        - name: idRegion
+          in: path
+          description: El id de la region para actualizar
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Datos para la actualiza de una region
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Region"
+      responses:
+        "201":
+          description: Operacion realizada con exito
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "400":
+          description: Se ha cometido un error en el procedimiento
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No tienes permisos
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+  /regions/delete/:
+    delete:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - region(Admin)
+      summary: Eliminar Region
+      description: Se elimina los datos de una region en la base de datos
+      operationId: eliminarRegion
+      parameters:
+        - name: idRegion
+          in: query
+          description: El id de la region para eliminar
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Se ha eliminado con exito la compañia
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "400":
+          description: Se ha cometido un error en el proceso
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No tienes acceso
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "404":
+          description: No encontrado
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response" 
+
+  # Rutas Paises (Usuarios Administrativos)
+  /regions/countries/:
+    get:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - pais(Admin)
+      summary: Mostrar Paises
+      description: Muestra todos los paises almacenadas en la base de datos
+      operationId: mostrarPaises
+      responses:
+        "200":
+          description: Operacion realizada con exito
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        idPais:
+                          type: integer
+                        nombre:
+                          type: string
+                        idRegion:
+                          type: integer
+        "400":
+          description: Se ha cometido un error en el proceso
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No tienes acceso
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "404":
+          description: No encontrado
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+  /regions/{idRegion}/countries/:
+    get:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - pais(Admin)
+      summary: Muestra informacion de los paises de la region solicitada
+      operationId: mostrarPaisesRegion
+      parameters:
+        - name: idRegion
+          in: path
+          description: El id de la region que solicita la informacion
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Operacion completada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: boolean
+                  data:
+                    type: array
+                    items: 
+                      type: object
+                      properties:
+                        idPais:
+                          type: integer
+                        nombre:
+                          type: string
+                        idRegion:
+                          type: integer
+        "400":
+          description: Ha ocurrido un error al realizar la operacion
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No esta autorizado para esta operacion
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "404":
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+  /regions/{idRegion}/countries/register/:
+    post:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - pais(Admin)
+      summary: Registra el pais en la region solicitada
+      description: Agrega a la base de datos el pais en la region solicitada
+      operationId: registrarPais
+      parameters:
+        - name: idRegion
+          in: path
+          description: El id de la region en la que se quiere registrar el pais
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Formulario con los datos a registrar
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pais"
+      responses:
+        "200":
+          description: Operacion completada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "400":
+          description: Ha ocurrido un error al realizar la operacion
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No esta autorizado para esta operacion
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "404":
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+  /regions/countries/update/{idCountry}:
+    put:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - pais(Admin)
+      summary: Actualizar Pais
+      description: Actualiza el pais con los datos enviados
+      operationId: actualizarPais
+      parameters:
+        - name: idCountry
+          in: path
+          description: El id del pais que se quiere actualizar
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Formulario con los datos a actualizar
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pais"
+      responses:
+        "200":
+          description: Operacion completada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "400":
+          description: Ha ocurrido un error al realizar la operacion
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No esta autorizado para esta operacion
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "404":
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+  /regions/countries/delete/:
+    delete:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - pais(Admin)
+      summary: Eliminar Pais
+      description: Elimina el pais de la base de datos
+      operationId: eliminarPais
+      parameters:
+        - name: idCountry
+          in: query
+          description: El id del pais que se quiere Eliminar
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Operacion completada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "400":
+          description: Ha ocurrido un error al realizar la operacion
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No esta autorizado para esta operacion
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "404":
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+
+  # Rutas Ciudades (Usuarios Administrativos)
+  /regions/cities/:
+    get:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - ciudad(Admin)
+      summary: Mostrar Ciudades
+      description: Muestra todas las ciudades almacenadas en la base de datos
+      operationId: mostrarCiudades
+      responses:
+        "200":
+          description: Operacion realizada con exito
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        idCiudad:
+                          type: integer
+                        nombre:
+                          type: string
+                        idPais:
+                          type: integer
+        "400":
+          description: Se ha cometido un error en el proceso
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No tienes acceso
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "404":
+          description: No encontrado
+          content: 
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+  /regions/countries/{idCountry}/cities:
+    get:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - ciudad(Admin)
+      summary: Muestrar ciudades de un pais
+      description: Muestra informacion de las ciudades del pais solicitado
+      operationId: mostrarCiudadesPais
+      parameters:
+        - name: idCountry
+          in: path
+          description: El id del pais que solicita la informacion
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Operacion completada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: boolean
+                  data:
+                    type: array
+                    items: 
+                      type: object
+                      properties:
+                        idCiudad:
+                          type: integer
+                        nombre:
+                          type: string
+                        idPais:
+                          type: integer
+        "400":
+          description: Ha ocurrido un error al realizar la operacion
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No esta autorizado para esta operacion
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "404":
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+  /regions/countries/{idCountry}/cities/register/:
+    post:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - ciudad(Admin)
+      summary: Registrar ciudad
+      description: Registra una nueva ciudad en el pais solicitado
+      operationId: registrarCiudad
+      parameters:
+        - name: idCountry
+          in: path
+          description: El id del pais en el que se registrara la ciudad
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Datos a registrar en la base de datos
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Ciudad"
+      responses:
+        "200":
+          description: Operacion completada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "400":
+          description: Ha ocurrido un error al realizar la operacion
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No esta autorizado para esta operacion
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "404":
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+  /regions/cities/update/{idCity}:
+    put:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - ciudad(Admin)
+      summary: Actualizar Ciudad
+      description: Actualiza el ciudad con los datos enviados
+      operationId: actualizarCiudad
+      parameters:
+        - name: idCity
+          in: path
+          description: El id de la ciudad que se quiere actualizar
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Formulario con los datos a actualizar
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Ciudad"
+      responses:
+        "200":
+          description: Operacion completada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "400":
+          description: Ha ocurrido un error al realizar la operacion
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No esta autorizado para esta operacion
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "404":
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+  /regions/cities/delete/:
+    delete:
+      security:
+        - ApiKeyAuth: []
+      tags:
+        - ciudad(Admin)
+      summary: Eliminar Ciudad
+      description: Elimina el ciudad de la base de datos
+      operationId: eliminarCiudad
+      parameters:
+        - name: idCity
+          in: query
+          description: El id de la ciudad que se quiere Eliminar
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Operacion completada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "400":
+          description: Ha ocurrido un error al realizar la operacion
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "401":
+          description: No esta autorizado para esta operacion
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+        "404":
+          description: No encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/API_Response"
+
+components:
+  schemas:
+    Usuario:
+      type: object
+      properties:
+        nombre:
+          type: string
+        apellido:
+          type: string
+        email:
+          type: string
+          default: example@mail.com
+        contrasena:
+          type: string
+        idRol:
+          type: integer
+    Contacto:
+      type: object
+      properties:
+        nombre: 
+          type: string
+        apellido:
+          type: string
+        cargo: 
+          type: string
+        email:
+          type: string
+          default: example@mail.com
+        interes: 
+          type: integer
+        direccion:
+          type: string
+        idCompany: 
+          type: integer
+        idCiudad:
+          type: integer
+        redes:
+          type: array
+          items:
+            $ref: "#/components/schemas/Red"
+    Red:
+      type: object
+      properties:
+        canal:
+          type: string
+        url:
+          type: string
+        telefono:
+          type: string
+        preferencia:
+          type: string
+    Compania:
+      type: object
+      properties:
+        nombre:
+          type: string
+        email:
+          type: string
+          default: "example@mail.com"
+        idCiudad:
+          type: integer
+        direccion:
+          type: string
+        telefono:
+          type: string
+    Region:
+      type: object
+      properties:
+        nombre:
+          type: string
+    Pais:
+      type: object
+      properties:
+        nombre:
+          type: string
+    Ciudad:
+      type: object
+      properties:
+        nombre:
+          type: string
+    API_Response:
+      type: object
+      properties:
+        msg:
+          type: boolean
+        data: 
+          type: string
+  securitySchemes:
+    ApiKeyAuth:        
+      type: apiKey
+      in: header       
+      name: authorization
+externalDocs:
+  description: Visita el repositorio y descarga la API REST para probarla
+  url: "https://github.com/Juansecod/DATA-WAREHOUSE/blob/main/backend/"
