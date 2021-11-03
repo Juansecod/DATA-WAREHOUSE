@@ -33,7 +33,7 @@ router.delete('/countries/delete', countriesControllers.deleteCountry);
 router.get('/cities', citiesControllers.getCities);
 router.get('/countries/:idCountry/cities', citiesControllers.getCitiesesOfCountry);
 router.post('/countries/:idCountry/cities/register', citiesControllers.postCitiesOfCountry);
-router.put('/cities/update/:idCountry', citiesControllers.updateCity);
+router.put('/cities/update/:idCity', citiesControllers.updateCity);
 router.delete('/cities/delete', citiesControllers.deleteCity);
 
 module.exports = router;
