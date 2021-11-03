@@ -83,6 +83,7 @@ const deleteCity = async(req, res) => {
 	        data: `La ciudad ${ciudad[0].nombre} ha sido eliminada con exito`
 	    });
     } catch (error) {
+        error.message = parseInt(error.message.split(':')[1]);
         errorResponse(res, error);
     }
 };

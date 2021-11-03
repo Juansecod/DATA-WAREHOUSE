@@ -83,6 +83,7 @@ const deleteCountry = async(req, res) => {
 	        'data': `El pais ${pais[0].nombre} se ha eliminado con exito`
 	    });
     } catch (error) {
+        error.message = parseInt(error.message.split(':')[1]);
         errorResponse(res, error);
     }
 };

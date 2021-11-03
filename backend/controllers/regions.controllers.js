@@ -2,6 +2,7 @@
 const sequelize = require('../config/conexion.js');
 const { deleteRegion:deleteScript } = require('../scripts/deleteRegion.script');
 const errorResponse = require('../error/error');
+const { region } = require('../scripts/deleteCountries.script.js');
 
 const getListRegions = async(req, res) => {
     try {
@@ -72,12 +73,13 @@ const updateRegion = async(req,res) => {
 const deleteRegion = async(req, res) => {
     const {idRegion} = req.query;
     try {
-        deleteScript(idRegion);
+        const region = await deleteScript(idRegion);
 		return res.status(200).json( {
 	        msg: true,
 	        data: `La region ${region[0].nombre} se ha eliminado con exito`
 	    });
     } catch (error) {
+        error.message = parseInt(error.message.split(':')[1]);
         errorResponse(res, error);
     }
 };
