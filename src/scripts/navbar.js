@@ -1,7 +1,7 @@
 const nav = document.getElementsByClassName('replace-navbars');
 const token = localStorage.getItem('token');
 const admin = localStorage.getItem('admin');
-const view = window.location.pathname.split('/')[2];
+const view = (window.location.pathname.split('/')[2] == 'pages') ? window.location.pathname.split('/')[3] : window.location.pathname.split('/')[2];
 
 /* Generador template lista nav */
 const listGen = ()=>{
