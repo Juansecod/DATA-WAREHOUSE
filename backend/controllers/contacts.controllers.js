@@ -152,7 +152,7 @@ const addRedContact = async(req, res) => {
                 throw new Error(400);
             }
         });
-        res.status(200).json({
+        res.status(201).json({
             msg: true,
             data: `Se ha agregado las redes del contacto ${contact[0].nombre}.`
         });
