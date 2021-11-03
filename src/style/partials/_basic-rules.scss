@@ -107,6 +107,10 @@ form{
     width: 100%;
 }
 
+button:hover{
+    cursor: pointer;
+}
+
 .cancel{
     @extend input;
     background-color: rgba($red-color, 0.9);

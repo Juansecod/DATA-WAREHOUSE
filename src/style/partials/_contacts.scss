@@ -99,34 +99,6 @@
     }
 }
 
-.table-contacts{
-    margin: 35px 0 0 0;
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid $light-grey-color;
-}
-
-.table-header{
-    height: 56px;
-    padding: 10px 0px 5px 0px;
-    border-bottom: 1px solid $light-grey-color;
-}
-
-.table-select, .actions{
-    text-align: center;
-    padding: 0px 10px 0px 10px;
-}
-
-.select-contact{
-    width: 20px;
-    height: 20px;
-}
-
-td,th{
-    text-align:start;
-    min-height: 56px;
-}
-
 .info-contact{
     height:71px;
     display: flex; 
@@ -183,12 +155,6 @@ td,th{
             background-color: $sky-blue;
             width: 25%;
         }
-    }
-}
-
-.actions{
-    i{
-        cursor: pointer;
     }
 }
 

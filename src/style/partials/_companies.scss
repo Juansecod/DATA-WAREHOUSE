@@ -1,0 +1,7 @@
+.companies{
+    @extend .contacts;
+    .container-header{
+        @extend .container-buttons;
+        justify-content: space-between;
+    }
+}

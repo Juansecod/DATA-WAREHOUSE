@@ -143,6 +143,10 @@ form .info.success::after {
   width: 100%;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 .cancel {
   background-color: rgba(222, 0, 40, 0.9);
   color: #FFFFFF;
@@ -252,6 +256,39 @@ header {
           transform: scaleX(1);
 }
 
+.table {
+  margin: 35px 0 0 0;
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #E8E8E8;
+}
+
+td, th, tr {
+  text-align: start;
+  min-height: 56px;
+  height: 56px;
+}
+
+.table-header {
+  height: 56px;
+  padding: 10px 0px 5px 0px;
+  border-bottom: 1px solid #E8E8E8;
+}
+
+.select-checkbox {
+  width: 20px;
+  height: 20px;
+}
+
+.table-select, .actions {
+  text-align: center;
+  padding: 0px 10px 0px 10px;
+}
+
+.actions i {
+  cursor: pointer;
+}
+
 .login, .add-user {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -265,11 +302,11 @@ header {
           align-items: center;
 }
 
-.contacts {
+.contacts, .companies, .users {
   padding: 40px 30px 20px 30px;
 }
 
-.container-buttons {
+.container-buttons, .companies .container-header, .users .container-header {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -390,34 +427,6 @@ header {
   background-color: #195894;
 }
 
-.table-contacts {
-  margin: 35px 0 0 0;
-  width: 100%;
-  border-collapse: collapse;
-  border: 1px solid #E8E8E8;
-}
-
-.table-header {
-  height: 56px;
-  padding: 10px 0px 5px 0px;
-  border-bottom: 1px solid #E8E8E8;
-}
-
-.table-select, .actions {
-  text-align: center;
-  padding: 0px 10px 0px 10px;
-}
-
-.select-contact {
-  width: 20px;
-  height: 20px;
-}
-
-td, th {
-  text-align: start;
-  min-height: 56px;
-}
-
 .info-contact {
   height: 71px;
   display: -webkit-box;
@@ -500,10 +509,6 @@ td, th {
 .interest .percentage-bar--25 {
   background-color: #1CC2F5;
   width: 25%;
-}
-
-.actions i {
-  cursor: pointer;
 }
 
 .add-contact {
@@ -629,5 +634,11 @@ td, th {
   padding-right: 5%;
   background-color: #FFFFFF;
   padding-bottom: 2.5%;
+}
+
+.companies .container-header, .users .container-header {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 /*# sourceMappingURL=style.css.map */
