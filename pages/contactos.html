@@ -9,7 +9,7 @@
     <title>DATA-WAREHOUSE</title>
 </head>
 <body>
-    <div class="darker-background"></div>
+    <div class="darker-background" id="darker-background"></div>
     <header>
         <nav class="navbar">
             <div class="replace-navbars">
@@ -31,10 +31,20 @@
                 <div class="container-submit">
                     <button type="button" class="disabled"><i class="fas fa-upload"></i></button>
                     <button type="button" class="disabled">Exportar contactos <i class="fas fa-caret-down"></i></button>
-                    <a href="./addContact.html"><button>Agregar contacto</button></a>
+                    <a id="add-contact-button"><button>Agregar contacto</button></a>
                 </div>
             </div>
-            <table class="table">
+            <div class="container-buttons">
+                <div class="amount" style="background: rgba(223, 223, 223, 0.9);
+                border-radius: 4px;
+                border-radius: 4px;color:#0683F9; font-size: small; padding: 5px 5px;">
+                    <p>2 seleccionados</p>
+                </div>
+                <div class="container-delete-amount">
+                    <button type="button" style="color: #1D72C2; font-size: medium; background-color: white;border: 0;"><i class="fas fa-trash-alt"></i> Eliminar contactos</button>
+                </div>
+            </div>
+            <table class="table" id="table-contacts">
                 <tr class="table-header">
                     <th class="table-select"><input type="checkbox" name="select-all-contacts" id="select-all-contacts" class="select-checkbox"></th>
                     <th>Contacto <i class="fas fa-sort"></i></th>
@@ -44,154 +54,9 @@
                     <th>Interés <i class="fas fa-sort"></i></th>
                     <th class="actions">Acciones</th>
                 </tr>
-                <tr>
-                    <td class="table-select"><input type="checkbox" name="select-contact" id="select-contact-1" class="select-checkbox"></td>
-                    <td class="info-contact">
-                        <img src="https://dummyimage.com/40x40/3347e6/ffffff" alt="picture-contact">
-                        <div class="text">
-                            <h4>Camila Soledad Pantó</h4>
-                            <a href="mailto:example@example.com">example@example.com</a>
-                        </div>
-                    </td>
-                    <td class="region">
-                        <h4>Pais</h4>
-                        <p>Region</p>
-                    </td>
-                    <td class="company">
-                        <h4>Ecom Experts</h4>
-                    </td>
-                    <td class="job">
-                        <h4>UX Designer</h4>
-                    </td>
-                    <td class="interest">
-                        <h4>100%</h4>
-                        <div class="background-bar">
-                            <div class="percentage-bar percentage-bar--100"></div>
-                        </div>
-                    </td>
-                    <td class="actions">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="table-select"><input type="checkbox" name="select-contact" id="select-contact-1" class="select-checkbox"></td>
-                    <td class="info-contact">
-                        <img src="https://dummyimage.com/40x40/3347e6/ffffff" alt="picture-contact">
-                        <div class="text">
-                            <h4>Camila Soledad Pantó</h4>
-                            <a href="mailto:example@example.com">example@example.com</a>
-                        </div>
-                    </td>
-                    <td class="region">
-                        <h4>Pais</h4>
-                        <p>Region</p>
-                    </td>
-                    <td class="company">
-                        <h4>Ecom Experts</h4>
-                    </td>
-                    <td class="job">
-                        <h4>UX Designer</h4>
-                    </td>
-                    <td class="interest">
-                        <h4>75%</h4>
-                        <div class="background-bar">
-                            <div class="percentage-bar percentage-bar--75"></div>
-                        </div>
-                    </td>
-                    <td class="actions">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="table-select"><input type="checkbox" name="select-contact" id="select-contact-1" class="select-checkbox"></td>
-                    <td class="info-contact">
-                        <img src="https://dummyimage.com/40x40/3347e6/ffffff" alt="picture-contact">
-                        <div class="text">
-                            <h4>Camila Soledad Pantó</h4>
-                            <a href="mailto:example@example.com">example@example.com</a>
-                        </div>
-                    </td>
-                    <td class="region">
-                        <h4>Pais</h4>
-                        <p>Region</p>
-                    </td>
-                    <td class="company">
-                        <h4>Ecom Experts</h4>
-                    </td>
-                    <td class="job">
-                        <h4>UX Designer</h4>
-                    </td>
-                    <td class="interest">
-                        <h4>50%</h4>
-                        <div class="background-bar">
-                            <div class="percentage-bar percentage-bar--50"></div>
-                        </div>
-                    </td>
-                    <td class="actions">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="table-select"><input type="checkbox" name="select-contact" id="select-contact-1" class="select-checkbox"></td>
-                    <td class="info-contact">
-                        <img src="https://dummyimage.com/40x40/3347e6/ffffff" alt="picture-contact">
-                        <div class="text">
-                            <h4>Camila Soledad Pantó</h4>
-                            <a href="mailto:example@example.com">example@example.com</a>
-                        </div>
-                    </td>
-                    <td class="region">
-                        <h4>Pais</h4>
-                        <p>Region</p>
-                    </td>
-                    <td class="company">
-                        <h4>Ecom Experts</h4>
-                    </td>
-                    <td class="job">
-                        <h4>UX Designer</h4>
-                    </td>
-                    <td class="interest">
-                        <h4>25%</h4>
-                        <div class="background-bar">
-                            <div class="percentage-bar percentage-bar--25"></div>
-                        </div>
-                    </td>
-                    <td class="actions">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="table-select"><input type="checkbox" name="select-contact" id="select-contact-1" class="select-checkbox"></td>
-                    <td class="info-contact">
-                        <img src="https://dummyimage.com/40x40/3347e6/ffffff" alt="picture-contact">
-                        <div class="text">
-                            <h4>Camila Soledad Pantó</h4>
-                            <a href="mailto:example@example.com">example@example.com</a>
-                        </div>
-                    </td>
-                    <td class="region">
-                        <h4>Pais</h4>
-                        <p>Region</p>
-                    </td>
-                    <td class="company">
-                        <h4>Ecom Experts</h4>
-                    </td>
-                    <td class="job">
-                        <h4>UX Designer</h4>
-                    </td>
-                    <td class="interest">
-                        <h4>0%</h4>
-                        <div class="background-bar">
-                            <div class="percentage-bar"></div>
-                        </div>
-                    </td>
-                    <td class="actions">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </td>
-                </tr>
             </table>
         </section>
-        <section class="add-contact">
+        <section class="add-contact" id="add-contact">
             <h2>Nuevo Contacto</h2>
             <form>
                 <div class="primary-info">
@@ -200,8 +65,8 @@
                         <input class="required" type="text" id="name" name="name" required placeholder="Nombre Completo">
                     </div>
                     <div class="container-input">
-                        <label for="lastName">Apellido<text>*</text></label>
-                        <input class="required" type="text" id="lastName" name="lastName" required placeholder="Apellido Completo">
+                        <label for="last-name">Apellido<text>*</text></label>
+                        <input class="required" type="text" id="last-name" name="last-name" required placeholder="Apellido Completo">
                     </div>
                     <div class="container-input">
                         <label for="job">Cargo<text>*</text></label>
@@ -213,7 +78,7 @@
                     </div>
                     <div class="container-input">
                         <label for="company">Compañia<text>*</text></label>
-                        <input class="required" type="text" id="company" name="company" required placeholder="Ingresar nombre de la compañia">
+                        <input class="required" type="text" id="company" name="company" required placeholder="Compañia">
                     </div>
                 </div>
                 <div class="secundary-info">
@@ -292,15 +157,19 @@
                     </div>
                 </div>
                 <div class="container-buttons-form">
-                    <button class="cancel" type="button">Cancelar</button>
-                    <input class="submit" type="submit" value="Crear">                
+                    <button class="cancel" type="button" id="cancel-add-contact">Cancelar</button>
+                    <input class="submit" type="button" value="Crear" id="register-contact">                
                 </div>
-            </form> 
+            </form>
+            <div class="error" id="error-info">
+                <i class="fas fa-times-circle"></i><p id="text-error">Ups, algo ha salido mal!</p>
+            </div> 
         </section>
+        
     </main>
     <footer>
-        <script src="../src/config/config.js" type="module"></script>
         <script src="../src/scripts/app.js" type="module"></script>
+        <script src="../src/scripts/contacts.js" type="module"></script>
     </footer>
 </body>
 </html>

@@ -1,7 +1,8 @@
-import rutes from '../utils/routes.js';
+import eventLogout from "../events/logout.js";
+const view = (window.location.pathname.split('/')[2] == 'pages') ? window.location.pathname.split('/')[3] : window.location.pathname.split('/')[2];
+const btnLogout = document.getElementById('logout');
 
-console.log(rutes);
+// Condicional de loggeo 
+if(token == undefined && view != 'index.html' ) window.location.replace("./index.html");
 
-/* Condicional de loggeo */
-if(token == undefined) window.location.replace("./index.html");
-
+if(btnLogout) eventLogout(btnLogout);

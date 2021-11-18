@@ -99,7 +99,7 @@
     }
 }
 
-.info-contact{
+.info-contact, .info-contact:hover{
     height:71px;
     display: flex; 
     align-items: center;
@@ -128,7 +128,7 @@
     }
 }
 
-.interest{
+.interest, .interest:hover{
     text-align:center;
     .background-bar{
         width: 100%;
@@ -173,6 +173,10 @@
     }
     form{
         gap: 0;
+        label{
+            display: inline-block;
+            width: 100%;
+        }
         input{
             width: auto;
         }
@@ -252,5 +256,14 @@
         padding-right: 5%;
         background-color: $white-color;
         padding-bottom: 2.5%;
+    }
+    .error{
+        background-color: white; 
+        align-self: center; 
+        justify-self: center; 
+        max-width: 500px; 
+        position: fixed; 
+        top: 10px; 
+        right: 10px;
     }
 }

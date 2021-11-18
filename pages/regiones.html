@@ -18,50 +18,562 @@
         </nav>
     </header>
     <main>
-        <section class="companies">
-            <div class="container-header">
+        <section class="regions" id="regions">
+            <div class="container-header title">
                 <h2>Regiones</h2>
-                <div class="container-submit">
-                    <a href="./addContact.html"><button>Agregar Región</button></a>
+                <div class="button-add-region">
+                    <a href=""><button>Agregar Región</button></a>
                 </div>
             </div>
-            <div class="container-header" style="max-width: 95%; margin: 12.5px 0 12.5px 5%;">
-                <div style="display: flex; justify-content: space-evenly; min-width: 40%;">
+            <!-- <div class="container-region">
+                <div class="container-header">
+                    <div class="info-region">
                     <h3>Sudamerica</h3>
                     <div>
-                        <button>Editar</button>
-                        <button>Eliminar</button>
+                        <button class="edit"><i class="fas fa-edit"></i></button>
+                        <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                    </div>
+                    <div class="button-add-country">
+                        <a href=""><button>Agregar País</button></a>
                     </div>
                 </div>
-                <div class="container-submit">
-                    <a href=""><button style="background-color: rgba(28, 177, 28, 0.815); border: 1px solid rgba(28, 177, 28, 1);">Agregar País</button></a>
+                <div class="container-country">
+                    <div class="container-header">
+                        <div class="info-country">
+                            <h4>Colombia</h4>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="button-add-city">
+                            <a href=""><button>Agregar Ciudad</button></a>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Bogota</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Medellin</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Pereira</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Rionegro</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>            
+                </div>
+                <div class="container-country">
+                    <div class="container-header">
+                        <div class="info-country">
+                            <h4>Argentina</h4>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="button-add-city">
+                            <a href=""><button>Agregar Ciudad</button></a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="container-header" style="max-width: 90%; margin: 12.5px 0 12.5px 10%;">
-                <div style="display: flex; justify-content: space-evenly; min-width: 40%;">
-                    <h4>Colombia</h4>
+            <div class="container-region">
+                <div class="container-header">
+                    <div class="info-region">
+                    <h3>Sudamerica</h3>
                     <div>
-                        <button>Editar</button>
-                        <button>Eliminar</button>
+                            <button class="edit"><i class="fas fa-edit"></i></button>
+                            <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="button-add-country">
+                        <a href=""><button>Agregar País</button></a>
                     </div>
                 </div>
-                <div class="container-submit">
-                    <a href=""><button style="background-color: rgba(28, 177, 28, 0.815); border: 1px solid rgba(28, 177, 28, 1);">Agregar Ciudad</button></a>
+                <div class="container-country">
+                    <div class="container-header">
+                        <div class="info-country">
+                            <h4>Colombia</h4>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="button-add-city">
+                            <a href=""><button>Agregar Ciudad</button></a>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Bogota</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Medellin</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Pereira</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Rionegro</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>            
                 </div>
-            </div>
-            <div class="container-header" style="max-width: 85%; margin: 12.5px 0 12.5px 15%;">
-                <div style="display: flex; justify-content: space-evenly; min-width: 40%;">
-                    <p>Medellin</p>
+                <div class="container-country">
+                    <div class="container-header">
+                        <div class="info-country">
+                            <h4>Argentina</h4>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="button-add-city">
+                            <a href=""><button>Agregar Ciudad</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div><div class="container-region">
+                <div class="container-header">
+                    <div class="info-region">
+                    <h3>Sudamerica</h3>
                     <div>
-                        <button>Editar</button>
-                        <button>Eliminar</button>
+                            <button class="edit"><i class="fas fa-edit"></i></button>
+                            <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="button-add-country">
+                        <a href=""><button>Agregar País</button></a>
                     </div>
                 </div>
-            </div>
+                <div class="container-country">
+                    <div class="container-header">
+                        <div class="info-country">
+                            <h4>Colombia</h4>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="button-add-city">
+                            <a href=""><button>Agregar Ciudad</button></a>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Bogota</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Medellin</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Pereira</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Rionegro</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>            
+                </div>
+                <div class="container-country">
+                    <div class="container-header">
+                        <div class="info-country">
+                            <h4>Argentina</h4>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="button-add-city">
+                            <a href=""><button>Agregar Ciudad</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div><div class="container-region">
+                <div class="container-header">
+                    <div class="info-region">
+                    <h3>Sudamerica</h3>
+                    <div>
+                            <button class="edit"><i class="fas fa-edit"></i></button>
+                            <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="button-add-country">
+                        <a href=""><button>Agregar País</button></a>
+                    </div>
+                </div>
+                <div class="container-country">
+                    <div class="container-header">
+                        <div class="info-country">
+                            <h4>Colombia</h4>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="button-add-city">
+                            <a href=""><button>Agregar Ciudad</button></a>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Bogota</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Medellin</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Pereira</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Rionegro</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>            
+                </div>
+                <div class="container-country">
+                    <div class="container-header">
+                        <div class="info-country">
+                            <h4>Argentina</h4>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="button-add-city">
+                            <a href=""><button>Agregar Ciudad</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div><div class="container-region">
+                <div class="container-header">
+                    <div class="info-region">
+                    <h3>Sudamerica</h3>
+                    <div>
+                            <button class="edit"><i class="fas fa-edit"></i></button>
+                            <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="button-add-country">
+                        <a href=""><button>Agregar País</button></a>
+                    </div>
+                </div>
+                <div class="container-country">
+                    <div class="container-header">
+                        <div class="info-country">
+                            <h4>Colombia</h4>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="button-add-city">
+                            <a href=""><button>Agregar Ciudad</button></a>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Bogota</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Medellin</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Pereira</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Rionegro</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>            
+                </div>
+                <div class="container-country">
+                    <div class="container-header">
+                        <div class="info-country">
+                            <h4>Argentina</h4>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="button-add-city">
+                            <a href=""><button>Agregar Ciudad</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div><div class="container-region">
+                <div class="container-header">
+                    <div class="info-region">
+                    <h3>Sudamerica</h3>
+                    <div>
+                            <button class="edit"><i class="fas fa-edit"></i></button>
+                            <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="button-add-country">
+                        <a href=""><button>Agregar País</button></a>
+                    </div>
+                </div>
+                <div class="container-country">
+                    <div class="container-header">
+                        <div class="info-country">
+                            <h4>Colombia</h4>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="button-add-city">
+                            <a href=""><button>Agregar Ciudad</button></a>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Bogota</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Medellin</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Pereira</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Rionegro</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>            
+                </div>
+                <div class="container-country">
+                    <div class="container-header">
+                        <div class="info-country">
+                            <h4>Argentina</h4>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="button-add-city">
+                            <a href=""><button>Agregar Ciudad</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div><div class="container-region">
+                <div class="container-header">
+                    <div class="info-region">
+                    <h3>Sudamerica</h3>
+                    <div>
+                            <button class="edit"><i class="fas fa-edit"></i></button>
+                            <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="button-add-country">
+                        <a href=""><button>Agregar País</button></a>
+                    </div>
+                </div>
+                <div class="container-country">
+                    <div class="container-header">
+                        <div class="info-country">
+                            <h4>Colombia</h4>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="button-add-city">
+                            <a href=""><button>Agregar Ciudad</button></a>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Bogota</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Medellin</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Pereira</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-city">
+                        <div class="info-city">
+                            <p>Rionegro</p>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>            
+                </div>
+                <div class="container-country">
+                    <div class="container-header">
+                        <div class="info-country">
+                            <h4>Argentina</h4>
+                            <div>
+                                <button class="edit"><i class="fas fa-edit"></i></button>
+                                <button class="delete"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                        <div class="button-add-city">
+                            <a href=""><button>Agregar Ciudad</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </section>
+        <section class="add-region">
+
         </section>
     </main>
     <footer>
         <script src="../src/scripts/app.js" type="module"></script>
+        <script src="../src/scripts/regions.js" type="module"></script>
     </footer>
 </body>
 </html>

@@ -1,5 +1,6 @@
+const ipAddress = '192.168.1.4';
 const port = 3001;
-const basePath = `localhost:${port}/api/v1`;
+const basePath = `http://${ipAddress}:${port}/api/v1`;
 
 const routesUsers = {
     login: `${basePath}/users/signIn`,
@@ -8,7 +9,7 @@ const routesUsers = {
     userById: (id) => `${basePath}/users/${id}`,
     update: (id) => `${basePath}/users/update/${id}`,
     updateRol: (idUser, idRol) => `${basePath}/users/updateRol/${idUser}?idRol=${idRol}`,
-    delete: (id) => `${basePath}/users/delete?idUser=${id}`
+    delete: (id) => `${basePath}/users/delete?idUsuario=${id}`
 };
 
 const routesContacts = {
@@ -50,4 +51,4 @@ const routesRegions = {
     }
 };
 
-export default {routesUsers, routesContacts, routesCompanies, routesRegions};
+export {routesUsers, routesContacts, routesCompanies, routesRegions};

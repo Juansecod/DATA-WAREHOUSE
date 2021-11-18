@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="stylesheet" href="../src/style/style.css">
     <title>DATA WAREHOUSE</title>
 </head>
@@ -23,21 +24,22 @@
                     <div class="container-input">
                         <label for="email">Correo<text>*</text></label>
                         <input class="required" type="email" id="email" name="email" required placeholder="example@mail.com" >
-                        <p class="info required"></p>
                     </div>
                     <div class="container-input">
                         <label for="password">Contraseña<text>*</text></label>
-                        <input class="required" type="password" id="password" name="password" required placeholder="********" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                        title="Debe contener al menos un número y una letra mayúscula y minúscula, y al menos 8 caracteres o más">
-                        <p class="info required"></p>
+                        <input class="required" type="password" id="password" name="password" required placeholder="********">
                     </div>
-                    <input type="submit" value="Ingresar" class="submit">
+                    <input type="button" value="Ingresar" class="submit" id="submit-login"> 
                 </form>
+                <div class="error" id="error-info">
+                    <i class="fas fa-times-circle"></i><p id="text-error">Ups, algo ha salido mal!</p>
+                </div>
             </div>
         </section>
     </main>
     <footer>
-        <script src="../src/scripts/redirect-login.js"></script>
+        <script src="../src/scripts/app.js" type="module"></script>
+        <script src="../src/scripts/login.js" type="module"></script>
       </footer>
 </body>
 </html>

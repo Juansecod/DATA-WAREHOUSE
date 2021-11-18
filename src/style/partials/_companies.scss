@@ -5,3 +5,11 @@
         justify-content: space-between;
     }
 }
+
+.add-company{
+    @extend .login;
+    .container-buttons{
+        gap: 5px;
+    }
+    display: none;
+}

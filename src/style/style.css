@@ -38,35 +38,40 @@ input, .cancel, .add-contact form select {
   border: 1px solid #CCCCCC;
 }
 
+input:focus, .cancel:focus, .add-contact form select:focus {
+  outline: none;
+  border: 1px solid #000000;
+}
+
 input[type="checkbox"], .cancel[type="checkbox"], .add-contact form select[type="checkbox"] {
   min-width: 0px;
   min-height: 0px;
 }
 
-.disabled, .container-submit .disabled {
+.disabled, .container-submit .disabled, .button-add-country .disabled, .button-add-region .disabled, .button-add-city .disabled {
   background-color: #C6CACC;
   border: none;
 }
 
-.disabled:hover, .container-submit .disabled:hover {
+.disabled:hover, .container-submit .disabled:hover, .button-add-country .disabled:hover, .button-add-region .disabled:hover, .button-add-city .disabled:hover {
   background-color: #C6CACC;
   border: none;
   cursor: not-allowed;
 }
 
-.disabled::-webkit-input-placeholder, .container-submit .disabled::-webkit-input-placeholder {
+.disabled::-webkit-input-placeholder, .container-submit .disabled::-webkit-input-placeholder, .button-add-country .disabled::-webkit-input-placeholder, .button-add-region .disabled::-webkit-input-placeholder, .button-add-city .disabled::-webkit-input-placeholder {
   color: #AAAAAA;
 }
 
-.disabled:-ms-input-placeholder, .container-submit .disabled:-ms-input-placeholder {
+.disabled:-ms-input-placeholder, .container-submit .disabled:-ms-input-placeholder, .button-add-country .disabled:-ms-input-placeholder, .button-add-region .disabled:-ms-input-placeholder, .button-add-city .disabled:-ms-input-placeholder {
   color: #AAAAAA;
 }
 
-.disabled::-ms-input-placeholder, .container-submit .disabled::-ms-input-placeholder {
+.disabled::-ms-input-placeholder, .container-submit .disabled::-ms-input-placeholder, .button-add-country .disabled::-ms-input-placeholder, .button-add-region .disabled::-ms-input-placeholder, .button-add-city .disabled::-ms-input-placeholder {
   color: #AAAAAA;
 }
 
-.disabled::placeholder, .container-submit .disabled::placeholder {
+.disabled::placeholder, .container-submit .disabled::placeholder, .button-add-country .disabled::placeholder, .button-add-region .disabled::placeholder, .button-add-city .disabled::placeholder {
   color: #AAAAAA;
 }
 
@@ -110,6 +115,7 @@ form .required:focus {
 }
 
 form .success:focus {
+  outline: none;
   border: 1px solid #429C41;
 }
 
@@ -125,18 +131,6 @@ form .submit {
 form .submit:hover {
   background-color: #367c10;
   cursor: pointer;
-}
-
-form .info.required::after {
-  content: "Campo requerido";
-  color: #DE0028;
-  font-style: italic;
-}
-
-form .info.success::after {
-  content: "Cumple con los requisitos";
-  color: #429C41;
-  font-style: italic;
 }
 
 .container-input, .add-contact .network .container-button {
@@ -167,6 +161,50 @@ button:hover {
   right: 0;
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 1;
+  display: none;
+}
+
+.logout {
+  font-size: 18px;
+}
+
+.logout:hover {
+  cursor: pointer;
+  color: #AAAAAA;
+}
+
+.edit, .delete {
+  width: 30px;
+  height: 30px;
+  color: #FFFFFF;
+  border: 0;
+}
+
+.edit {
+  background-color: #0683F9;
+}
+
+.delete {
+  background-color: #DE0028;
+}
+
+.error {
+  margin-top: 15px;
+  min-height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #DE0028;
+  border: 1px solid #DE0028;
+  padding: 0 10px;
+  border-radius: 5px;
+  gap: 5px;
   display: none;
 }
 
@@ -257,22 +295,28 @@ header {
 }
 
 .table {
+  padding-left: 5px;
   margin: 35px 0 0 0;
   width: 100%;
   border-collapse: collapse;
   border: 1px solid #E8E8E8;
 }
 
-td, th, tr {
+td, th, tr, td:hover, th:hover, tr:hover {
+  padding-left: 10px;
   text-align: start;
   min-height: 56px;
   height: 56px;
 }
 
 .table-header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 68px;
   height: 56px;
   padding: 10px 0px 5px 0px;
   border-bottom: 1px solid #E8E8E8;
+  background-color: #E8E8E8;
 }
 
 .select-checkbox {
@@ -280,7 +324,7 @@ td, th, tr {
   height: 20px;
 }
 
-.table-select, .actions {
+.table-select, .actions, .table-select:hover, .actions:hover {
   text-align: center;
   padding: 0px 10px 0px 10px;
 }
@@ -289,7 +333,7 @@ td, th, tr {
   cursor: pointer;
 }
 
-.login, .add-user {
+.login, .add-company, .add-user {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -302,11 +346,11 @@ td, th, tr {
           align-items: center;
 }
 
-.contacts, .companies, .users {
+.contacts, .companies, .users, .regions {
   padding: 40px 30px 20px 30px;
 }
 
-.container-buttons, .companies .container-header, .users .container-header {
+.container-buttons, .companies .container-header, .users .container-header, .regions .container-header, .companies .container-city, .users .container-city, .regions .container-city {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -379,7 +423,7 @@ td, th, tr {
   color: #1D72C2;
 }
 
-.container-submit {
+.container-submit, .button-add-country, .button-add-region, .button-add-city {
   width: 35%;
   gap: 10px;
   display: -webkit-box;
@@ -390,7 +434,7 @@ td, th, tr {
           justify-content: flex-end;
 }
 
-.container-submit button {
+.container-submit button, .button-add-country button, .button-add-region button, .button-add-city button {
   height: 41px;
   border-radius: 1.5px;
   border: 1px solid #1D72C2;
@@ -409,25 +453,25 @@ td, th, tr {
   min-width: 41px;
 }
 
-.container-submit button i {
+.container-submit button i, .button-add-country button i, .button-add-region button i, .button-add-city button i {
   min-width: 15px;
 }
 
-.container-submit button:hover {
+.container-submit button:hover, .button-add-country button:hover, .button-add-region button:hover, .button-add-city button:hover {
   cursor: pointer;
   background-color: #E8E8E8;
 }
 
-.container-submit button:last-child {
+.container-submit button:last-child, .button-add-country button:last-child, .button-add-region button:last-child, .button-add-city button:last-child {
   background-color: #1D72C2;
   color: #FFFFFF;
 }
 
-.container-submit button:last-child:hover {
+.container-submit button:last-child:hover, .button-add-country button:last-child:hover, .button-add-region button:last-child:hover, .button-add-city button:last-child:hover {
   background-color: #195894;
 }
 
-.info-contact {
+.info-contact, .info-contact:hover {
   height: 71px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -441,7 +485,7 @@ td, th, tr {
   gap: 10px;
 }
 
-.info-contact img {
+.info-contact img, .info-contact:hover img {
   border-radius: 50%;
   max-width: 40px;
   min-width: 40px;
@@ -451,7 +495,7 @@ td, th, tr {
   height: 40px;
 }
 
-.info-contact .text {
+.info-contact .text, .info-contact:hover .text {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -467,46 +511,46 @@ td, th, tr {
           justify-content: center;
 }
 
-.info-contact .text a {
+.info-contact .text a, .info-contact:hover .text a {
   color: #000000;
 }
 
-.info-contact .text a:hover {
+.info-contact .text a:hover, .info-contact:hover .text a:hover {
   color: #6f6f6f;
 }
 
-.interest {
+.interest, .interest:hover {
   text-align: center;
 }
 
-.interest .background-bar {
+.interest .background-bar, .interest:hover .background-bar {
   width: 100%;
   background-color: #CCCCCC;
   border-radius: 4px;
   height: 8px;
 }
 
-.interest .percentage-bar {
+.interest .percentage-bar, .interest:hover .percentage-bar {
   height: 8px;
   border-radius: 4px;
 }
 
-.interest .percentage-bar--100 {
+.interest .percentage-bar--100, .interest:hover .percentage-bar--100 {
   background-color: #DE0028;
   width: 100%;
 }
 
-.interest .percentage-bar--75 {
+.interest .percentage-bar--75, .interest:hover .percentage-bar--75 {
   background-color: #FF6F00;
   width: 75%;
 }
 
-.interest .percentage-bar--50 {
+.interest .percentage-bar--50, .interest:hover .percentage-bar--50 {
   background-color: #FFC700;
   width: 50%;
 }
 
-.interest .percentage-bar--25 {
+.interest .percentage-bar--25, .interest:hover .percentage-bar--25 {
   background-color: #1CC2F5;
   width: 25%;
 }
@@ -529,6 +573,11 @@ td, th, tr {
 
 .add-contact form {
   gap: 0;
+}
+
+.add-contact form label {
+  display: inline-block;
+  width: 100%;
 }
 
 .add-contact form input, .add-contact form .cancel, .add-contact form select {
@@ -636,9 +685,180 @@ td, th, tr {
   padding-bottom: 2.5%;
 }
 
-.companies .container-header, .users .container-header {
+.add-contact .error {
+  background-color: white;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  -ms-grid-column-align: center;
+      justify-self: center;
+  max-width: 500px;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
+
+.companies .container-header, .users .container-header, .regions .container-header, .companies .container-city, .users .container-city, .regions .container-city {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+.add-company {
+  display: none;
+}
+
+.add-company .container-buttons, .add-company .companies .container-header, .companies .add-company .container-header, .add-company .users .container-header, .users .add-company .container-header, .add-company .regions .container-header, .regions .add-company .container-header, .add-company .companies .container-city, .companies .add-company .container-city, .add-company .users .container-city, .users .add-company .container-city, .add-company .regions .container-city, .regions .add-company .container-city {
+  gap: 5px;
+}
+
+.add-user {
+  display: none;
+}
+
+.add-user .container {
+  padding: 0;
+}
+
+.add-user .container-buttons, .add-user .companies .container-header, .companies .add-user .container-header, .add-user .users .container-header, .users .add-user .container-header, .add-user .regions .container-header, .regions .add-user .container-header, .add-user .companies .container-city, .companies .add-user .container-city, .add-user .users .container-city, .users .add-user .container-city, .add-user .regions .container-city, .regions .add-user .container-city {
+  gap: 5px;
+}
+
+.add-user .note {
+  border-radius: 5px;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 5px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #1D72C2;
+  background-color: #8EC7FC;
+  max-width: 500px;
+  margin-bottom: 10px;
+}
+
+.add-user .note i {
+  font-size: 24px;
+}
+
+.add-user .note p {
+  font-size: medium;
+  text-align: center;
+}
+
+.add-user .container-radio-select {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.add-user .container-radio-select div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 5px;
+}
+
+.add-user .container-radio-select input[type='radio'], .add-user .container-radio-select .cancel[type='radio'], .add-user .container-radio-select .add-contact form select[type='radio'], .add-contact form .add-user .container-radio-select select[type='radio'] {
+  min-width: 0px;
+  min-height: 0px;
+  width: 24px;
+  height: 24px;
+}
+
+.add-user .container-radio-select label {
+  min-width: 0px;
+  width: 24px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.regions .title {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 68px;
+  background: #FFFFFF;
+  padding: 15px 0;
+}
+
+.container-region .container-header, .container-region .container-city, .container-country .container-header, .container-country .container-city, .container-city .container-header, .container-city .container-city {
+  width: 100%;
+}
+
+.container-region {
+  max-width: 95%;
+  margin: 12.5px 0 12.5px 5%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-bottom: 1px solid #AAAAAA;
+  padding-bottom: 10px;
+}
+
+.container-country {
+  max-width: 90%;
+  margin: 12.5px 0 12.5px 10%;
+  -webkit-box-align: flex;
+      -ms-flex-align: flex;
+          align-items: flex;
+}
+
+.container-city {
+  max-width: 85%;
+  margin: 12.5px 0 12.5px 15%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.info-region {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  min-width: 40%;
+}
+
+.info-country {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  min-width: 40%;
+}
+
+.info-city {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  min-width: 40%;
+}
+
+.button-add-country, .button-add-region, .button-add-city {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.button-add-country button, .button-add-region button, .button-add-city button {
+  width: 107.81px;
 }
 /*# sourceMappingURL=style.css.map */

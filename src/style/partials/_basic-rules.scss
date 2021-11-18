@@ -36,11 +36,14 @@ input{
     min-width: 190px;
     min-height: 35.5px;
     border: 1px solid $grey-color;
-}
-
-input[type="checkbox"]{
-    min-width: 0px;
-    min-height: 0px;
+    &:focus{
+        outline: none;
+        border: 1px solid $black-color;
+    }
+    &[type="checkbox"]{
+        min-width: 0px;
+        min-height: 0px;
+    }
 }
 
 .disabled{
@@ -78,6 +81,7 @@ form{
         border: 1px solid $red-color;
     }
     .success:focus{
+        outline: none;
         border: 1px solid $green-color;
     }
     .submit{
@@ -90,16 +94,6 @@ form{
     .submit:hover{
         background-color: $dark-green-color;
         cursor: pointer;
-    }
-    .info.required::after{
-        content: "Campo requerido";
-        color: $red-color;
-        font-style: italic;
-    }
-    .info.success::after{
-      content: "Cumple con los requisitos";
-      color: $green-color;
-      font-style: italic;
     }
 }
 
@@ -131,5 +125,42 @@ button:hover{
 	right: 0;
 	background-color: rgba(0,0,0,0.6);
     z-index: 1;
+    display: none;
+}
+
+.logout{
+    font-size: 18px;
+    &:hover{
+        cursor: pointer;
+        color: $dark-grey-color;
+    }
+}
+
+.edit, .delete{
+    width: 30px;
+    height: 30px;
+    color: $white-color;
+    border: 0;
+}
+
+.edit{
+    background-color: $blue-color;
+}
+
+.delete{
+    background-color: $red-color;
+}
+
+.error{
+    margin-top: 15px;
+    min-height: 50px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    color: $red-color; 
+    border: 1px solid $red-color; 
+    padding: 0 10px; 
+    border-radius: 5px; 
+    gap: 5px; 
     display: none;
 }
