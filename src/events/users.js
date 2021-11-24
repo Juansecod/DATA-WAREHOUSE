@@ -28,7 +28,6 @@ const eventRegisterBtn = (email, password, closeForm)=> {
         contrasena: password.value,
         idRol
     };
-    console.table(data);
     registerUser(data, closeForm);
 };
 

@@ -31,19 +31,19 @@ ul {
   list-style: none;
 }
 
-input, .cancel, .add-contact form select {
+input, .cancel, select {
   border-radius: 5px;
   min-width: 190px;
   min-height: 35.5px;
   border: 1px solid #CCCCCC;
 }
 
-input:focus, .cancel:focus, .add-contact form select:focus {
+input:focus, .cancel:focus, select:focus {
   outline: none;
   border: 1px solid #000000;
 }
 
-input[type="checkbox"], .cancel[type="checkbox"], .add-contact form select[type="checkbox"] {
+input[type="checkbox"], .cancel[type="checkbox"], select[type="checkbox"] {
   min-width: 0px;
   min-height: 0px;
 }
@@ -105,7 +105,7 @@ form {
           align-items: flex-start;
 }
 
-form input, form .cancel, .add-contact form select {
+form input, form .cancel, form select {
   width: 100%;
 }
 
@@ -333,7 +333,7 @@ td, th, tr, td:hover, th:hover, tr:hover {
   cursor: pointer;
 }
 
-.login, .add-company, .add-user {
+.login, .add-company, .add-user, .add-region, .add-country, .add-city {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -344,6 +344,16 @@ td, th, tr, td:hover, th:hover, tr:hover {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.login input, .add-company input, .add-user input, .add-region input, .add-country input, .add-city input, .login .cancel, .add-company .cancel, .add-user .cancel, .add-region .cancel, .add-country .cancel, .add-city .cancel, .login select, .add-company select, .add-user select, .add-region select, .add-country select, .add-city select {
+  padding-left: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.login input:hover, .add-company input:hover, .add-user input:hover, .add-region input:hover, .add-country input:hover, .add-city input:hover, .login .cancel:hover, .add-company .cancel:hover, .add-user .cancel:hover, .add-region .cancel:hover, .add-country .cancel:hover, .add-city .cancel:hover, .login select:hover, .add-company select:hover, .add-user select:hover, .add-region select:hover, .add-country select:hover, .add-city select:hover {
+  padding-left: 10px;
 }
 
 .contacts, .companies, .users, .regions {
@@ -390,12 +400,12 @@ td, th, tr, td:hover, th:hover, tr:hover {
   border: none;
 }
 
-.container-search .container-input input, .container-search .add-contact .network .container-button input, .add-contact .network .container-search .container-button input, .container-search .container-input .cancel, .container-search .add-contact .network .container-button .cancel, .add-contact .network .container-search .container-button .cancel, .container-search .container-input .add-contact form select, .add-contact form .container-search .container-input select, .container-search .add-contact .network .container-button form select, .container-search .add-contact form .network .container-button select, .add-contact .network .container-search .container-button form select, .add-contact form .network .container-search .container-button select {
+.container-search .container-input input, .container-search .add-contact .network .container-button input, .add-contact .network .container-search .container-button input, .container-search .container-input .cancel, .container-search .add-contact .network .container-button .cancel, .add-contact .network .container-search .container-button .cancel {
   padding-left: 5%;
   width: calc(95% - 41px);
 }
 
-.container-search .container-input input:focus, .container-search .add-contact .network .container-button input:focus, .add-contact .network .container-search .container-button input:focus, .container-search .container-input .cancel:focus, .container-search .add-contact .network .container-button .cancel:focus, .add-contact .network .container-search .container-button .cancel:focus, .container-search .container-input .add-contact form select:focus, .add-contact form .container-search .container-input select:focus, .container-search .add-contact .network .container-button form select:focus, .container-search .add-contact form .network .container-button select:focus, .add-contact .network .container-search .container-button form select:focus, .add-contact form .network .container-search .container-button select:focus {
+.container-search .container-input input:focus, .container-search .add-contact .network .container-button input:focus, .add-contact .network .container-search .container-button input:focus, .container-search .container-input .cancel:focus, .container-search .add-contact .network .container-button .cancel:focus, .add-contact .network .container-search .container-button .cancel:focus {
   outline: none;
 }
 
@@ -559,15 +569,22 @@ td, th, tr, td:hover, th:hover, tr:hover {
   position: fixed;
   top: 100px;
   width: 90vw;
+  max-height: 78.99vh;
   margin-left: calc(10vw / 2);
   background-color: #1D72C2;
   z-index: 1000;
   display: none;
+  overflow-y: scroll;
+}
+
+.add-contact h2, .add-contact .info {
+  display: inline-block;
+  color: #FFFFFF;
 }
 
 .add-contact h2 {
-  color: #FFFFFF;
   margin-left: calc(2.5%);
+  margin-right: 2.5%;
   padding: 26.7px 0 36.6px 0;
 }
 
@@ -580,8 +597,18 @@ td, th, tr, td:hover, th:hover, tr:hover {
   width: 100%;
 }
 
-.add-contact form input, .add-contact form .cancel, .add-contact form select {
+.add-contact form input, .add-contact form .cancel {
   width: auto;
+  padding-left: 10px;
+}
+
+.add-contact form input[type="range"], .add-contact form .cancel[type="range"] {
+  padding: 0;
+}
+
+.add-contact form select {
+  width: auto;
+  padding-left: 10px;
 }
 
 .add-contact .primary-info, .add-contact .secundary-info {
@@ -613,7 +640,7 @@ td, th, tr, td:hover, th:hover, tr:hover {
   margin-left: 0px;
 }
 
-.add-contact .address, .add-contact .network {
+.add-contact .address, .add-contact .network, .add-contact .form-network {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -633,6 +660,17 @@ td, th, tr, td:hover, th:hover, tr:hover {
   min-width: 0px;
 }
 
+.add-contact .network {
+  padding-top: 10px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.add-contact .network .form-network {
+  width: auto;
+  margin-right: 20px;
+}
+
 .add-contact .network .container-input, .add-contact .network .container-button {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -644,7 +682,7 @@ td, th, tr, td:hover, th:hover, tr:hover {
   width: auto;
 }
 
-.add-contact .network .container-input input, .add-contact .network .container-button input, .add-contact .network .container-input .cancel, .add-contact .network .container-button .cancel, .add-contact .network .container-input form select, .add-contact form .network .container-input select, .add-contact .network .container-button form select, .add-contact form .network .container-button select {
+.add-contact .network .container-input input, .add-contact .network .container-button input, .add-contact .network .container-input .cancel, .add-contact .network .container-button .cancel {
   max-width: 143px;
 }
 
@@ -712,19 +750,19 @@ td, th, tr, td:hover, th:hover, tr:hover {
   gap: 5px;
 }
 
-.add-user {
+.add-user, .add-region, .add-country, .add-city {
   display: none;
 }
 
-.add-user .container {
+.add-user .container, .add-region .container, .add-country .container, .add-city .container {
   padding: 0;
 }
 
-.add-user .container-buttons, .add-user .companies .container-header, .companies .add-user .container-header, .add-user .users .container-header, .users .add-user .container-header, .add-user .regions .container-header, .regions .add-user .container-header, .add-user .companies .container-city, .companies .add-user .container-city, .add-user .users .container-city, .users .add-user .container-city, .add-user .regions .container-city, .regions .add-user .container-city {
+.add-user .container-buttons, .add-region .container-buttons, .add-country .container-buttons, .add-city .container-buttons, .add-user .companies .container-header, .companies .add-user .container-header, .add-region .companies .container-header, .companies .add-region .container-header, .add-country .companies .container-header, .companies .add-country .container-header, .add-city .companies .container-header, .companies .add-city .container-header, .add-user .users .container-header, .users .add-user .container-header, .add-region .users .container-header, .users .add-region .container-header, .add-country .users .container-header, .users .add-country .container-header, .add-city .users .container-header, .users .add-city .container-header, .add-user .regions .container-header, .regions .add-user .container-header, .add-region .regions .container-header, .regions .add-region .container-header, .add-country .regions .container-header, .regions .add-country .container-header, .add-city .regions .container-header, .regions .add-city .container-header, .add-user .companies .container-city, .companies .add-user .container-city, .add-region .companies .container-city, .companies .add-region .container-city, .add-country .companies .container-city, .companies .add-country .container-city, .add-city .companies .container-city, .companies .add-city .container-city, .add-user .users .container-city, .users .add-user .container-city, .add-region .users .container-city, .users .add-region .container-city, .add-country .users .container-city, .users .add-country .container-city, .add-city .users .container-city, .users .add-city .container-city, .add-user .regions .container-city, .regions .add-user .container-city, .add-region .regions .container-city, .regions .add-region .container-city, .add-country .regions .container-city, .regions .add-country .container-city, .add-city .regions .container-city, .regions .add-city .container-city {
   gap: 5px;
 }
 
-.add-user .note {
+.add-user .note, .add-region .note, .add-country .note, .add-city .note {
   border-radius: 5px;
   padding: 10px;
   display: -webkit-box;
@@ -740,16 +778,16 @@ td, th, tr, td:hover, th:hover, tr:hover {
   margin-bottom: 10px;
 }
 
-.add-user .note i {
+.add-user .note i, .add-region .note i, .add-country .note i, .add-city .note i {
   font-size: 24px;
 }
 
-.add-user .note p {
+.add-user .note p, .add-region .note p, .add-country .note p, .add-city .note p {
   font-size: medium;
   text-align: center;
 }
 
-.add-user .container-radio-select {
+.add-user .container-radio-select, .add-region .container-radio-select, .add-country .container-radio-select, .add-city .container-radio-select {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -761,7 +799,7 @@ td, th, tr, td:hover, th:hover, tr:hover {
           align-items: center;
 }
 
-.add-user .container-radio-select div {
+.add-user .container-radio-select div, .add-region .container-radio-select div, .add-country .container-radio-select div, .add-city .container-radio-select div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -771,14 +809,14 @@ td, th, tr, td:hover, th:hover, tr:hover {
   gap: 5px;
 }
 
-.add-user .container-radio-select input[type='radio'], .add-user .container-radio-select .cancel[type='radio'], .add-user .container-radio-select .add-contact form select[type='radio'], .add-contact form .add-user .container-radio-select select[type='radio'] {
+.add-user .container-radio-select input[type='radio'], .add-region .container-radio-select input[type='radio'], .add-country .container-radio-select input[type='radio'], .add-city .container-radio-select input[type='radio'], .add-user .container-radio-select .cancel[type='radio'], .add-region .container-radio-select .cancel[type='radio'], .add-country .container-radio-select .cancel[type='radio'], .add-city .container-radio-select .cancel[type='radio'] {
   min-width: 0px;
   min-height: 0px;
   width: 24px;
   height: 24px;
 }
 
-.add-user .container-radio-select label {
+.add-user .container-radio-select label, .add-region .container-radio-select label, .add-country .container-radio-select label, .add-city .container-radio-select label {
   min-width: 0px;
   width: 24px;
   text-align: center;

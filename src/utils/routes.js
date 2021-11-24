@@ -40,7 +40,7 @@ const routesRegions = {
         getByRegion: (idRegion) => `${basePath}/regions/${idRegion}/countries`,
         post: (idRegion) => `${basePath}/regions/${idRegion}/countries/register`,
         update: (id) => `${basePath}/regions/countries/${id}`,
-        delete: () => `${basePath}/regions/countries/delete?idCountry=${id}`,
+        delete: (id) => `${basePath}/regions/countries/delete?idCountry=${id}`,
     },    
     cities:{
         get: `${basePath}/regions/cities`,

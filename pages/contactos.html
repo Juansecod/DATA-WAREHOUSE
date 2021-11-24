@@ -58,6 +58,8 @@
         </section>
         <section class="add-contact" id="add-contact">
             <h2>Nuevo Contacto</h2>
+            <i class="fas fa-question-circle info"></i>
+            <p class="info">Revisa que selecciones una ciudad valida, en caso de que no selecciones generara un error</p>
             <form>
                 <div class="primary-info">
                     <div class="container-input">
@@ -78,7 +80,9 @@
                     </div>
                     <div class="container-input">
                         <label for="company">Compañia<text>*</text></label>
-                        <input class="required" type="text" id="company" name="company" required placeholder="Compañia">
+                        <select name="company" id="company" class="required" required>
+                            <option disabled selected hidden value="">Selecciona la compañia</option>
+                        </select>
                     </div>
                 </div>
                 <div class="secundary-info">
@@ -86,29 +90,19 @@
                         <div class="container-input">
                             <label for="region">Región</label>
                             <select name="region" id="region">
-                                <option disabled selected hidden>Seleccione una region</option>
-                                <option value="centroamerica">Centroamerica</option>
-                                <option value="norteamerica">Norteamerica</option>
-                                <option value="sudamerica">Sudamerica</option>
+                                <option disabled selected hidden value="">Seleccione una region</option>
                             </select>
                         </div>
                         <div class="container-input">
                             <label for="pais">Pais</label>
                             <select name="pais" id="pais" disabled class="disabled">
-                                <option disabled selected hidden>Seleccione un pais</option>
-                                <option value="argentina">Argentina</option>
-                                <option value="brasil">Brasil</option>
-                                <option value="colombia">Colombia</option>
-                                <option value="uruguay">Uruguay</option>
+                                <option disabled selected hidden value="">Seleccione un pais</option>
                             </select>
                         </div>
                         <div class="container-input">
                             <label for="ciudad">Ciudad</label>
                             <select name="ciudad" id="ciudad" disabled class="disabled">
-                                <option disabled selected hidden>Seleccione una ciudad</option>
-                                <option value="bogota">Bogota</option>
-                                <option value="cali">Cali</option>
-                                <option value="medellin">Medellin</option>
+                                <option disabled selected hidden value="">Seleccione una ciudad</option>
                             </select>
                         </div>
                         <div class="container-input">
@@ -118,7 +112,7 @@
                         <div class="container-input">
                             <label for="interest">Interés</label>
                             <div class="container-range">
-                                <input type="range" name="interest" id="interest" step="25" min="0" max="100">
+                                <input type="range" name="interest" id="interest" step="25" min="0" max="100" value="0">
                                 <select name="range-select" id="range-select">
                                     <option value="0" id="0%" selected>0%</option>
                                     <option value="25" id="25%">25%</option>
@@ -129,30 +123,32 @@
                             </div>
                         </div>
                     </div>
-                    <div class="network">
-                        <div class="container-input">
-                            <label for="channel">Canal Contacto</label>
-                            <select name="channel" id="channel">
-                                <option disabled selected hidden>Seleccione un canal</option>
-                                <option value="facebook">Facebook</option>
-                                <option value="linkedin">Linkedin</option>
-                                <option value="whatsapp">Whatsapp</option>
-                            </select>
-                        </div>
-                        <div class="container-input">
-                            <label for="nick-channel-contact">Cuenta de Usuario</label>
-                            <input type="text" name="nick-channel-contact" id="nick-channel-contact" placeholder="@exmaple" class="disabled" disabled>
-                        </div>
-                        <div class="container-input">
-                            <label for="preferences">Preferencias</label>
-                            <select class="disabled" name="preferences" id="preferences" disabled>
-                                <option selected value="Sin preferencia">Sin preferencia</option>
-                                <option value="canal favorito">Canal Favorito</option>
-                                <option value="no molestar">No molestar</option>
-                            </select>
-                        </div>
-                        <div class="container-button">
-                            <button type="button" class="add-form-network">+ Agregar Canal</button>
+                    <div class="network" id="network-container">
+                        <div class="form-network">
+                            <div class="container-input">
+                                <label for="channel">Canal Contacto</label>
+                                <select name="channel" id="channel-0">
+                                    <option disabled selected hidden value="">Seleccione un canal</option>
+                                    <option value="facebook">Facebook</option>
+                                    <option value="linkedin">Linkedin</option>
+                                    <option value="whatsapp">Whatsapp</option>
+                                </select>
+                            </div>
+                            <div class="container-input">
+                                <label for="nick-channel-contact">Cuenta de Usuario</label>
+                                <input type="text" name="nick-channel-contact" id="nick-channel-contact-0" placeholder="@exmaple" class="disabled" disabled>
+                            </div>
+                            <div class="container-input">
+                                <label for="preferences">Preferencias</label>
+                                <select class="disabled" name="preferences" id="preferences-0" disabled>
+                                    <option selected value="Sin preferencia">Sin preferencia</option>
+                                    <option value="canal favorito">Canal Favorito</option>
+                                    <option value="no molestar">No molestar</option>
+                                </select>
+                            </div>
+                        </div>  
+                        <div class="container-button" id='container-button'>
+                            <button type="button" class="add-form-network" id="add-network-form">+ Agregar Canal</button>
                         </div>
                     </div>
                 </div>

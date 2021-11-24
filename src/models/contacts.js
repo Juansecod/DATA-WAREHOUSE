@@ -30,4 +30,30 @@ const tableContacts = ({idContacto: id,nombre,apellido, cargo, email, interes, c
     </td>`;
 };
 
-export default tableContacts;
+const formNetwork = (id) => {
+    return`
+        <div class="container-input">
+            <label for="channel">Canal Contacto</label>
+            <select name="channel" id="channel-${id}">
+                <option disabled selected hidden value="">Seleccione un canal</option>
+                <option value="facebook">Facebook</option>
+                <option value="linkedin">Linkedin</option>
+                <option value="whatsapp">Whatsapp</option>
+            </select>
+        </div>
+        <div class="container-input">
+            <label for="nick-channel-contact">Cuenta de Usuario</label>
+            <input type="text" name="nick-channel-contact" id="nick-channel-contact-${id}" placeholder="@exmaple" class="disabled" disabled>
+        </div>
+        <div class="container-input">
+            <label for="preferences">Preferencias</label>
+            <select class="disabled" name="preferences" id="preferences-${id}" disabled>
+                <option selected value="Sin preferencia">Sin preferencia</option>
+                <option value="canal favorito">Canal Favorito</option>
+                <option value="no molestar">No molestar</option>
+            </select>
+        </div>
+    `;
+};
+
+export {tableContacts, formNetwork};

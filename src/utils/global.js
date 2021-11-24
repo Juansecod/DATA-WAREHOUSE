@@ -12,9 +12,9 @@ function errorAdmin (errorInfo, container) {
     container.style.display = 'none'; 
 }
 
-function errorForm (message = 'Ups, algo ha salido mal'){
-    const container = document.getElementById('error-info');
-    const text = document.getElementById('text-error');
+function errorForm (message = 'Ups, algo ha salido mal', idError = 'error-info', idTextError = 'text-error'){
+    const container = document.getElementById(idError);
+    const text = document.getElementById(idTextError);
     container.style.display = 'flex';
     text.textContent = message;
     setTimeout(function(){ 
@@ -22,4 +22,23 @@ function errorForm (message = 'Ups, algo ha salido mal'){
     },5000);
 }
 
-export {generateDOM,errorAdmin, errorForm};
+function sortArray(array){
+    array.sort(function (a, b) {
+        if (a.nombre > b.nombre) {
+        return 1;
+        }
+        if (a.nombre < b.nombre) {
+        return -1;
+        }
+        return 0;
+    });
+}
+
+const insertOptionsSelect = (data,select)=>{
+    const option =  document.createElement('option');
+    option.textContent = data.nombre;
+    option.value = data.id;
+    select.appendChild(option);
+};
+
+export {generateDOM,errorAdmin, errorForm, sortArray, insertOptionsSelect};

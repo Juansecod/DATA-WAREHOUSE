@@ -31,7 +31,7 @@ ul{
     list-style: none;
 }
 
-input{
+input, select{
     border-radius: 5px;
     min-width: 190px;
     min-height: 35.5px;
@@ -73,7 +73,7 @@ form{
     flex-direction: column;
     gap: 10px;
     align-items: flex-start;
-    input{
+    input, select{
         width: 100%;
     }
     .required:focus{

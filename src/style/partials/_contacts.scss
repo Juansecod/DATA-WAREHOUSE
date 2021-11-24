@@ -162,13 +162,19 @@
     position: fixed;
     top: 100px;
     width: 90vw;
+    max-height: 78.99vh;
     margin-left: calc(10vw / 2);
     background-color: $dark-blue-color;
     z-index: 1000;
     display: none;
-    h2{ 
+    overflow-y: scroll;
+    h2, .info{
+        display: inline-block; 
         color: $white-color;
+    }
+    h2{
         margin-left: calc(2.5%);
+        margin-right: 2.5%;
         padding: 26.7px 0 36.6px 0;
     }
     form{
@@ -179,9 +185,20 @@
         }
         input{
             width: auto;
+            padding-left: 10px;
+            &[type="range"]{
+                padding: 0;
+            }
         }
         select{
-            @extend input;
+            width: auto;
+            padding-left: 10px;
+        }
+        .required{
+            @extend .required;
+        }
+        .success{
+            @extend .success;
         }
     }
     .primary-info, .secundary-info{
@@ -204,7 +221,7 @@
         padding: 2.6% 2.4% 4.6% 2.4%;
         margin-left: 0px;
     }
-    .address, .network{
+    .address, .network, .form-network{
         width: 100%;
         display: flex;
         gap: 15px;
@@ -220,6 +237,12 @@
         }
     }
     .network{
+        padding-top: 10px;
+        flex-wrap: wrap;
+        .form-network{
+            width: auto;
+            margin-right: 20px;
+        }
         .container-input{
             display: flex;
             flex-direction: column;

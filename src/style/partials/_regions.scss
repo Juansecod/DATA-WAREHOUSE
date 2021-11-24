@@ -61,3 +61,7 @@
         width: 107.81px;
     }
 }
+
+.add-region, .add-country, .add-city{
+    @extend .add-user;
+}

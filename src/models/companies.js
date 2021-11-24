@@ -13,7 +13,7 @@ const tableCompanies = ({idCompania: id,nombre,email,ciudad,direccion,telefono})
             <p>${direccion}</p>
         </td>
         <td class="city">
-            <p>${ciudad}</p>
+            <p>${(ciudad!= null) ? ciudad : 'No disponible'}</p>
         </td>
         <td class="actions">
             <button class="edit" id="edit-${id}"><i class="fas fa-edit"></i></button>

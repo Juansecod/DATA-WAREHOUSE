@@ -53,8 +53,10 @@
                         <input type="text" id="phone" name="phone" placeholder="000-000-0000">
                     </div>
                     <div class="container-input">
-                        <label for="city">Ciudad</label>
-                        <input type="text" id="city" name="city" placeholder="Ciudad">
+                        <label for="city">Ciudad<text>*</text></label>
+                        <select name="city" id="city" class="required">
+                            <option disabled selected hidden value="">Seleccione una ciudad</option>
+                        </select>
                     </div>
                     <div class="container-input">
                         <label for="address">Direccion</label>

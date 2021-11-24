@@ -1,6 +1,6 @@
 import { routesContacts } from "../utils/routes.js";
 import * as fetchFunctions from '../utils/fetchFunctions.js';
-import tableContacts from "../models/contacts.js";
+import {tableContacts} from "../models/contacts.js";
 import { errorForm, generateDOM } from "./global.js";
 
 const dataTable = (table, btnLogout)=>{
@@ -33,7 +33,7 @@ const dataTable = (table, btnLogout)=>{
 };
 
 const registerContact = (data, hiddenBtn) => {
-    fetchFunctions.postData(routesContacts.register,data,token)
+    fetchFunctions.postData(routesContacts.register, data, token)
         .then(res => {
             if(!res.msg) throw new Error(res.data);
             hiddenBtn.click();

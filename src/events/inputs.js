@@ -36,6 +36,15 @@ const eventInputs = (input, type, password) => {
     input.addEventListener("keyup",() => {
         functionsEventsInputs[type](input, password);
     });
+    input.addEventListener("keypress", (e) => {
+        if(e.keyCode == 13) e.preventDefault();
+    });
 };
 
-export {eventInputs};
+const eventSelect = (select) => {
+    select.addEventListener("change", () => {
+        functionsEventsInputs['default'](select);
+    });
+};
+
+export {eventInputs, eventSelect};

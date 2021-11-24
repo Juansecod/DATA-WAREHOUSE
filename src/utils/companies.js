@@ -19,7 +19,7 @@ const dataTable = (table)=>{
                 const deleteBtn = document.getElementById(`delete-${id}`);
                 deleteBtn.addEventListener('click', ()=> {
                     const confirm = window.confirm(`Esta seguro que quire eliminar la compañia ${compania.nombre}`);
-                    /* if(confirm) deleteUser([id]); */
+                    if(confirm) deleteCompany([id]);
                 });
             });
         })
@@ -54,7 +54,7 @@ const updateUser = (data, id,hiddenBtn)=>{
         });
 };
 
-const deleteUser = async (array) => {
+const deleteCompany = async (array) => {
     try{
         await array.forEach((id) => {
             fetchFunctions.deleteData(routesCompanies.delete(id), token)
@@ -68,4 +68,4 @@ const deleteUser = async (array) => {
     }
 };
 
-export { dataTable, registerCompany, updateUser, deleteUser };
+export { dataTable, registerCompany, updateUser, deleteCompany };
