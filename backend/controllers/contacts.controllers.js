@@ -8,9 +8,8 @@ const errorResponse = require('../error/error');
 const getContacts = async(req,res) => {
     try {
         const contacts = await sequelize.query(
-            `SELECT cont.idContacto, cont.nombre, cont.apellido, cont.cargo, cont.email, cont.interes, comp.idCompania, comp.nombre AS compania, ciu.idCiudad, ciu.nombre AS ciudad, cont.direccion, red.idRedContacto, red.canal, red.url AS link, red.telefono, red.preferencia 
-            FROM contactos AS cont JOIN redesContacto AS red ON cont.idContacto = red.idContacto 
-            JOIN ciudades AS ciu ON ciu.idCiudad = cont.idCiudad 
+            `SELECT cont.idContacto, cont.nombre, cont.apellido, cont.cargo, cont.email, cont.interes, comp.idCompania, comp.nombre AS compania, ciu.idCiudad, ciu.nombre AS ciudad, cont.direccion 
+            FROM contactos AS cont JOIN ciudades AS ciu ON ciu.idCiudad = cont.idCiudad 
             JOIN companias AS comp ON comp.idCompania = cont.idCompania;`,
             {type: sequelize.QueryTypes.SELECT}
         );
@@ -26,7 +25,7 @@ const getContacts = async(req,res) => {
 const postContact = async(req,res) => {
     const { nombre, apellido, cargo, email, interes = 0, direccion, idCompany, idCiudad, redes } = req.body;
     try { 
-        if(!redesValidator(redes)) throw new Error('Formato de redes invalido');
+        if(!redesValidator(redes) && redes.lenght > 0) throw new Error('Formato de redes invalido');
         if(!emailValidator(email)) throw new Error('Formato email invalido');
         const company = await sequelize.query(
             `SELECT nombre FROM companias WHERE idCompania = ${idCompany}`,
@@ -109,7 +108,6 @@ const putContact = async(req,res) =>{
             data: 'Contacto actualizado con exito'
 	    });
     } catch (error) {
-        console.log(error);
         errorResponse(res, error);
     }
 };
