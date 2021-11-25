@@ -13,7 +13,7 @@ router.use(middlewares.tokenValidator);
 router.get('/', contactsControllers.getContacts);
 router.post('/register', contactsControllers.postContact);
 router.post('/addNetworks/:id', contactsControllers.addRedContact);
-router.put('/update', contactsControllers.putContact);
+router.put('/update/:id', contactsControllers.putContact);
 router.delete('/delete', contactsControllers.deleteContact);
 
 module.exports = router;
