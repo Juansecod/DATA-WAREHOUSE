@@ -28,7 +28,6 @@ const containerFormNetworks = document.getElementById('network-container');
 const btnAddNetwork = document.getElementById('add-network-form');
 const containerBtn = document.getElementById('container-button');
 const displayContSelect = document.getElementById('amount');
-const selectAllContacts = document.getElementById('select-all-contacts');
 const selects = document.getElementsByName('select-contact');
 const btnBulkDelete = document.getElementById('bulk-delete');
 const updateContactButton = document.getElementById('update-contact');
@@ -52,6 +51,7 @@ async function renderOptionsCompanies(){
             console.error(err);
         });
     const companiesDatabase = new SessionStorage().get('companies');
+    if(!companiesDatabase) return errorForm('Primero por favor registra minimo una compañia para poder iniciar el registro de nuestros contactos','error-info-table','text-error-table');
     companiesDatabase.forEach((data)=>{
         insertOptionsSelect(data,company);
     });
@@ -101,15 +101,6 @@ selectCountry.addEventListener("change", ()=>{
 selectCity.addEventListener("change",()=>{
     address.classList = '';
     address.disabled = false;
-});
-
-selectAllContacts.addEventListener('click',function(){
-    let contSelect = (this.checked) ? selects.length : 0;
-    document.getElementById('container-bulk-delete').style.display = (contSelect == 0) ? 'none' : 'inline-block';
-    selects.forEach((input)=>{
-        input.checked = (this.checked) ? true : false;
-    });
-    displayContSelect.textContent = `${contSelect} seleccionados`;
 });
 
 btnBulkDelete.addEventListener('click',()=>{

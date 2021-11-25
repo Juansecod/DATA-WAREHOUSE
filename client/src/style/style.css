@@ -364,6 +364,19 @@ td, th, tr, td:hover, th:hover, tr:hover {
   padding: 40px 30px 20px 30px;
 }
 
+.contacts .error, .companies .error, .users .error, .regions .error {
+  background-color: white;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  -ms-grid-column-align: center;
+      justify-self: center;
+  max-width: 500px;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
+
 .container-buttons, .companies .container-header, .users .container-header, .regions .container-header, .companies .container-city, .users .container-city, .regions .container-city {
   width: 100%;
   display: -webkit-box;

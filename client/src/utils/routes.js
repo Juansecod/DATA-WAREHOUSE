@@ -1,4 +1,4 @@
-const ipAddress = '192.168.1.4';
+const ipAddress = 'localhost';
 const port = 3001;
 const basePath = `http://${ipAddress}:${port}/api/v1`;
 

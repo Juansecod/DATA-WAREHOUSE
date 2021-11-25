@@ -31,7 +31,6 @@ const dataTable = (table, btnLogout, printContSelect, input = undefined)=>{
                     <th class="actions">Acciones</th>
                 </tr>`;
 
-
             if(contacts.length <= 0) throw new Error('Not content');
             if(input == undefined) {
                 contacts.forEach(contacto => {
@@ -128,6 +127,16 @@ const dataTable = (table, btnLogout, printContSelect, input = undefined)=>{
                     });
                 });
             }
+            const selectAllContacts = document.getElementById('select-all-contacts');
+            const selects = document.getElementsByName('select-contact');
+            selectAllContacts.addEventListener('click',function(){
+                let contSelect = (this.checked) ? selects.length : 0;
+                document.getElementById('container-bulk-delete').style.display = (contSelect == 0) ? 'none' : 'inline-block';
+                selects.forEach((input)=>{
+                    input.checked = (this.checked) ? true : false;
+                });
+                printContSelect.textContent = `${contSelect} seleccionados`;
+            });
         })
         .catch(err => {
             if(err.message.toLowerCase() == "no tienes acceso") btnLogout.click();

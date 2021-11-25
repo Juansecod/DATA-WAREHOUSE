@@ -45,7 +45,7 @@ const postContact = async(req,res) => {
         if(resultInsert[1] == 0) throw new Error(400);
         /* Registro Redes Contacto */
         const idContact = resultInsert[0];
-        redes.forEach(async({ canal, url, telefono, preferencia = 'Sin Preferencia' })=>{
+        if(redes.lenght > 0) redes.forEach(async({ canal, url, telefono, preferencia = 'Sin Preferencia' })=>{
             if(!url) return await sequelize.query(
                 `INSERT INTO redesContacto(canal, telefono, preferencia, idContacto) 
                 VALUES ('${canal}', '${telefono}', '${preferencia}', ${idContact});`,

@@ -9,6 +9,15 @@
 
 .contacts{
     padding: 40px 30px 20px 30px;
+    .error{
+        background-color: white; 
+        align-self: center; 
+        justify-self: center; 
+        max-width: 500px; 
+        position: fixed; 
+        top: 10px; 
+        right: 10px;
+    }
 }
 
 .container-buttons{

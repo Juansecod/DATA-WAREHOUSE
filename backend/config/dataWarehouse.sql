@@ -101,18 +101,14 @@ CREATE TABLE IF NOT EXISTS `dataWarehouse`.`contactos` (
   PRIMARY KEY (`idContacto`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
   INDEX `fk_contactos_companias1_idx` (`idCompania` ASC) VISIBLE,
-  INDEX `fk_contactos_ciudades1_idx` (`idCiudad` ASC) VISIBLE,
   CONSTRAINT `fk_contactos_companias1`
     FOREIGN KEY (`idCompania`)
     REFERENCES `dataWarehouse`.`companias` (`idCompania`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-  CONSTRAINT `fk_contactos_ciudades1`
-    FOREIGN KEY (`idCiudad`)
-    REFERENCES `dataWarehouse`.`ciudades` (`idCiudad`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+ALTER TABLE contactos ADD CONSTRAINT idCiudad
+FOREIGN KEY (idCiudad) REFERENCES ciudades(idCiudad);
 
 
 -- -----------------------------------------------------
@@ -175,3 +171,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- Se inserta el rol admin y basico
 -- -----------------------------------------------------
 insert into rolesusuario (nombre) values ('admin'),('basico');
+
+insert into regiones (nombre) values ('Sudamerica');
+insert into paises (nombre, idRegion) values ('Colombia',1);
+insert into ciudades (nombre, idPais) values ('Medellin', 1);
+insert into companias (nombre, email, idCiudad) values ('Acamica', 'acamica@mail.com', 1);
