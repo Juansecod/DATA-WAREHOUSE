@@ -43,7 +43,7 @@
     <li>
       <a href="https://github.com/Juansecod/DATA-WAREHOUSE/tree/main/backend">Backend</a>
     </li>
-    <li><a href="https://github.com/Juansecod/DATA-WAREHOUSE/tree/main/Client">Frontend</a>
+    <li><a href="https://github.com/Juansecod/DATA-WAREHOUSE/tree/main/client">Frontend</a>
     </li>
     <li><a href="#licencia">Licencia</a></li>
     <li><a href="#contacto">Contacto</a></li>
