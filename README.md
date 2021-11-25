@@ -16,9 +16,11 @@ Para poder utilizar este proyecto sin nungun problema necesitamos contar con las
    ```sh
    git clone https://github.com/Juansecod/DATA-WAREHOUSE.git
    ```
-2. Nos paramos sobre la carpeta del proyecto y ya puedes inicializar el cliente
-
+2. Nos paramos sobre la carpeta del proyecto
+3. Por ultimo nos paramos sobre la carpeta de nuestro cliente.
 
 ### 🤓 Inicializacion
 
-1. Ya con todo listo para ejecutar buscamos en nuestro VS Code el live server y revisamos que el puerto este configurado en uno diferente al de nuestra API. Lo que tienes que hacer es abrir un documento html, le das a click derecho en el código y finalmente le das click a «Open With Live Server»
+1. Ya con todo listo para ejecutamos el VS Code
+2. Ya en nuestro VS Code, buscamos el live server y revisamos que el puerto este configurado en uno diferente al de nuestra API. Lo que tienes que hacer es abrir un documento html, le das a click derecho en el código y finalmente le das click a «Open With Live Server»
+3. Y listo, verifica primero de tener montada nuestra API para el correcto funcionamiento del cliente. [Aqui](https://github.com/Juansecod/DATA-WAREHOUSE/tree/main/backend) te dejo la documentacion de ella.
