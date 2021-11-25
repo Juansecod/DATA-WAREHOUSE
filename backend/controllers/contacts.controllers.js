@@ -84,14 +84,14 @@ const putContact = async(req,res) =>{
         
         if (valores[0] == ",") valores = valores.replace(",","");
 		
-		const sentenciaSQL = sql + valores + `WHERE idContacto = ${idContact}`;
+		const sentenciaSQL = sql + valores + ` WHERE idContacto = ${idContact}`;
 
         let resultUpdate = await sequelize.query(`${sentenciaSQL};`,
 	        { type: sequelize.QueryTypes.UPDATE });
 
 		if(resultUpdate[1] == 0) throw new Error(400);
 		
-        redes.forEach(async({ canal, url, telefono, preferencia, idRedContacto })=>{
+        if(redes != undefined) redes.forEach(async({ canal, url, telefono, preferencia, idRedContacto })=>{
             let sql = 'UPDATE redesContacto SET';
 		    let valores = '';   
             if (canal != undefined) valores = valores + ` canal = '${canal}'`;
@@ -99,7 +99,7 @@ const putContact = async(req,res) =>{
             if (telefono != undefined) valores = valores + `, telefono = '${telefono}'`;
             if (preferencia != undefined) valores = valores + `, preferencia = '${preferencia}''`;
             if (valores[0] == ",") valores = valores.replace(",","");
-            const sentenciaSQL = sql + valores + `WHERE idRedContacto = ${idRedContacto}`;
+            const sentenciaSQL = sql + valores + ` WHERE idRedContacto = ${idRedContacto}`;
             await sequelize.query(`${sentenciaSQL};`, { type: sequelize.QueryTypes.UPDATE });
         });
 
