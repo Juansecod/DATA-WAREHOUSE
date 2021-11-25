@@ -26,8 +26,12 @@ tags:
     description: Operaciones para realizar acciones con las regiones
   - name: region(Admin)
     description: Operaciones de los administradores sobre las regiones
+  - name: pais
+    description: Operaciones para realizar acciones con los paises
   - name: pais(Admin)
     description: Operaciones de los administradores sobre los paises
+  - name: ciudad
+    description: Operaciones para realizar acciones con las ciudades
   - name: ciudad(Admin)
     description: Operaciones de los administradores sobre las ciudades
 
@@ -854,12 +858,10 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/API_Response"
-
-  # Rutas Regiones (Usuarios Administrativos)
   /regions/:
     get:
       tags:
-        - region(Admin)
+        - region
       summary: Mostrar Regiones
       description: Muestra todas las regiones almacenadas en la base de datos
       operationId: mostrarRegiones
@@ -900,6 +902,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/API_Response"
+  
+  # Rutas Regiones (Usuarios Administrativos)
   /regions/register/:
     post:
       security:
@@ -1019,13 +1023,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/API_Response" 
 
-  # Rutas Paises (Usuarios Administrativos)
+  # Rutas Paises
   /regions/countries/:
     get:
-      security:
-        - ApiKeyAuth: []
       tags:
-        - pais(Admin)
+        - pais
       summary: Mostrar Paises
       description: Muestra todos los paises almacenadas en la base de datos
       operationId: mostrarPaises
@@ -1070,10 +1072,8 @@ paths:
                 $ref: "#/components/schemas/API_Response"
   /regions/{idRegion}/countries/:
     get:
-      security:
-        - ApiKeyAuth: []
       tags:
-        - pais(Admin)
+        - pais
       summary: Muestra informacion de los paises de la region solicitada
       operationId: mostrarPaisesRegion
       parameters:
@@ -1122,6 +1122,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/API_Response"
+  
+  # Rutas Paises (Usuarios Administrativos)
   /regions/{idRegion}/countries/register/:
     post:
       security:
@@ -1260,13 +1262,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/API_Response"
 
-  # Rutas Ciudades (Usuarios Administrativos)
+  # Rutas Ciudades
   /regions/cities/:
     get:
-      security:
-        - ApiKeyAuth: []
       tags:
-        - ciudad(Admin)
+        - ciudad
       summary: Mostrar Ciudades
       description: Muestra todas las ciudades almacenadas en la base de datos
       operationId: mostrarCiudades
@@ -1311,10 +1311,8 @@ paths:
                 $ref: "#/components/schemas/API_Response"
   /regions/countries/{idCountry}/cities:
     get:
-      security:
-        - ApiKeyAuth: []
       tags:
-        - ciudad(Admin)
+        - ciudad
       summary: Muestrar ciudades de un pais
       description: Muestra informacion de las ciudades del pais solicitado
       operationId: mostrarCiudadesPais
@@ -1364,6 +1362,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/API_Response"
+  
+  # Rutas Ciudades (Usuarios Administrativos)
   /regions/countries/{idCountry}/cities/register/:
     post:
       security:
