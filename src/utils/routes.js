@@ -23,7 +23,7 @@ const routesContacts = {
 const routesCompanies = {
     get: `${basePath}/companies/`,
     register: `${basePath}/companies/register`,
-    upadte: (id) => `${basePath}/companies/update/${id}`,
+    update: (id) => `${basePath}/companies/update/${id}`,
     delete: (id) => `${basePath}/companies/delete?id=${id}`
 };
 
@@ -39,7 +39,7 @@ const routesRegions = {
         get: `${basePath}/regions/countries`,
         getByRegion: (idRegion) => `${basePath}/regions/${idRegion}/countries`,
         post: (idRegion) => `${basePath}/regions/${idRegion}/countries/register`,
-        update: (id) => `${basePath}/regions/countries/${id}`,
+        update: (id) => `${basePath}/regions/countries/update/${id}`,
         delete: (id) => `${basePath}/regions/countries/delete?idCountry=${id}`,
     },    
     cities:{

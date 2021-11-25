@@ -1,6 +1,6 @@
 const tableContacts = ({idContacto: id,nombre,apellido, cargo, email, interes, compania, ciudad, direccion})=> {
     return `
-    <td class="table-select"><input type="checkbox" name="select-contact" id="select-${id}" class="select-checkbox"></td>
+    <td class="table-select"><input type="checkbox" name="select-contact" id="select-${id}" class="select-checkbox" value=${id}></td>
     <td class="info-contact">
         <img src="../assets/profile-picture.png" alt="picture-contact">
         <div class="text">

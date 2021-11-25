@@ -1,5 +1,5 @@
 import { addContactDisplay, addContactHidden } from "../events/contacts.js";
-import { dataTable, registerContact } from "../utils/contacts.js";
+import { dataTable, registerContact, updateContact, deleteContact } from "../utils/contacts.js";
 import SessionStorage from "./app.js";
 import { insertOptionsSelect,errorForm } from '../utils/global.js';
 import { eventInputs, eventSelect } from "../events/inputs.js";
@@ -27,31 +27,15 @@ const cargo = document.getElementById('job');
 const containerFormNetworks = document.getElementById('network-container');
 const btnAddNetwork = document.getElementById('add-network-form');
 const containerBtn = document.getElementById('container-button');
+const displayContSelect = document.getElementById('amount');
+const selectAllContacts = document.getElementById('select-all-contacts');
+const selects = document.getElementsByName('select-contact');
+const btnBulkDelete = document.getElementById('bulk-delete');
+const updateContactButton = document.getElementById('update-contact');
 
 var contForm = 1;
 
-btnAddNetwork.addEventListener('click',()=>{
-    containerFormNetworks.removeChild(containerBtn);
-    const newForm = document.createElement('div');
-    newForm.classList = 'form-network';
-    newForm.innerHTML = formNetwork(contForm);
-    containerFormNetworks.appendChild(newForm);
-    containerFormNetworks.appendChild(containerBtn);
-    
-    const selectChannel = document.getElementById(`channel-${contForm}`);
-    const nickContact = document.getElementById(`nick-channel-contact-${contForm}`);
-    const preferences = document.getElementById(`preferences-${contForm}`);
-    selectChannel.addEventListener("change",()=>{
-        nickContact.classList = '';
-        nickContact.disabled = false;
-        preferences.classList = '';
-        preferences.disabled = false;
-    });
-
-    contForm = contForm + 1;
-});
-
-dataTable(table,btnLogout);
+dataTable(table, btnLogout, displayContSelect);
 
 async function renderOptionsCompanies(){
     await getData(routesCompanies.get, token)
@@ -117,6 +101,65 @@ selectCity.addEventListener("change",()=>{
     address.disabled = false;
 });
 
+selectAllContacts.addEventListener('click',function(){
+    let contSelect = (this.checked) ? selects.length : 0;
+    document.getElementById('container-bulk-delete').style.display = (contSelect == 0) ? 'none' : 'inline-block';
+    selects.forEach((input)=>{
+        input.checked = (this.checked) ? true : false;
+    });
+    displayContSelect.textContent = `${contSelect} seleccionados`;
+});
+
+btnBulkDelete.addEventListener('click',()=>{
+    const idArray = [];
+    let contSelect = 0;
+    selects.forEach(({value,checked})=>{
+        if(checked) contSelect = contSelect + 1;
+        if(checked) idArray.push(value);
+    });
+    const confirm = window.confirm(`Esta seguro que quire eliminar a ${contSelect} contactos`);
+    if(confirm) deleteContact(idArray);
+});
+
+btnAddNetwork.addEventListener('click',()=>{
+    containerFormNetworks.removeChild(containerBtn);
+    const newForm = document.createElement('div');
+    newForm.classList = 'form-network';
+    newForm.innerHTML = formNetwork(contForm);
+    containerFormNetworks.appendChild(newForm);
+    containerFormNetworks.appendChild(containerBtn);
+    
+    const selectChannel = document.getElementById(`channel-${contForm}`);
+    const nickContact = document.getElementById(`nick-channel-contact-${contForm}`);
+    const preferences = document.getElementById(`preferences-${contForm}`);
+    selectChannel.addEventListener("change",()=>{
+        nickContact.classList = '';
+        nickContact.disabled = false;
+        preferences.classList = '';
+        preferences.disabled = false;
+    });
+
+    contForm = contForm + 1;
+});
+
+addContactButton.addEventListener('click',()=>{
+    document.getElementById('icon-info').style.display = '';
+    document.getElementById('info').style.display = '';
+    document.getElementById('register-contact').style.display = '';
+    document.getElementById('update-contact').style.display = 'none';
+    document.getElementById('network-container').style.display = '';
+    document.getElementById('network-container').style.display = '';
+    document.getElementById('title').textContent = 'Nuevo Contacto';
+    document.getElementById('name').value = '';
+    document.getElementById('last-name').value = '';
+    document.getElementById('job').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('company').value = '';
+    document.getElementById('ciudad').value = '';
+    document.getElementById('address').value = '';
+    document.getElementById('interest').value = 0;
+    document.getElementById('range-select').value = 0;
+});
 addContactDisplay(addContactButton,addContactSection);
 addContactHidden(cancelAddContact,addContactSection, containerFormNetworks, containerBtn);
 cancelAddContact.addEventListener('click',() => contForm = 1);
@@ -178,5 +221,25 @@ registerContactButton.addEventListener('click', ()=> {
         registerContact(data,cancelAddContact);
     }else{
         errorForm('Revisa que esten completos los campos requeridos');
+    } 
+});
+
+updateContactButton.addEventListener('click', ()=> {
+    const data = {
+        nombre: nombre.value, 
+        apellido: apellido.value, 
+        cargo: cargo.value, 
+        email: email.value, 
+        interes: interestSelect.value, 
+        direccion: address.value, 
+        idCompany: parseInt(company.value) || undefined, 
+        idCiudad: parseInt(selectCity.value) || undefined
+    };
+    const positionAt = email.value.search('@');
+    const positionDot = email.value.search('.com');
+    if(nombre.value.length > 0 && positionAt > 0 && positionDot > 1 && cargo.value.length > 0 && apellido.value.length > 0 && company.value != '') {
+        updateContact(data,updateContactButton.getAttribute('id-contact'),cancelAddContact);
+    }else{
+        errorForm('Revisa que esten bien escritos todos los campos');
     } 
 });

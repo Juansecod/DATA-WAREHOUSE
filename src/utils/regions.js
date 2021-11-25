@@ -1,7 +1,7 @@
 import { routesRegions } from "../utils/routes.js";
 import * as fetchFunctions from '../utils/fetchFunctions.js';
 import * as models from "../models/regions.js";
-import { generateDOM, errorAdmin } from "./global.js";
+import { generateDOM, errorAdmin, errorForm } from "./global.js";
 import { formDisplay } from "../events/regions.js";
 import { formCity, formCountry } from "../scripts/regions.js";
 
@@ -14,11 +14,24 @@ const dataDisplay = (container)=>{
                 const containerRegion = generateDOM(region,container,models.regionInfo, 'div','container-region');
                 
                 const addCountry = document.getElementById(`add-country-button-${id}`);
+                addCountry.addEventListener('click',()=>{
+                    document.getElementById('register-country').style.display = '';
+                    document.getElementById('update-country').style.display = 'none';
+                    document.getElementById('title-country').textContent = 'Nuevo Pais';
+                    document.getElementById('name-country').classList = 'required';
+                    document.getElementById('name-country').value = '';
+                });
                 formDisplay(addCountry, formCountry, id, 'country');
 
                 const edit = document.getElementById(`edit-region-${id}`);
-                edit.addEventListener('click', ()=> {
-                    console.log('edit: ' + id);
+                edit.addEventListener('click', () => {
+                    formDisplay(edit,document.getElementById('add-region'));
+                    document.getElementById('register-region').style.display = 'none';
+                    document.getElementById('update-region').style.display = 'inline-block';
+                    document.getElementById('title-region').textContent = 'Actualizar Region';
+                    document.getElementById('name-region').classList = 'success';
+                    document.getElementById('name-region').value = region.nombre;
+                    document.getElementById('update-region').setAttribute('id-region', id);
                 });
     
                 const deleteBtn = document.getElementById(`delete-region-${id}`);
@@ -34,11 +47,24 @@ const dataDisplay = (container)=>{
                             const containerCountry = generateDOM(pais,containerRegion,models.countryInfo, 'div','container-country');
 
                             const addCity = document.getElementById(`add-city-button-${id}`);
+                            addCity.addEventListener('click',()=>{
+                                document.getElementById('register-city').style.display = '';
+                                document.getElementById('update-city').style.display = 'none';
+                                document.getElementById('title-city').textContent = 'Nueva Ciudad';
+                                document.getElementById('name-city').classList = 'required';
+                                document.getElementById('name-city').value = '';
+                            });
                             formDisplay(addCity, formCity, id, 'city');
 
                             const edit = document.getElementById(`edit-country-${id}`);
-                            edit.addEventListener('click', ()=> {
-                                console.log('edit Country: ' + id);
+                            edit.addEventListener('click', () => {
+                                formDisplay(edit,document.getElementById('add-country'));
+                                document.getElementById('register-country').style.display = 'none';
+                                document.getElementById('update-country').style.display = 'inline-block';
+                                document.getElementById('title-country').textContent = 'Actualizar Pais';
+                                document.getElementById('name-country').classList = 'success';
+                                document.getElementById('name-country').value = pais.nombre;
+                                document.getElementById('update-country').setAttribute('id-country', id);
                             });
                 
                             const deleteBtn = document.getElementById(`delete-country-${id}`);
@@ -54,8 +80,14 @@ const dataDisplay = (container)=>{
                                         generateDOM(ciudad,containerCountry,models.cityInfo, 'div','container-city');
 
                                         const edit = document.getElementById(`edit-city-${id}`);
-                                        edit.addEventListener('click', ()=> {
-                                            console.log('edit City: ' + id);
+                                        edit.addEventListener('click', () => {
+                                            formDisplay(edit,document.getElementById('add-city'));
+                                            document.getElementById('register-city').style.display = 'none';
+                                            document.getElementById('update-city').style.display = 'inline-block';
+                                            document.getElementById('title-city').textContent = 'Actualizar Ciudad';
+                                            document.getElementById('name-city').classList = 'success';
+                                            document.getElementById('name-city').value = ciudad.nombre;
+                                            document.getElementById('update-city').setAttribute('id-city', id);
                                         });
                             
                                         const deleteBtn = document.getElementById(`delete-city-${id}`);
@@ -88,7 +120,7 @@ const registerRegion = (data, hiddenBtn) => {
             location.reload();
         })
         .catch(({message}) => {
-            errorForm(message);
+            errorForm(message,'error-info-region','text-error-region');
         });
 };
 
@@ -100,7 +132,7 @@ const registerCountry = (idRegion, data, hiddenBtn) => {
             location.reload();
         })
         .catch(({message}) => {
-            errorForm(message);
+            errorForm(message,'error-info-country','text-error-country');
         });
 };
 
@@ -112,7 +144,43 @@ const registerCity = (idCountry, data, hiddenBtn) => {
             location.reload();
         })
         .catch(({message}) => {
-            errorForm(message);
+            errorForm(message,'error-info-city','text-error-city');
+        });
+};
+
+const updateRegion = (id, data, hiddenBtn) => {
+    fetchFunctions.putData(routesRegions.regions.update(id), data, token)
+        .then(res => {
+            if(!res.msg) throw new Error(res.data);
+            hiddenBtn.click();
+            location.reload();
+        })
+        .catch(({message}) => {
+            errorForm(message,'error-info-region','text-error-region');
+        });
+};
+
+const updateCountry = (id, data, hiddenBtn) => {
+    fetchFunctions.putData(routesRegions.countries.update(id), data, token)
+        .then(res => {
+            if(!res.msg) throw new Error(res.data);
+            hiddenBtn.click();
+            location.reload();
+        })
+        .catch(({message}) => {
+            errorForm(message,'error-info-country','text-error-country');
+        });
+};
+
+const updateCity = (id, data, hiddenBtn) => {
+    fetchFunctions.putData(routesRegions.cities.update(id), data, token)
+        .then(res => {
+            if(!res.msg) throw new Error(res.data);
+            hiddenBtn.click();
+            location.reload();
+        })
+        .catch(({message}) => {
+            errorForm(message,'error-info-city','text-error-city');
         });
 };
 
@@ -152,4 +220,4 @@ const deleteCity = (id) => {
     }
 };
 
-export {dataDisplay, registerRegion, registerCountry, registerCity};
+export {dataDisplay, registerRegion, registerCountry, registerCity, updateRegion, updateCountry, updateCity};

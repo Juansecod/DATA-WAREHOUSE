@@ -133,6 +133,10 @@ form .submit:hover {
   cursor: pointer;
 }
 
+form .update {
+  display: none;
+}
+
 .container-input, .add-contact .network .container-button {
   width: 100%;
 }
@@ -369,6 +373,26 @@ td, th, tr, td:hover, th:hover, tr:hover {
       -ms-flex-pack: justify;
           justify-content: space-between;
   margin-top: 10px;
+}
+
+.amount {
+  background: rgba(223, 223, 223, 0.9);
+  border-radius: 4px;
+  border-radius: 4px;
+  color: #0683F9;
+  font-size: small;
+  padding: 5px 5px;
+}
+
+.container-delete-amount {
+  display: none;
+}
+
+.container-delete-amount .bulk-delete-button {
+  color: #1D72C2;
+  font-size: medium;
+  background-color: #FFFFFF;
+  border: 0;
 }
 
 .container-search {

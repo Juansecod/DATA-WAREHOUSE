@@ -27,21 +27,20 @@
             </div>
             <table class="table" id="table-users">
                 <tr class="table-header">
-                    <th>Nombre <i class="fas fa-sort"></i></th>
-                    <th>Apellido<i class="fas fa-sort"></i></th>
-                    <th>Correo <i class="fas fa-sort"></i></th>
-                    <th>Rol <i class="fas fa-sort"></i></th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Correo</th>
+                    <th>Rol</th>
                     <th class="actions">Acciones</th>
                 </tr>
             </table>
         </section>
         <section class="add-user" id="add-user">
-            
             <div class="container">
-                <div class="note">
+                <div class="note" id="note">
                     <i class="fas fa-question-circle"></i><p>Asegurese de ingresar el rol correcto, luego no se podra actualizar</p>
                 </div>
-                <h2>Crear Usuario</h2>
+                <h2 id="title">Crear Usuario</h2>
                 <form autocomplete="off">
                     <div class="container-input">
                         <label for="name">Nombre</label>
@@ -66,7 +65,7 @@
                         <input type="password" id="same-password" name="same-password" required placeholder="********" class="required">
                         <p class="info required"></p>
                     </div>
-                    <div class="container-radio-select">
+                    <div class="container-radio-select" id="container-rols">
                         <div>
                             <input type="radio" name="rol" id="rolChoise1" value="1">
                             <label for="rolChoise1">Administrador</label>
@@ -79,6 +78,7 @@
                     <div class="container-buttons">
                         <input class="cancel" type="button" value="Cancelar" id="cancel-add-user">
                         <input type="button" value="Registrar" class="submit" id="register-user">
+                        <input class="submit update" type="button" value="Actualizar" id="update-user">
                     </div>
                 </form>
                 <div class="error" id="error-info">

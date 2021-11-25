@@ -1,7 +1,7 @@
 import { routesUsers } from "../utils/routes.js";
 import * as fetchFunctions from '../utils/fetchFunctions.js';
 import tableUsers from "../models/users.js";
-import { eventDeleteBtn } from "../events/users.js";
+import { eventDeleteBtn, addUserDisplay } from "../events/users.js";
 import { errorAdmin, errorForm, generateDOM } from "./global.js";
 
 const dataTable = (table)=>{
@@ -13,8 +13,18 @@ const dataTable = (table)=>{
                 generateDOM(usuario,table,tableUsers, 'tr');
                 
                 const edit = document.getElementById(`edit-${id}`);
-                edit.addEventListener('click', ()=> {
-                    console.log('edit: ' + id);
+                edit.addEventListener('click',()=>{
+                    addUserDisplay(edit,document.getElementById('add-user'));
+                    document.getElementById('register-user').style.display = 'none';
+                    document.getElementById('note').style.display = 'none';
+                    document.getElementById('container-rols').style.display = 'none';
+                    document.getElementById('update-user').style.display = 'inline-block';
+                    document.getElementById('title').textContent = 'Actualizar Usuario';
+                    document.getElementById('name').value = usuario.nombre;
+                    document.getElementById('last-name').value = usuario.apellido;
+                    document.getElementById('email').value = usuario.email;
+                    document.getElementById('email').classList = 'success';
+                    document.getElementById('update-user').setAttribute('id-user', id);
                 });
 
                 const deleteBtn = document.getElementById(`delete-${id}`);
@@ -39,7 +49,7 @@ const registerUser = (data, hiddenBtn)=>{
 };
 
 const updateUser = (data, id,hiddenBtn)=>{
-    fetchFunctions.putData(routesUsers.updateUser(id), data, token)
+    fetchFunctions.putData(routesUsers.update(id), data, token)
         .then(res => {
             if(!res.msg) throw new Error(res.data);
             console.log(res.data);

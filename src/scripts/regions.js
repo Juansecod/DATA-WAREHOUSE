@@ -1,7 +1,7 @@
 import { eventInputs } from "../events/inputs.js";
 import { formDisplay, formHidden } from "../events/regions.js";
 import { errorForm } from "../utils/global.js";
-import { dataDisplay, registerCity, registerCountry, registerRegion } from "../utils/regions.js";
+import { dataDisplay, registerCity, registerCountry, registerRegion, updateRegion, updateCountry, updateCity } from "../utils/regions.js";
 
 const regions = document.getElementById('regions');
 const addRegionButton = document.getElementById('add-region-button');
@@ -17,10 +17,20 @@ const nameCity = document.getElementById('name-city');
 const registerRegionButton = document.getElementById('register-region');
 const registerCountryButton = document.getElementById('register-country');
 const registerCityButton = document.getElementById('register-city');
+const updateRegionButton = document.getElementById('update-region');
+const updateCountryButton = document.getElementById('update-country');
+const updateCityButton = document.getElementById('update-city');
 
 dataDisplay(regions);
 
 // Eventos regiones
+addRegionButton.addEventListener('click',()=>{
+    document.getElementById('register-region').style.display = '';
+    document.getElementById('update-region').style.display = 'none';
+    document.getElementById('title-region').textContent = 'Nueva Region';
+    document.getElementById('name-region').classList = 'required';
+    document.getElementById('name-region').value = '';
+});
 formDisplay(addRegionButton, formRegion);
 formHidden(cancelAddRegion, formRegion, 'region');
 eventInputs(nameRegion);
@@ -32,6 +42,10 @@ eventInputs(nameCountry);
 // Eventos ciudades
 formHidden(cancelAddCity, formCity, 'city');
 eventInputs(nameCity);
+
+
+
+
 
 
 
@@ -61,5 +75,32 @@ registerCityButton.addEventListener('click', ()=> {
         errorForm('Revisa que esten completos los campos requeridos','error-info-city','text-error-city');
     } 
 }); 
+
+updateRegionButton.addEventListener('click', ()=> {
+    const nombre = document.getElementById('name-region').value; 
+    if(nombre.length > 0 ) {
+        updateRegion(updateRegionButton.getAttribute('id-region'),{nombre: nombre},cancelAddRegion);
+    }else{
+        errorForm('Revisa que esten completos los campos requeridos','error-info-region','text-error-region');
+    } 
+}); 
+
+updateCountryButton.addEventListener('click', ()=> {
+    const nombre = document.getElementById('name-country').value; 
+    if(nombre.length > 0 ) {
+        updateCountry(updateCountryButton.getAttribute('id-country'), {nombre: nombre}, cancelAddCountry);
+    }else{
+        errorForm('Revisa que esten completos los campos requeridos','error-info-country','text-error-country');
+    } 
+}); 
+
+updateCityButton.addEventListener('click', ()=> {
+    const nombre = document.getElementById('name-city').value; 
+    if(nombre.length > 0 ) {
+        updateCity(updateCityButton.getAttribute('id-city'), {nombre: nombre}, cancelAddCity);
+    }else{
+        errorForm('Revisa que esten completos los campos requeridos','error-info-city','text-error-city');
+    } 
+});
 
 export {formCountry, formCity};

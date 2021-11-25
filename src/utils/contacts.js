@@ -2,8 +2,9 @@ import { routesContacts } from "../utils/routes.js";
 import * as fetchFunctions from '../utils/fetchFunctions.js';
 import {tableContacts} from "../models/contacts.js";
 import { errorForm, generateDOM } from "./global.js";
+import { addContactDisplay } from "../events/contacts.js";
 
-const dataTable = (table, btnLogout)=>{
+const dataTable = (table, btnLogout, printContSelect)=>{
     fetchFunctions.getData(routesContacts.get, token)
         .then(res => {
             if(!res.msg) throw new Error(res.data);
@@ -14,14 +15,43 @@ const dataTable = (table, btnLogout)=>{
                 const {idContacto: id} = contacto;
                 generateDOM(contacto, table, tableContacts,'tr');
 
+                const select = document.getElementById(`select-${id}`);
+                select.addEventListener('click', function (){
+                    const selectAll = document.getElementById('select-all-contacts');
+                    const selects = document.getElementsByName('select-contact');
+                    let contSelect = 0;
+                    selects.forEach((select)=>{ 
+                        if(select.checked) contSelect =contSelect + 1;
+                    });
+                    printContSelect.textContent = `${contSelect} seleccionados`;
+                    selectAll.checked = (selects.length == contSelect) ? true : false;
+                    document.getElementById('container-bulk-delete').style.display = (contSelect == 0) ? 'none' : 'inline-block';
+                });
+
                 const edit = document.getElementById(`edit-${id}`);
                 edit.addEventListener('click', ()=> {
-                    console.log('edit: ' + id);
+                    addContactDisplay(edit,document.getElementById('add-contact'));
+                    document.getElementById('icon-info').style.display = 'none';
+                    document.getElementById('info').style.display = 'none';
+                    document.getElementById('register-contact').style.display = 'none';
+                    document.getElementById('update-contact').style.display = 'inline-block';
+                    document.getElementById('network-container').style.display = 'none';
+                    document.getElementById('title').textContent = 'Actualizar Contacto';
+                    document.getElementById('name').value = contacto.nombre;
+                    document.getElementById('last-name').value = contacto.apellido;
+                    document.getElementById('job').value = contacto.cargo;
+                    document.getElementById('email').value = contacto.email;
+                    document.getElementById('company').value = contacto.idCompania;
+                    document.getElementById('ciudad').value = contacto.idCiudad;
+                    document.getElementById('address').value = contacto.direccion;
+                    document.getElementById('interest').value = contacto.interes;
+                    document.getElementById('range-select').value = contacto.interes;
+                    document.getElementById('update-contact').setAttribute('id-contact', id);
                 });
 
                 const deleteBtn = document.getElementById(`delete-${id}`);
                 deleteBtn.addEventListener('click', ()=> {
-                    const confirm = window.confirm(`Esta seguro que quire eliminar el usuario con correo ${contacto.nombre} ${contacto.apellido}`);
+                    const confirm = window.confirm(`Esta seguro que quire eliminar el contacto con correo ${contacto.nombre} ${contacto.apellido}`);
                     if(confirm) deleteContact([id]);
                 });
             });
@@ -44,16 +74,14 @@ const registerContact = (data, hiddenBtn) => {
         });
 };
 
-const updateUser = (data, id,hiddenBtn)=>{
-    fetchFunctions.putData(routesUsers.updateUser(id), data, token)
+const updateContact = (data, id,hiddenBtn)=>{
+    fetchFunctions.putData(routesContacts.update(id), data, token)
         .then(res => {
             if(!res.msg) throw new Error(res.data);
-            console.log(res.data);
             hiddenBtn.click();
             location.reload();
         })
         .catch(err => {
-            console.log(err);
             errorForm(err.message);
         });
 };
@@ -72,4 +100,4 @@ const deleteContact = async (array) => {
     }
 };
 
-export {dataTable, registerContact, deleteContact};
+export {dataTable, registerContact, updateContact, deleteContact};

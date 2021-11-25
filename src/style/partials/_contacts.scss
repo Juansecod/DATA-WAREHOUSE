@@ -18,6 +18,25 @@
     margin-top: 10px;
 }
 
+.amount{
+    background: rgba(223, 223, 223, 0.9);
+    border-radius: 4px;
+    border-radius: 4px;
+    color: $blue-color; 
+    font-size: small; 
+    padding: 5px 5px;
+}
+
+.container-delete-amount{
+    display: none;
+    .bulk-delete-button{
+        color: $dark-blue-color; 
+        font-size: medium; 
+        background-color: $white-color;
+        border: 0;
+    }
+}
+
 .container-search{
     width: 65%;
     display: flex;
