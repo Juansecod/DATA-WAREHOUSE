@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../src/style/style.css">
+    <title>DATA WAREHOUSE</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="replace-navbars">
+                <script src="../src/scripts/navbar.js"></script>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="login">
+            <div class="container">
+                <h2>Bienvenido</h2>
+                <form autocomplete="off">
+                    <div class="container-input">
+                        <label for="email">Correo<text>*</text></label>
+                        <input class="required" type="email" id="email" name="email" required placeholder="example@mail.com" >
+                    </div>
+                    <div class="container-input">
+                        <label for="password">Contraseña<text>*</text></label>
+                        <input class="required" type="password" id="password" name="password" required placeholder="********">
+                    </div>
+                    <input type="button" value="Ingresar" class="submit" id="submit-login"> 
+                </form>
+                <div class="error" id="error-info">
+                    <i class="fas fa-times-circle"></i><p id="text-error">Ups, algo ha salido mal!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <script src="../src/scripts/app.js" type="module"></script>
+        <script src="../src/scripts/login.js" type="module"></script>
+      </footer>
+</body>
+</html>

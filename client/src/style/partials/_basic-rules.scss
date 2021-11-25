@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+*, *:hover, *:active{
+    text-decoration: none;
+    font-family: $font-family;
+    margin: 0;
+    padding: 0;
+}
+
+i, .fas, .fa, .fab, .fad, .fal, .far, .fas{
+    font-family: "Font Awesome 5 Pro";
+    &:hover, &:focus, &:active{
+        font-family: "Font Awesome 5 Pro";
+    }
+}
+
+a{
+    text-decoration: none;
+    color: $white-color;
+}
+
+text{
+    color: $red-color;
+}
+
+main{
+    min-height: calc(100vh - 62px);
+}
+
+ul{
+    list-style: none;
+}
+
+input, select{
+    border-radius: 5px;
+    min-width: 190px;
+    min-height: 35.5px;
+    border: 1px solid $grey-color;
+    &:focus{
+        outline: none;
+        border: 1px solid $black-color;
+    }
+    &[type="checkbox"]{
+        min-width: 0px;
+        min-height: 0px;
+    }
+}
+
+.disabled{
+    background-color: $background-grey;
+    border: none;
+    &:hover{
+        background-color: $background-grey;
+        border: none;
+        cursor: not-allowed;
+    }
+    &::placeholder{
+        color: $dark-grey-color;
+    }
+}
+
+.container{
+    width: 70%;
+    height: auto;
+    padding: 5% 5% 5% 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    input, select{
+        width: 100%;
+    }
+    .required:focus{
+        outline: none;
+        border: 1px solid $red-color;
+    }
+    .success:focus{
+        outline: none;
+        border: 1px solid $green-color;
+    }
+    .submit{
+        border: 0;
+        background-color: rgba($green-color,1);
+        color: #FFFFFF;
+        max-width: 30%;
+        align-self:flex-end;
+    }
+    .submit:hover{
+        background-color: $dark-green-color;
+        cursor: pointer;
+    }
+    .update{
+        display: none;
+    }
+}
+
+.container-input{
+    width: 100%;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+.cancel{
+    @extend input;
+    background-color: rgba($red-color, 0.9);
+    color: $white-color;
+    border: 0;
+    &:hover{
+        cursor: pointer;
+        background-color: rgba($red-color-hover , 0.9);
+    }
+}
+
+.darker-background {
+	content:'';
+	position: fixed;
+    top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(0,0,0,0.6);
+    z-index: 1;
+    display: none;
+}
+
+.logout{
+    font-size: 18px;
+    &:hover{
+        cursor: pointer;
+        color: $dark-grey-color;
+    }
+}
+
+.edit, .delete{
+    width: 30px;
+    height: 30px;
+    color: $white-color;
+    border: 0;
+}
+
+.edit{
+    background-color: $blue-color;
+}
+
+.delete{
+    background-color: $red-color;
+}
+
+.error{
+    margin-top: 15px;
+    min-height: 50px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    color: $red-color; 
+    border: 1px solid $red-color; 
+    padding: 0 10px; 
+    border-radius: 5px; 
+    gap: 5px; 
+    display: none;
+}

@@ -1,0 +1,15 @@
+.companies{
+    @extend .contacts;
+    .container-header{
+        @extend .container-buttons;
+        justify-content: space-between;
+    }
+}
+
+.add-company{
+    @extend .login;
+    .container-buttons{
+        gap: 5px;
+    }
+    display: none;
+}

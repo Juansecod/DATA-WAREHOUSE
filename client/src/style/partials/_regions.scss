@@ -1,0 +1,67 @@
+.regions{
+    @extend .companies;
+    .title{
+        position: sticky;
+        top: 68px;
+        background: $white-color;
+        padding: 15px 0;
+    }
+}
+
+.container-region, .container-country, .container-city{
+    .container-header{
+        width: 100%;
+    }
+}
+
+
+.container-region{
+    max-width: 95%; 
+    margin: 12.5px 0 12.5px 5%; 
+    align-items: center;
+    border-bottom: 1px solid $dark-grey-color;
+    padding-bottom: 10px;
+}
+
+.container-country{
+    max-width: 90%; 
+    margin: 12.5px 0 12.5px 10%;
+    align-items: flex;
+}
+
+.container-city{
+    @extend .container-header;
+    max-width: 85%; 
+    margin: 12.5px 0 12.5px 15%;
+    align-items: center;
+}
+
+.info-region{
+    display: flex; 
+    justify-content: space-evenly; 
+    min-width: 40%;
+}
+
+.info-country{
+    display: flex; 
+    justify-content: space-around; 
+    min-width: 40%;
+}
+
+.info-city{
+    display: flex; 
+    justify-content: space-between; 
+    min-width: 40%;
+}
+
+.button-add-country, .button-add-region, .button-add-city{
+    @extend .container-submit;
+    align-self: center;
+    button{
+        width: 107.81px;
+    }
+}
+
+.add-region, .add-country, .add-city{
+    @extend .add-user;
+}

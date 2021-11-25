@@ -1,0 +1,13 @@
+.login{
+    display: flex;
+    justify-content: center;
+    min-height: calc(100vh - 68px);
+    align-items: center;
+    input, select{
+        padding-left: 10px;
+        box-sizing: border-box;
+        &:hover{
+            padding-left: 10px;
+        }
+    }
+}

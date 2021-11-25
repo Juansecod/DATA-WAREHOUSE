@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../src/style/style.css">
+    <title>DATA-WAREHOUSE</title>
+</head>
+<body>
+    <div class="darker-background"></div>
+    <header>
+        <nav class="navbar">
+            <div class="replace-navbars">
+                <script src="../src/scripts/navbar.js"></script>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="regions" id="regions">
+            <div class="container-header title">
+                <h2>Regiones</h2>
+                <div class="button-add-region">
+                    <a id="add-region-button"><button>Agregar Región</button></a>
+                </div>
+            </div>
+        </section>
+        <section class="add-region" id="add-region">
+            <div class="container">
+                <h2 id="title-region">Crear Region</h2>
+                <form autocomplete="off">
+                    <div class="container-input">
+                        <label for="name-region">Nombre<text>*</text></label>
+                        <input type="text" id="name-region" name="name-region" placeholder="Nombre" required class="required">
+                    </div>
+                    <div class="container-buttons">
+                        <input class="cancel" type="button" value="Cancelar" id="cancel-add-region">
+                        <input type="button" value="Registrar" class="submit" id="register-region">
+                        <input class="submit update" type="button" value="Actualizar" id="update-region">                 
+                    </div>
+                </form>
+                <div class="error" id="error-info-region">
+                    <i class="fas fa-times-circle"></i><p id="text-error-region">Ups, algo ha salido mal!</p>
+                </div>
+            </div>
+        </section>
+        <section class="add-country" id="add-country">
+            <div class="container">
+                <h2 id="title-country">Crear Pais</h2>
+                <form autocomplete="off">
+                    <div class="container-input">
+                        <label for="name-country">Nombre<text>*</text></label>
+                        <input type="text" id="name-country" name="name-country" placeholder="Nombre" required class="required">
+                    </div>
+                    <div class="container-buttons">
+                        <input class="cancel" type="button" value="Cancelar" id="cancel-add-country">
+                        <input type="button" value="Registrar" class="submit" id="register-country">
+                        <input class="submit update" type="button" value="Actualizar" id="update-country">                 
+                    </div>
+                </form>
+                <div class="error" id="error-info-country">
+                    <i class="fas fa-times-circle"></i><p id="text-error-country">Ups, algo ha salido mal!</p>
+                </div>
+            </div>
+        </section>
+        <section class="add-city" id="add-city">
+            <div class="container">
+                <h2 id="title-city">Crear Ciudad</h2>
+                <form autocomplete="off">
+                    <div class="container-input">
+                        <label for="name-city">Nombre<text>*</text></label>
+                        <input type="text" id="name-city" name="name-city" placeholder="Nombre" required class="required">
+                    </div>
+                    <div class="container-buttons">
+                        <input class="cancel" type="button" value="Cancelar" id="cancel-add-city">
+                        <input type="button" value="Registrar" class="submit" id="register-city">
+                        <input class="submit update" type="button" value="Actualizar" id="update-city">                 
+                    </div>
+                </form>
+                <div class="error" id="error-info-city">
+                    <i class="fas fa-times-circle"></i><p id="text-error-city">Ups, algo ha salido mal!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <script src="../src/scripts/app.js" type="module"></script>
+        <script src="../src/scripts/regions.js" type="module"></script>
+    </footer>
+</body>
+</html>

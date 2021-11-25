@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../src/style/style.css">
+    <title>DATA-WAREHOUSE</title>
+</head>
+<body>
+    <div class="darker-background"></div>
+    <header>
+        <nav class="navbar">
+            <div class="replace-navbars">
+                <script src="../src/scripts/navbar.js"></script>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="companies" id="companies">
+            <div class="container-header" >
+                <h2>Compañias</h2>
+                <div class="container-submit">
+                    <a id="add-company-button"><button>Agregar compañia</button></a>
+                </div>
+            </div>
+            <table class="table" id="table-companies">
+                <tr class="table-header">
+                    <th>Nombre</i></th>
+                    <th>Correo</i></th>
+                    <th>Telefono</i></th>
+                    <th>Dirección</i></th>
+                    <th>Ciudad</i></th>
+                    <th class="actions">Acciones</th>
+                </tr>
+            </table>
+        </section>
+        <section class="add-company" id="add-company">
+            <div class="container">
+                <h2 id="title">Crear Compañia</h2>
+                <form autocomplete="off">
+                    <div class="container-input">
+                        <label for="name">Nombre<text>*</text></label>
+                        <input type="text" id="name" name="name" required placeholder="Nombre Completo" class="required">
+                    </div>
+                    <div class="container-input">
+                        <label for="email">Email<text>*</text></label>
+                        <input type="email" id="email" name="email" required placeholder="example@mail.com" class="required">
+                    </div>
+                    <div class="container-input">
+                        <label for="phone">Telefono</label>
+                        <input type="text" id="phone" name="phone" placeholder="000-000-0000">
+                    </div>
+                    <div class="container-input">
+                        <label for="city">Ciudad<text>*</text></label>
+                        <select name="city" id="city" class="required">
+                            <option disabled selected hidden value="">Seleccione una ciudad</option>
+                        </select>
+                    </div>
+                    <div class="container-input">
+                        <label for="address">Direccion</label>
+                        <input type="text" id="address" name="address" placeholder="Direccion">
+                    </div>
+                    <div class="container-buttons">
+                        <input class="cancel" type="button" value="Cancelar" id="cancel-add-company">
+                        <input type="button" value="Registrar" class="submit" id="register-company">
+                        <input class="submit update" type="button" value="Actualizar" id="update-company">                 
+                    </div>
+                </form>
+                <div class="error" id="error-info">
+                    <i class="fas fa-times-circle"></i><p id="text-error">Ups, algo ha salido mal!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <script src="../src/scripts/app.js" type="module"></script>
+        <script src="../src/scripts/companies.js" type="module"></script>
+    </footer>
+</body>
+</html>

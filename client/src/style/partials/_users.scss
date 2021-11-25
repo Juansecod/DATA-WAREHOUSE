@@ -1,0 +1,56 @@
+.users{
+    @extend .companies;
+}
+
+.add-user{
+    @extend .login;
+    .container{
+        padding: 0;
+    }
+    .container-buttons{
+        gap: 5px;
+    }
+    .note{
+        border-radius: 5px;
+        padding: 10px;
+        display: flex; 
+        gap: 5px;  
+        align-items: center; 
+        color: $dark-blue-color; 
+        background-color: $light-blue; 
+        max-width: 500px;
+        margin-bottom: 10px;
+        i{
+            font-size: 24px;
+        }
+        p{
+            font-size: medium;
+            text-align: center;
+        }
+    }
+    .container-radio-select{
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        div{
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        input[type='radio']{
+            min-width: 0px;
+            min-height: 0px;
+            width: 24px;
+            height: 24px;
+        }
+        label{
+            min-width: 0px;
+            width: 24px;
+            text-align: center;
+            font-size: 16px;
+        }
+    }
+    display: none;
+    
+}

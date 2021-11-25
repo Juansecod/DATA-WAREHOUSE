@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="../src/style/style.css">
+    <title>DATA-WAREHOUSE</title>
+</head>
+<body>
+    <div class="darker-background" id="darker-background"></div>
+    <header>
+        <nav class="navbar">
+            <div class="replace-navbars">
+                <script src="../src/scripts/navbar.js"></script>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="contacts">
+            <h2>Contactos</h2>
+            <div class="container-buttons">
+                <div class="container-search">
+                    <div class="container-input">    
+                        <input type="text" name="search" id="search">
+                    </div>
+                    <button class="search-button" id="search-button"><i class="fa fa-search"></i></button>
+                </div>
+                <div class="container-submit">
+                    <button type="button" class="disabled"><i class="fas fa-upload"></i></button>
+                    <button type="button" class="disabled">Exportar contactos <i class="fas fa-caret-down"></i></button>
+                    <a id="add-contact-button"><button>Agregar contacto</button></a>
+                </div>
+            </div>
+            <div class="container-buttons">
+                <div class="amount" id="amount">
+                    <p>0 seleccionados</p>
+                </div>
+                <div class="container-delete-amount" id='container-bulk-delete'>
+                    <button type="button" class="bulk-delete-button" id="bulk-delete"><i class="fas fa-trash-alt"></i> Eliminar contactos</button>
+                </div>
+            </div>
+            <table class="table" id="table-contacts">
+                <tr class="table-header">
+                    <th class="table-select"><input type="checkbox" name="select-all-contacts" id="select-all-contacts" class="select-checkbox"></th>
+                    <th>Contacto</i></th>
+                    <th>País/Región</i></th>
+                    <th>Compañía</i></th>
+                    <th>Cargo</i></th>
+                    <th class="actions">Interés</i></th>
+                    <th class="actions">Acciones</th>
+                </tr>
+            </table>
+        </section>
+        <section class="add-contact" id="add-contact">
+            <h2 id="title">Nuevo Contacto</h2>
+            <i class="fas fa-question-circle info" id="icon-info"></i>
+            <p class="info" id="info">Revisa que selecciones una ciudad valida, en caso de que no selecciones generara un error</p>
+            <form>
+                <div class="primary-info">
+                    <div class="container-input">
+                        <label for="name">Nombre<text>*</text></label>
+                        <input class="required" type="text" id="name" name="name" required placeholder="Nombre Completo">
+                    </div>
+                    <div class="container-input">
+                        <label for="last-name">Apellido<text>*</text></label>
+                        <input class="required" type="text" id="last-name" name="last-name" required placeholder="Apellido Completo">
+                    </div>
+                    <div class="container-input">
+                        <label for="job">Cargo<text>*</text></label>
+                        <input class="required" type="text" id="job" name="job" required placeholder="Cargo contacto">
+                    </div>
+                    <div class="container-input">
+                        <label for="email">Email<text>*</text></label>
+                        <input class="required" type="email" id="email" name="eamil" required placeholder="email@example.com">
+                    </div>
+                    <div class="container-input">
+                        <label for="company">Compañia<text>*</text></label>
+                        <select name="company" id="company" class="required" required>
+                            <option disabled selected hidden value="">Selecciona la compañia</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="secundary-info">
+                    <div class="address">
+                        <div class="container-input">
+                            <label for="region">Región</label>
+                            <select name="region" id="region">
+                                <option disabled selected hidden value="">Seleccione una region</option>
+                            </select>
+                        </div>
+                        <div class="container-input">
+                            <label for="pais">Pais</label>
+                            <select name="pais" id="pais" disabled class="disabled">
+                                <option disabled selected hidden value="">Seleccione un pais</option>
+                            </select>
+                        </div>
+                        <div class="container-input">
+                            <label for="ciudad">Ciudad</label>
+                            <select name="ciudad" id="ciudad" disabled class="disabled">
+                                <option disabled selected hidden value="">Seleccione una ciudad</option>
+                            </select>
+                        </div>
+                        <div class="container-input">
+                            <label for="address">Dirección</label>
+                            <input class="disabled" type="text" name="address" id="address" placeholder="Ingrese una dirección" disabled>
+                        </div>
+                        <div class="container-input">
+                            <label for="interest">Interés</label>
+                            <div class="container-range">
+                                <input type="range" name="interest" id="interest" step="25" min="0" max="100" value="0">
+                                <select name="range-select" id="range-select">
+                                    <option value="0" id="0%" selected>0%</option>
+                                    <option value="25" id="25%">25%</option>
+                                    <option value="50" id="50%">50%</option>
+                                    <option value="75" id="75%">75%</option>
+                                    <option value="100" id="100%">100%</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="network" id="network-container">
+                        <div class="form-network">
+                            <div class="container-input">
+                                <label for="channel">Canal Contacto</label>
+                                <select name="channel" id="channel-0">
+                                    <option disabled selected hidden value="">Seleccione un canal</option>
+                                    <option value="facebook">Facebook</option>
+                                    <option value="linkedin">Linkedin</option>
+                                    <option value="whatsapp">Whatsapp</option>
+                                </select>
+                            </div>
+                            <div class="container-input">
+                                <label for="nick-channel-contact">Cuenta de Usuario</label>
+                                <input type="text" name="nick-channel-contact" id="nick-channel-contact-0" placeholder="@exmaple" class="disabled" disabled>
+                            </div>
+                            <div class="container-input">
+                                <label for="preferences">Preferencias</label>
+                                <select class="disabled" name="preferences" id="preferences-0" disabled>
+                                    <option selected value="Sin preferencia">Sin preferencia</option>
+                                    <option value="canal favorito">Canal Favorito</option>
+                                    <option value="no molestar">No molestar</option>
+                                </select>
+                            </div>
+                        </div>  
+                        <div class="container-button" id='container-button'>
+                            <button type="button" class="disabled" id="add-network-form" disabled>+ Agregar Canal</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-buttons-form">
+                    <button class="cancel" type="button" id="cancel-add-contact">Cancelar</button>
+                    <input class="submit" type="button" value="Crear" id="register-contact">
+                    <input class="submit update" type="button" value="Actualizar" id="update-contact">                 
+                </div>
+            </form>
+            <div class="error" id="error-info">
+                <i class="fas fa-times-circle"></i><p id="text-error">Ups, algo ha salido mal!</p>
+            </div> 
+        </section>
+        
+    </main>
+    <footer>
+        <script src="../src/scripts/app.js" type="module"></script>
+        <script src="../src/scripts/contacts.js" type="module"></script>
+    </footer>
+</body>
+</html>
