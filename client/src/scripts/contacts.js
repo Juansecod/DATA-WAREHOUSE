@@ -32,6 +32,8 @@ const selectAllContacts = document.getElementById('select-all-contacts');
 const selects = document.getElementsByName('select-contact');
 const btnBulkDelete = document.getElementById('bulk-delete');
 const updateContactButton = document.getElementById('update-contact');
+const btnSearch = document.getElementById('search-button');
+const inputSearch = document.getElementById('search');
 
 var contForm = 1;
 
@@ -128,6 +130,8 @@ btnAddNetwork.addEventListener('click',()=>{
     newForm.innerHTML = formNetwork(contForm);
     containerFormNetworks.appendChild(newForm);
     containerFormNetworks.appendChild(containerBtn);
+    btnAddNetwork.classList = 'disabled';
+    btnAddNetwork.disabled = true;
     
     const selectChannel = document.getElementById(`channel-${contForm}`);
     const nickContact = document.getElementById(`nick-channel-contact-${contForm}`);
@@ -137,6 +141,8 @@ btnAddNetwork.addEventListener('click',()=>{
         nickContact.disabled = false;
         preferences.classList = '';
         preferences.disabled = false;
+        btnAddNetwork.classList = 'add-form-network';
+        btnAddNetwork.disabled = false;
     });
 
     contForm = contForm + 1;
@@ -185,6 +191,8 @@ selectChannel.addEventListener("change",()=>{
     nickContact.disabled = false;
     preferences.classList = '';
     preferences.disabled = false;
+    document.getElementById('add-network-form').classList = 'add-form-network';
+    document.getElementById('add-network-form').disabled = false;
 });
 
 registerContactButton.addEventListener('click', ()=> {
@@ -242,4 +250,13 @@ updateContactButton.addEventListener('click', ()=> {
     }else{
         errorForm('Revisa que esten bien escritos todos los campos');
     } 
+});
+
+btnSearch.addEventListener('click',()=>{
+    dataTable(table, btnLogout, displayContSelect, inputSearch);
+});
+
+inputSearch.addEventListener('keyup',function ({keyCode}){
+    if(this.value == '') dataTable(table, btnLogout, displayContSelect);
+    if(keyCode == 13) btnSearch.click();
 });

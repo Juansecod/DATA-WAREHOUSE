@@ -716,11 +716,14 @@ td, th, tr, td:hover, th:hover, tr:hover {
           justify-content: flex-end;
 }
 
-.add-contact .network .container-button .add-form-network {
+.add-contact .network .container-button button {
   border-radius: 4px;
   height: 35.5px;
   min-width: 143px;
   max-height: 35.5px;
+}
+
+.add-contact .network .container-button .add-form-network {
   border: solid 1px #AAAAAA;
   color: #AAAAAA;
   background-color: #FFFFFF;

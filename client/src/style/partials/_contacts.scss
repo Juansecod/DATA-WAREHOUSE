@@ -273,11 +273,13 @@
         .container-button{
             @extend .container-input;
             justify-content: flex-end;
-            .add-form-network{
+            button{
                 border-radius: 4px;
                 height: 35.5px;
                 min-width: 143px;
                 max-height: 35.5px;
+            }
+            .add-form-network{
                 border: solid 1px $dark-grey-color;
                 color: $dark-grey-color;
                 background-color: $white-color;
